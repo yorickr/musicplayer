@@ -15,8 +15,8 @@ namespace MusicPlayer
         static void Main()
         {
             APIHandler api = new APIHandler();
-            NetworkHandler nw = new NetworkHandler("www.imegumii.nl", api);
-            nw.SendString("GET /getsongbyid?id=102 HTTP/1.1");
+            NetworkHandler nw = new NetworkHandler("http://www.imegumii.nl", api);
+            nw.SendString("getsongbyid?id=102");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
