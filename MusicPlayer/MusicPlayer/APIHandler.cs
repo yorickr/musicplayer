@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using MusicPlayer;
 using Newtonsoft.Json;
 
-namespace WindowsFormsApplication2
+namespace MusicPlayer
 {
     internal class APIHandler
     {

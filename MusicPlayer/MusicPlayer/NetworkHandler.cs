@@ -2,17 +2,19 @@
 using System.Text;
 using System.Net.Sockets;
 
-namespace WindowsFormsApplication2
+namespace MusicPlayer
 {
     class NetworkHandler
     {
         private int port = 8585;
         private Socket s;
+        private APIHandler api;
  
-        public NetworkHandler(string ip)
+        public NetworkHandler(string ip, APIHandler apihandler)
         {
             s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(ip, port);
+            api = apihandler;
         }
 
         public void SendString(string m)
@@ -26,7 +28,9 @@ namespace WindowsFormsApplication2
             while (s.Connected)
             {
                 byte[] data = new byte[1024 * 200]; 
-                int t = s.Receive(data);
+                s.Receive(data);
+                string message = Encoding.ASCII.GetString(data);
+                System.Console.WriteLine(message);
                 //Iets doen met api calls
             }
         }
