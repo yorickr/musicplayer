@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MusicPlayer;
-using Newtonsoft.Json;
 
 namespace MusicPlayer
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Net.Sockets;
 using System.Threading;
 
@@ -15,8 +14,10 @@ namespace MusicPlayer
         {
             s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(ip, port);
+            ThreadStart thread = new ThreadStart(ReceiveData);
+            Thread childThread = new Thread(thread);
+            childThread.Start();
             api = apihandler;
-            SendString("GET");
         }
 
         public void SendString(string m)
