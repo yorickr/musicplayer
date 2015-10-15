@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SongsTable = new System.Windows.Forms.DataGridView();
+            this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
             this.AlbumListView = new System.Windows.Forms.ListView();
             this.ArtistListBox = new System.Windows.Forms.ListBox();
@@ -37,24 +37,29 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.SongsTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SongsTable
+            // SongsTableView
             // 
-            this.SongsTable.AllowUserToAddRows = false;
-            this.SongsTable.AllowUserToDeleteRows = false;
-            this.SongsTable.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.SongsTableView.AllowUserToAddRows = false;
+            this.SongsTableView.AllowUserToDeleteRows = false;
+            this.SongsTableView.AllowUserToResizeRows = false;
+            this.SongsTableView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SongsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SongsTable.Location = new System.Drawing.Point(12, 153);
-            this.SongsTable.Name = "SongsTable";
-            this.SongsTable.ReadOnly = true;
-            this.SongsTable.Size = new System.Drawing.Size(784, 182);
-            this.SongsTable.TabIndex = 0;
+            this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.SongsTableView.Location = new System.Drawing.Point(12, 153);
+            this.SongsTableView.MultiSelect = false;
+            this.SongsTableView.Name = "SongsTableView";
+            this.SongsTableView.ReadOnly = true;
+            this.SongsTableView.RowHeadersVisible = false;
+            this.SongsTableView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SongsTableView.Size = new System.Drawing.Size(760, 172);
+            this.SongsTableView.TabIndex = 0;
             // 
             // GenreListBox
             // 
@@ -62,6 +67,7 @@
             this.GenreListBox.Location = new System.Drawing.Point(12, 12);
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(124, 134);
+            this.GenreListBox.Sorted = true;
             this.GenreListBox.TabIndex = 1;
             // 
             // AlbumListView
@@ -70,7 +76,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumListView.Location = new System.Drawing.Point(272, 12);
             this.AlbumListView.Name = "AlbumListView";
-            this.AlbumListView.Size = new System.Drawing.Size(524, 134);
+            this.AlbumListView.Size = new System.Drawing.Size(500, 134);
+            this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
             this.AlbumListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -80,6 +87,7 @@
             this.ArtistListBox.Location = new System.Drawing.Point(142, 12);
             this.ArtistListBox.Name = "ArtistListBox";
             this.ArtistListBox.Size = new System.Drawing.Size(124, 134);
+            this.ArtistListBox.Sorted = true;
             this.ArtistListBox.TabIndex = 3;
             // 
             // MainPanel
@@ -87,11 +95,11 @@
             this.MainPanel.Controls.Add(this.GenreListBox);
             this.MainPanel.Controls.Add(this.ArtistListBox);
             this.MainPanel.Controls.Add(this.AlbumListView);
-            this.MainPanel.Controls.Add(this.SongsTable);
+            this.MainPanel.Controls.Add(this.SongsTableView);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(808, 347);
+            this.MainPanel.Size = new System.Drawing.Size(784, 337);
             this.MainPanel.TabIndex = 5;
             // 
             // MenuStrip
@@ -100,7 +108,7 @@
             this.fileToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Size = new System.Drawing.Size(808, 24);
+            this.MenuStrip.Size = new System.Drawing.Size(784, 24);
             this.MenuStrip.TabIndex = 6;
             this.MenuStrip.Text = "Menu";
             // 
@@ -116,26 +124,27 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 371);
+            this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MenuStrip);
             this.MainMenuStrip = this.MenuStrip;
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "MainForm";
             this.Text = "YJMPD Music Player";
-            ((System.ComponentModel.ISupportInitialize)(this.SongsTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
@@ -146,7 +155,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView SongsTable;
+        private System.Windows.Forms.DataGridView SongsTableView;
         private System.Windows.Forms.ListBox GenreListBox;
         private System.Windows.Forms.ListView AlbumListView;
         private System.Windows.Forms.ListBox ArtistListBox;
