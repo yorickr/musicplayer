@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication2;
 
 namespace MusicPlayer
 {
@@ -15,6 +16,9 @@ namespace MusicPlayer
         public Form1()
         {
             InitializeComponent();
+            NetworkHandler nw = new NetworkHandler("83.128.250.123");
+            
+
         }
     }
 }
