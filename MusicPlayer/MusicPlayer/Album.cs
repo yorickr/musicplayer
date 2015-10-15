@@ -2,9 +2,11 @@
 {
     public class Album
     {
-        public Album()
+        public string albumnaam { get; set; }
+
+        public Album(string albumnaam)
         {
-            
+            this.albumnaam = albumnaam;
         }
     }
 }
