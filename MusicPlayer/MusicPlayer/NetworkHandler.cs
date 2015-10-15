@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace MusicPlayer
 {
@@ -15,6 +16,7 @@ namespace MusicPlayer
             s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s.Connect(ip, port);
             api = apihandler;
+            SendString("GET");
         }
 
         public void SendString(string m)
