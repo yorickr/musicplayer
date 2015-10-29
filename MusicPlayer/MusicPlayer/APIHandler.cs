@@ -29,12 +29,46 @@ namespace MusicPlayer
 
         public List<Artist> GetArtists()
         {
-            return null;
+            List<Artist> artistlist = new List<Artist>();
+
+            JObject o = nw.SendString("getartists?id=hallo");
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["artists"].Count(); i++) {
+                    artistlist.Add(new Artist(o["artists"][i][0].ToString()));
+                }
+            }
+            return artistlist;
         }
 
         public List<Album> GetAlbums()
         {
-            return null;
-        } 
+            List<Album> albumlist = new List<Album>();
+
+            JObject o = nw.SendString("getalbums?id=hallo");
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["albums"].Count(); i++)
+                {
+                    albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                }
+            }
+
+            return albumlist;
+        }
+
+        public List<Year> GetYears()
+        {
+            List<Year> yearlist = new List<Year> ();
+            JObject o = nw.SendString("getyears?id=hallo");
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["years"].Count(); i++)
+                {
+                    yearlist.Add(new Year(o["years"][i][0].ToString()));
+                }
+            }
+            return yearlist;
+        }
     }
 }

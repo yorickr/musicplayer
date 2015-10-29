@@ -17,6 +17,18 @@ namespace MusicPlayer
             NetworkHandler nw = new NetworkHandler("http://www.imegumii.nl");
             APIHandler api = new APIHandler(nw);
             Console.WriteLine(api.GetSongURLByID("102"));
+            api.GetArtists().ForEach(a =>
+            {
+                Console.WriteLine(a.naam);
+            });
+            api.GetYears().ForEach(y =>
+            {
+                Console.WriteLine(y.year);
+            });
+            api.GetAlbums().ForEach(a =>
+            {
+                Console.WriteLine(a.albumnaam);
+            });
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
