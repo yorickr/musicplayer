@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
             this.AlbumListView = new System.Windows.Forms.ListView();
@@ -140,6 +141,7 @@
             this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MenuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MenuStrip;
             this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "MainForm";
