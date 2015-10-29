@@ -27,14 +27,18 @@ namespace MusicPlayer
 //            {
 //                Console.WriteLine(s.Name);
 //            });
-            api.GetSongsByGenre("Melodic Death Metal").ForEach(s =>
-            {
-                Console.WriteLine(s.Name);
-            });
+//            api.GetSongsByGenre("Melodic Death Metal").ForEach(s =>
+//            {
+//                Console.WriteLine(s.Name);
+//            });
 //            api.GetSongsByAlbum("Stronger").ForEach(s =>
 //            {
 //                Console.WriteLine(s.Name);
 //            });
+            api.GetAllSongs().ForEach(s =>
+            {
+                Console.WriteLine(s.Name);
+            });
             MainForm form = new MainForm();
             new Main(nw, api, form);
 

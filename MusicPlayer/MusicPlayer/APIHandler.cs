@@ -46,6 +46,22 @@ namespace MusicPlayer
             return GetSongsByArgs("album=" + year);
         }
 
+        public List<Song> GetAllSongs()
+        {
+            List<Song> allsongslist = new List<Song>();
+            JObject o = nw.SendString("getallsongs?");
+            if (o["result"].ToString() == "OK")
+            {
+                dynamic songs = o["songs"];
+                for (int i = 0; i < songs.Count; i++)
+                {
+                    allsongslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), this));
+                }
+            }
+            return allsongslist;
+
+        } 
+
         public List<Song> GetSongsByArgs(string args)
         {
             List<Song> songslist = new List<Song>();
