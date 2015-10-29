@@ -18,6 +18,12 @@ namespace MusicPlayer
         public MainForm()
         {
             InitializeComponent();
+//            nw.SendString("GET / HTTP/1.1");
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             //APIHandler api = new APIHandler();
             //NetworkHandler nw = new NetworkHandler("83.128.250.123", api);
             table = new SongsTable();
