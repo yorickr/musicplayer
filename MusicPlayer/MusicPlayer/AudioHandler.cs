@@ -12,8 +12,10 @@ namespace MusicPlayer
 {
     public class AudioHandler
     {
-        public enum AudioState { PLAYING, STOPPED, PAUSED }
-        public AudioState State { get; set; }
+        public enum AudioState { PLAYING, WAITING, STOPPED, PAUSED }
+        public enum BufferState { EMPTY, BUFFERING, DONE }
+        public AudioState AState { get; set; }
+        public BufferState BState { get; set; }
 
         private Stream ms;
 
@@ -24,24 +26,32 @@ namespace MusicPlayer
 
         public AudioHandler()
         {
+            CreateThreads();
+        }
+
+        private void CreateThreads()
+        {
+            AState = AudioState.STOPPED;
+            BState = BufferState.EMPTY;
+
             ms = new MemoryStream();
+
             network = new Thread(LoadAudio);
             audio = new Thread(PlayAudio);
+
             network.IsBackground = true;
             audio.IsBackground = true;
-            State = AudioState.STOPPED;
+
+            
         }
 
         public void Play(Song s)
         {
             if (CurrentSong == s)
-                State = AudioState.PLAYING;
+                AState = AudioState.PLAYING;
             else
             {
-                State = AudioState.STOPPED;
-
-                network = new Thread(LoadAudio);
-                audio = new Thread(PlayAudio);
+                Stop();
 
                 CurrentSong = s;
                 network.Start(s);
@@ -51,20 +61,24 @@ namespace MusicPlayer
 
         public void Stop()
         {
-            State = AudioState.STOPPED;
+            CreateThreads();
         }
 
         public void Pause()
         {
-            State = AudioState.PAUSED;
+            AState = AudioState.PAUSED;
         }
 
         private void PlayAudio()
         {
-            while (ms.Length < 65536 * 10)
+            AState = AudioState.WAITING;
+            while (ms.Length < 65536 * 10 && BState != BufferState.DONE)
                 Thread.Sleep(1000);
+            AState = AudioState.PLAYING;
 
-            ms.Position = 0;
+            long position = 0;
+
+            ms.Position = position;
             using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(ms))))
             {
                 using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
@@ -73,21 +87,25 @@ namespace MusicPlayer
                     waveOut.Play();
                     while (waveOut.PlaybackState != PlaybackState.Stopped)
                     {
-                        System.Threading.Thread.Sleep(100);
-                        if(State == AudioState.PAUSED && waveOut.PlaybackState == PlaybackState.Playing)
+                        System.Threading.Thread.Sleep(10);
+
+                        if(AState == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
                         {
-                            waveOut.Pause();
-                        }
-                        if (State == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
-                        {
+                            ms.Position = position;
                             waveOut.Play();
                         }
-                        if (State == AudioState.STOPPED)
+                        if (AState == AudioState.PAUSED && waveOut.PlaybackState == PlaybackState.Playing)
+                        {
+                            position = ms.Position;
+                            waveOut.Pause();
+                        }
+                        if(AState == AudioState.STOPPED)
                         {
                             waveOut.Stop();
                         }
                     }
-                    State = AudioState.STOPPED;
+
+                    AState = AudioState.STOPPED;
                 }
             }
         }
@@ -96,24 +114,26 @@ namespace MusicPlayer
         {
             Song s = (Song) o;
             var response = WebRequest.Create(s.Url).GetResponse();
-            State = AudioState.PLAYING;
+
+            BState = BufferState.EMPTY;
+
             using (var stream = response.GetResponseStream())
             {
                 byte[] buffer = new byte[65536]; // 64KB chunks
                 int read;
-                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+                BState = BufferState.BUFFERING;
+                AState = AudioState.WAITING;
+
+                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0 && AState != AudioState.STOPPED)
                 {
                     var pos = ms.Position;
                     ms.Position = ms.Length;
                     ms.Write(buffer, 0, read);
                     ms.Position = pos;
-                    if(State == AudioState.STOPPED)
-                    {
-                        stream.Close();
-                        return;
-                    }
                 }
             }
+
+            BState = BufferState.DONE;
         }
 
     }
