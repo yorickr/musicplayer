@@ -17,9 +17,12 @@ namespace MusicPlayer
         public AudioState AState { get; set; }
         public BufferState BState { get; set; }
 
-        public int Buffered { get { return Math.Min((int)((bufpos / (double)Length) * 100), 100); } }
+        public int Buffered { get { return Math.Min((int)((bufpos / (double)LengthBuffer) * 100), 100); } }
         public int Position { get { return Math.Min((int)((playpos / (double)Length) * 100), 100); } }
-        public long Length { get; set; }
+        public string CurrentTime { get; set; }
+        public string TotalTime { get; set; }
+        private long LengthBuffer { get; set; }
+        private long Length { get; set; }
         private long bufpos = 0;
         private long playpos = 0;
         private long seek = 0;
@@ -41,6 +44,8 @@ namespace MusicPlayer
             AState = AudioState.STOPPED;
             BState = BufferState.EMPTY;
 
+            Thread.Sleep(11);
+
             ms = new MemoryStream();
 
             network = new Thread(LoadAudio);
@@ -50,6 +55,7 @@ namespace MusicPlayer
             audio.IsBackground = true;
 
             Length = 1;
+            LengthBuffer = 1;
             bufpos = 0;
             playpos = 0;
         }
@@ -98,8 +104,13 @@ namespace MusicPlayer
             long position = 0;
 
             ms.Position = position;
-            using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(ms))))
+            Mp3FileReader mp3fr = new Mp3FileReader(ms);
+            Length = mp3fr.Length;
+            CurrentTime = mp3fr.CurrentTime + "";
+            TotalTime = mp3fr.TotalTime + "";
+            using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3fr)))
             {
+
                 using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
                 {
                     waveOut.Init(blockAlignedStream);
@@ -131,6 +142,9 @@ namespace MusicPlayer
                         }
 
                         playpos = blockAlignedStream.Position;
+                        Length = mp3fr.Length;
+                        CurrentTime = mp3fr.CurrentTime + "";
+                        TotalTime = mp3fr.TotalTime + "";
                     }
 
                     AState = AudioState.STOPPED;
@@ -145,7 +159,7 @@ namespace MusicPlayer
             var response = WebRequest.Create(s.Url).GetResponse();
 
             BState = BufferState.EMPTY;
-            Length = response.ContentLength;
+            LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
                 byte[] buffer = new byte[65536]; // 64KB chunks
