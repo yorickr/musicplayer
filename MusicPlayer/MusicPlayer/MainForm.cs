@@ -83,6 +83,7 @@ namespace MusicPlayer
 
         private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            main.audio.Stop();
             SongsTable s = new SongsTable();
             var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
             var row = drv.Row as DataRow;
