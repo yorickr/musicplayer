@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer
 {
-    class AudioHandler
+    public class AudioHandler
     {
         public static Stream ms = new MemoryStream();
 

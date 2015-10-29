@@ -8,18 +8,25 @@ namespace MusicPlayer
 {
     class Song
     {
+        public string SongID { get; set; }
         public string Name { get; set; }
         public string Album { get; set; }
         public string Artist { get; set; }
         public string Url { get { return GetURL(); } set { SetURL(value); } }
 
+        private APIHandler api;
+
         private string url;
 
-        public Song(string name, string album, string artist)
+        public Song(string songid, string name, string album, string artist, APIHandler api)
         {
+            SongID = songid;
             Name = name;
             Album = album;
             Artist = artist;
+
+            this.api = api;
+
             url = "";
         }
 
@@ -27,7 +34,7 @@ namespace MusicPlayer
         {
             if (url == "")
             {
-                url = "http://imegumii.nl/music/Old%20Music/Pre-Parade%20-%20Toradora.mp3";
+                url = api.GetSongURLByID(SongID);
             }
 
             return url;

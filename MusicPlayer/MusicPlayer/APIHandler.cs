@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MusicPlayer
 {
-    internal class APIHandler
+    public class APIHandler
     {
         private NetworkHandler nw;
 
@@ -24,7 +24,6 @@ namespace MusicPlayer
                 return o["songurl"].ToString();
             }
             return o["errormsg"].ToString();
-            
         } 
 
         public List<Artist> GetArtists()

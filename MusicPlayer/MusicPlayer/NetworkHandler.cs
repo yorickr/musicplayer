@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace MusicPlayer
 {
-    class NetworkHandler
+    public class NetworkHandler
     {
         private int port = 8585;
         private string ip;

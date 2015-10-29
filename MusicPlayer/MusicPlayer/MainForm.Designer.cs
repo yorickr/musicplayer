@@ -64,8 +64,10 @@
             this.SongsTableView.ReadOnly = true;
             this.SongsTableView.RowHeadersVisible = false;
             this.SongsTableView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SongsTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SongsTableView.Size = new System.Drawing.Size(760, 148);
             this.SongsTableView.TabIndex = 0;
+            this.SongsTableView.SelectionChanged += new System.EventHandler(this.SongsTableView_SelectionChanged);
             // 
             // GenreListBox
             // 
@@ -186,6 +188,7 @@
             this.MinimumSize = new System.Drawing.Size(800, 500);
             this.Name = "MainForm";
             this.Text = "YJMPD Music Player";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
@@ -198,10 +201,10 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView SongsTableView;
-        private System.Windows.Forms.ListBox GenreListBox;
-        private System.Windows.Forms.ListView AlbumListView;
-        private System.Windows.Forms.ListBox ArtistListBox;
+        public System.Windows.Forms.DataGridView SongsTableView;
+        public System.Windows.Forms.ListBox GenreListBox;
+        public System.Windows.Forms.ListView AlbumListView;
+        public System.Windows.Forms.ListBox ArtistListBox;
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
