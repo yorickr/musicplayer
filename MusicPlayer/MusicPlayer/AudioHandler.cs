@@ -17,6 +17,12 @@ namespace MusicPlayer
         public AudioState AState { get; set; }
         public BufferState BState { get; set; }
 
+        public int Buffered { get { return Math.Min((int)((bufpos / Length) * 100), 100); } }
+        public int Position { get { return Math.Min((int)((playpos / Length) * 100), 100); } }
+        public double Length { get; set; }
+        private long bufpos = 0;
+        private long playpos = 0;
+
         private Stream ms;
 
         private Thread network;
@@ -42,12 +48,14 @@ namespace MusicPlayer
             network.IsBackground = true;
             audio.IsBackground = true;
 
-            
+            Length = 1;
+            bufpos = 0;
+            playpos = 0;
         }
 
         public void Play(Song s)
         {
-            if (CurrentSong == s)
+            if (CurrentSong == s && AState == AudioState.PAUSED)
                 AState = AudioState.PLAYING;
             else
             {
@@ -85,27 +93,31 @@ namespace MusicPlayer
                 {
                     waveOut.Init(blockAlignedStream);
                     waveOut.Play();
+
                     while (waveOut.PlaybackState != PlaybackState.Stopped)
                     {
                         System.Threading.Thread.Sleep(10);
 
                         if(AState == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
                         {
-                            ms.Position = position;
+                            blockAlignedStream.Position = position;
                             waveOut.Play();
                         }
                         if (AState == AudioState.PAUSED && waveOut.PlaybackState == PlaybackState.Playing)
                         {
-                            position = ms.Position;
+                            position = blockAlignedStream.Position;
                             waveOut.Pause();
                         }
                         if(AState == AudioState.STOPPED)
                         {
                             waveOut.Stop();
                         }
+
+                        playpos = blockAlignedStream.Position;
                     }
 
                     AState = AudioState.STOPPED;
+                    playpos = 0;
                 }
             }
         }
@@ -116,7 +128,7 @@ namespace MusicPlayer
             var response = WebRequest.Create(s.Url).GetResponse();
 
             BState = BufferState.EMPTY;
-
+            Length = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
                 byte[] buffer = new byte[65536]; // 64KB chunks
@@ -130,6 +142,9 @@ namespace MusicPlayer
                     ms.Position = ms.Length;
                     ms.Write(buffer, 0, read);
                     ms.Position = pos;
+
+
+                    this.bufpos += buffer.Length;
                 }
             }
 

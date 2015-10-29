@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
@@ -43,6 +44,11 @@
             this.PlayButton = new System.Windows.Forms.Button();
             this.PauseButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
+            this.BufferBar = new System.Windows.Forms.ProgressBar();
+            this.PositionBar = new System.Windows.Forms.ProgressBar();
+            this.BufferLabel = new System.Windows.Forms.Label();
+            this.PositionLabel = new System.Windows.Forms.Label();
+            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
@@ -160,6 +166,10 @@
             // ControlsPanel
             // 
             this.ControlsPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ControlsPanel.Controls.Add(this.PositionLabel);
+            this.ControlsPanel.Controls.Add(this.BufferLabel);
+            this.ControlsPanel.Controls.Add(this.PositionBar);
+            this.ControlsPanel.Controls.Add(this.BufferBar);
             this.ControlsPanel.Controls.Add(this.StopButton);
             this.ControlsPanel.Controls.Add(this.PauseButton);
             this.ControlsPanel.Controls.Add(this.PlayButton);
@@ -199,6 +209,43 @@
             this.StopButton.UseVisualStyleBackColor = true;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
+            // BufferBar
+            // 
+            this.BufferBar.Location = new System.Drawing.Point(13, 60);
+            this.BufferBar.Name = "BufferBar";
+            this.BufferBar.Size = new System.Drawing.Size(265, 23);
+            this.BufferBar.TabIndex = 3;
+            // 
+            // PositionBar
+            // 
+            this.PositionBar.Location = new System.Drawing.Point(13, 90);
+            this.PositionBar.Name = "PositionBar";
+            this.PositionBar.Size = new System.Drawing.Size(265, 23);
+            this.PositionBar.TabIndex = 4;
+            // 
+            // BufferLabel
+            // 
+            this.BufferLabel.AutoSize = true;
+            this.BufferLabel.Location = new System.Drawing.Point(285, 60);
+            this.BufferLabel.Name = "BufferLabel";
+            this.BufferLabel.Size = new System.Drawing.Size(35, 13);
+            this.BufferLabel.TabIndex = 5;
+            this.BufferLabel.Text = "Buffer";
+            // 
+            // PositionLabel
+            // 
+            this.PositionLabel.AutoSize = true;
+            this.PositionLabel.Location = new System.Drawing.Point(285, 90);
+            this.PositionLabel.Name = "PositionLabel";
+            this.PositionLabel.Size = new System.Drawing.Size(44, 13);
+            this.PositionLabel.TabIndex = 6;
+            this.PositionLabel.Text = "Position";
+            // 
+            // UpdateTimer
+            // 
+            this.UpdateTimer.Interval = 600;
+            this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,6 +265,7 @@
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.ControlsPanel.ResumeLayout(false);
+            this.ControlsPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,6 +287,11 @@
         private System.Windows.Forms.Button PlayButton;
         private System.Windows.Forms.Button StopButton;
         private System.Windows.Forms.Button PauseButton;
+        private System.Windows.Forms.Label PositionLabel;
+        private System.Windows.Forms.Label BufferLabel;
+        private System.Windows.Forms.ProgressBar PositionBar;
+        private System.Windows.Forms.ProgressBar BufferBar;
+        private System.Windows.Forms.Timer UpdateTimer;
     }
 }
 

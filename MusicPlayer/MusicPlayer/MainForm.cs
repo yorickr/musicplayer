@@ -17,6 +17,8 @@ namespace MusicPlayer
 {
     public partial class MainForm : Form
     {
+        Song testsong;
+
         public Main main
         {
             get; set;
@@ -29,12 +31,15 @@ namespace MusicPlayer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            
+            UpdateTimer.Start();
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            main.audio.Play(new Song("102", "Test", "Test", "Test", main.api));
+            if (testsong == null)
+                testsong = new Song("917", "Test", "Test", "Test", main.api);
+
+            main.audio.Play(testsong);
         }
 
         private void SongsTableView_SelectionChanged(object sender, EventArgs e)
@@ -50,6 +55,12 @@ namespace MusicPlayer
         private void StopButton_Click(object sender, EventArgs e)
         {
             main.audio.Stop();
+        }
+
+        private void UpdateTimer_Tick(object sender, EventArgs e)
+        {
+            BufferBar.Value = main.audio.Buffered;
+            PositionBar.Value = main.audio.Position;
         }
     }
 }
