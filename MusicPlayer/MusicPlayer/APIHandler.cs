@@ -24,7 +24,42 @@ namespace MusicPlayer
                 return o["songurl"].ToString();
             }
             return o["errormsg"].ToString();
-        } 
+        }
+
+        public List<Song> GetSongsByAlbum(string albumname)
+        {
+            return GetSongsByArgs("album=" + albumname);
+        }
+
+        public List<Song> GetSongsByArtist(string artistname)
+        {
+            return GetSongsByArgs("artist=" + artistname);
+        }
+
+        public List<Song> GetSongsByGenre(string genre)
+        {
+            return GetSongsByArgs("genre=" + genre);
+        }
+
+        public List<Song> GetSongsByYear(string year)
+        {
+            return GetSongsByArgs("album=" + year);
+        }
+
+        public List<Song> GetSongsByArgs(string args)
+        {
+            List<Song> songslist = new List<Song>();
+            JObject o = nw.SendString("getsongs?"+args);
+            if (o["result"].ToString() == "OK")
+            {
+                dynamic songs = o["songs"];
+                for (int i = 0; i < songs.Count; i++)
+                {
+                    songslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), this));
+                }
+            }
+            return songslist;
+        }
 
         public List<Artist> GetArtists()
         {
