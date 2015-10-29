@@ -38,11 +38,12 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
+            this.PlayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
+            this.ControlsPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // SongsTableView
@@ -54,6 +55,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Location = new System.Drawing.Point(12, 153);
             this.SongsTableView.MultiSelect = false;
@@ -66,6 +68,7 @@
             // 
             // GenreListBox
             // 
+            this.GenreListBox.BackColor = System.Drawing.SystemColors.Control;
             this.GenreListBox.FormattingEnabled = true;
             this.GenreListBox.Location = new System.Drawing.Point(12, 12);
             this.GenreListBox.Name = "GenreListBox";
@@ -77,6 +80,7 @@
             // 
             this.AlbumListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.AlbumListView.BackColor = System.Drawing.SystemColors.Control;
             this.AlbumListView.Location = new System.Drawing.Point(272, 12);
             this.AlbumListView.Name = "AlbumListView";
             this.AlbumListView.Size = new System.Drawing.Size(500, 134);
@@ -86,6 +90,7 @@
             // 
             // ArtistListBox
             // 
+            this.ArtistListBox.BackColor = System.Drawing.SystemColors.Control;
             this.ArtistListBox.FormattingEnabled = true;
             this.ArtistListBox.Location = new System.Drawing.Point(142, 12);
             this.ArtistListBox.Name = "ArtistListBox";
@@ -98,6 +103,7 @@
             this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.MainPanel.BackColor = System.Drawing.SystemColors.Window;
             this.MainPanel.Controls.Add(this.GenreListBox);
             this.MainPanel.Controls.Add(this.ArtistListBox);
             this.MainPanel.Controls.Add(this.AlbumListView);
@@ -109,6 +115,7 @@
             // 
             // MenuStrip
             // 
+            this.MenuStrip.BackColor = System.Drawing.SystemColors.Window;
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem});
@@ -141,27 +148,29 @@
             // 
             // viewToolStripMenuItem
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.playToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
-            // playToolStripMenuItem
-            // 
-            this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
-            this.playToolStripMenuItem.Text = "Play";
-            this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click);
-            // 
             // ControlsPanel
             // 
-            this.ControlsPanel.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.ControlsPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ControlsPanel.Controls.Add(this.PlayButton);
             this.ControlsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ControlsPanel.Location = new System.Drawing.Point(0, 343);
             this.ControlsPanel.Name = "ControlsPanel";
             this.ControlsPanel.Size = new System.Drawing.Size(784, 119);
             this.ControlsPanel.TabIndex = 4;
+            // 
+            // PlayButton
+            // 
+            this.PlayButton.Location = new System.Drawing.Point(12, 13);
+            this.PlayButton.Name = "PlayButton";
+            this.PlayButton.Size = new System.Drawing.Size(75, 23);
+            this.PlayButton.TabIndex = 0;
+            this.PlayButton.Text = "Play";
+            this.PlayButton.UseVisualStyleBackColor = true;
+            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
             // MainForm
             // 
@@ -179,6 +188,7 @@
             this.MainPanel.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
+            this.ControlsPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,8 +206,8 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
         private System.Windows.Forms.Panel ControlsPanel;
+        private System.Windows.Forms.Button PlayButton;
     }
 }
 

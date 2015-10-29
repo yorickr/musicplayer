@@ -55,48 +55,9 @@ namespace MusicPlayer
             table.Add(new Song("Test Song 2", "Test Album 2", "Test Artist 2"));
         }
 
-        private void playToolStripMenuItem_Click(object sender, EventArgs e)
+        private void PlayButton_Click(object sender, EventArgs e)
         {
-            PlayMp3FromUrl("http://imegumii.nl/music/English/Monstercat/Direct%20-%20Eternity.mp3");
-        }
-
-        private Stream ms = new MemoryStream();
-        public void PlayMp3FromUrl(string url)
-        {
-            new Thread(delegate (object o)
-            {
-                var response = WebRequest.Create(url).GetResponse();
-                using (var stream = response.GetResponseStream())
-                {
-                    byte[] buffer = new byte[65536]; // 64KB chunks
-                    int read;
-                    while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        var pos = ms.Position;
-                        ms.Position = ms.Length;
-                        ms.Write(buffer, 0, read);
-                        ms.Position = pos;
-                    }
-                }
-            }).Start();
-
-            // Pre-buffering some data to allow NAudio to start playing
-            while (ms.Length < 65536 * 10)
-                Thread.Sleep(1000);
-
-            ms.Position = 0;
-            using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(ms))))
-            {
-                using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
-                {
-                    waveOut.Init(blockAlignedStream);
-                    waveOut.Play();
-                    while (waveOut.PlaybackState == PlaybackState.Playing)
-                    {
-                        System.Threading.Thread.Sleep(100);
-                    }
-                }
-            }
+            AudioHandler.PlayMp3FromUrl("http://imegumii.nl/music/English/Monstercat/Direct%20-%20Eternity.mp3");
         }
     }
 }
