@@ -36,15 +36,7 @@ namespace MusicPlayer
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            if (testsong == null)
-                testsong = new Song("917", "Test", "Test", "Test", main.api);
-
-            main.audio.Play(testsong);
-        }
-
-        private void SongsTableView_SelectionChanged(object sender, EventArgs e)
-        {
-            DataGridViewSelectedRowCollection col = SongsTableView.SelectedRows;
+            SongsTableView_CellDoubleClick(sender, new DataGridViewCellEventArgs(0, 0));
         }
 
         private void PauseButton_Click(object sender, EventArgs e)
@@ -63,6 +55,8 @@ namespace MusicPlayer
             BufferBar.Value = main.audio.Buffered;
             PositionBar.Value = main.audio.Position;
             PositionTrackBar.Value = main.audio.Position;
+            LabelCurrentTime.Text = main.audio.CurrentTime;
+            LabelTotalTime.Text = main.audio.TotalTime;
         }
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
