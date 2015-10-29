@@ -65,6 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.SongsTableView.AutoGenerateColumns = true;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Location = new System.Drawing.Point(12, 153);
             this.SongsTableView.MultiSelect = false;

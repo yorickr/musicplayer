@@ -77,13 +77,17 @@ namespace MusicPlayer
         private void AlbumListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(AlbumListView.SelectedItems.Count != 0)
-                main.AlbumFilter(AlbumListView.SelectedItems[0].ToString());
+                main.AlbumFilter(AlbumListView.SelectedItems[0].Text);
         }
 
         private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            main.audio.Play(SongsTableView.CurrentRow.DataBoundItem as Song);
-
+            SongsTable s = new SongsTable();
+            var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+            var row = drv.Row as DataRow;
+            s.ImportRow(row);
+            System.Console.WriteLine((s.Rows[0][3] as Song).SongID);
+            main.audio.Play((s.Rows[0][3] as Song));
         }
     }
 }
