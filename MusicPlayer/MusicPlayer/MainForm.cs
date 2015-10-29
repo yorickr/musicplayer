@@ -57,10 +57,33 @@ namespace MusicPlayer
             main.audio.Stop();
         }
 
+
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             BufferBar.Value = main.audio.Buffered;
             PositionBar.Value = main.audio.Position;
+        }
+
+        private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ArtistListBox.SelectedItems.Count != 0)
+                main.ArtistFilter(ArtistListBox.SelectedItems[0].ToString());
+        }
+
+        private void AlbumListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(AlbumListView.SelectedItems.Count != 0)
+                main.AlbumFilter(AlbumListView.SelectedItems[0].ToString());
+        }
+
+        private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            main.audio.Play(SongsTableView.CurrentRow.DataBoundItem as Song);
+
         }
     }
 }

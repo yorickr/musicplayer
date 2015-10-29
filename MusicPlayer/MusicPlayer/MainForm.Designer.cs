@@ -41,14 +41,14 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
-            this.PlayButton = new System.Windows.Forms.Button();
-            this.PauseButton = new System.Windows.Forms.Button();
             this.StopButton = new System.Windows.Forms.Button();
             this.BufferBar = new System.Windows.Forms.ProgressBar();
             this.PositionBar = new System.Windows.Forms.ProgressBar();
             this.BufferLabel = new System.Windows.Forms.Label();
             this.PositionLabel = new System.Windows.Forms.Label();
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.PauseButton = new System.Windows.Forms.Button();
+            this.PlayButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
@@ -75,6 +75,7 @@
             this.SongsTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.SongsTableView.Size = new System.Drawing.Size(760, 148);
             this.SongsTableView.TabIndex = 0;
+            this.SongsTableView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SongsTableView_CellDoubleClick);
             this.SongsTableView.SelectionChanged += new System.EventHandler(this.SongsTableView_SelectionChanged);
             // 
             // GenreListBox
@@ -86,6 +87,7 @@
             this.GenreListBox.Size = new System.Drawing.Size(124, 134);
             this.GenreListBox.Sorted = true;
             this.GenreListBox.TabIndex = 1;
+            this.GenreListBox.SelectedIndexChanged += new System.EventHandler(this.GenreListBox_SelectedIndexChanged);
             // 
             // AlbumListView
             // 
@@ -98,6 +100,7 @@
             this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
             this.AlbumListView.UseCompatibleStateImageBehavior = false;
+            this.AlbumListView.SelectedIndexChanged += new System.EventHandler(this.AlbumListView_SelectedIndexChanged);
             // 
             // ArtistListBox
             // 
@@ -108,6 +111,7 @@
             this.ArtistListBox.Size = new System.Drawing.Size(124, 134);
             this.ArtistListBox.Sorted = true;
             this.ArtistListBox.TabIndex = 3;
+            this.ArtistListBox.SelectedIndexChanged += new System.EventHandler(this.ArtistListBox_SelectedIndexChanged);
             // 
             // MainPanel
             // 
@@ -179,15 +183,15 @@
             this.ControlsPanel.Size = new System.Drawing.Size(784, 119);
             this.ControlsPanel.TabIndex = 4;
             // 
-            // PlayButton
+            // StopButton
             // 
-            this.PlayButton.Location = new System.Drawing.Point(12, 13);
-            this.PlayButton.Name = "PlayButton";
-            this.PlayButton.Size = new System.Drawing.Size(75, 23);
-            this.PlayButton.TabIndex = 0;
-            this.PlayButton.Text = "Play";
-            this.PlayButton.UseVisualStyleBackColor = true;
-            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+            this.StopButton.Location = new System.Drawing.Point(203, 13);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(75, 23);
+            this.StopButton.TabIndex = 2;
+            this.StopButton.Text = "Stop";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // PauseButton
             // 
@@ -199,15 +203,15 @@
             this.PauseButton.UseVisualStyleBackColor = true;
             this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
             // 
-            // StopButton
+            // PlayButton
             // 
-            this.StopButton.Location = new System.Drawing.Point(203, 13);
-            this.StopButton.Name = "StopButton";
-            this.StopButton.Size = new System.Drawing.Size(75, 23);
-            this.StopButton.TabIndex = 2;
-            this.StopButton.Text = "Stop";
-            this.StopButton.UseVisualStyleBackColor = true;
-            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+            this.PlayButton.Location = new System.Drawing.Point(12, 13);
+            this.PlayButton.Name = "PlayButton";
+            this.PlayButton.Size = new System.Drawing.Size(75, 23);
+            this.PlayButton.TabIndex = 0;
+            this.PlayButton.Text = "Play";
+            this.PlayButton.UseVisualStyleBackColor = true;
+            this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
             // BufferBar
             // 
