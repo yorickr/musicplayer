@@ -41,6 +41,8 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.PlayButton = new System.Windows.Forms.Button();
+            this.PauseButton = new System.Windows.Forms.Button();
+            this.StopButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
@@ -158,6 +160,8 @@
             // ControlsPanel
             // 
             this.ControlsPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ControlsPanel.Controls.Add(this.StopButton);
+            this.ControlsPanel.Controls.Add(this.PauseButton);
             this.ControlsPanel.Controls.Add(this.PlayButton);
             this.ControlsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ControlsPanel.Location = new System.Drawing.Point(0, 343);
@@ -174,6 +178,26 @@
             this.PlayButton.Text = "Play";
             this.PlayButton.UseVisualStyleBackColor = true;
             this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
+            // 
+            // PauseButton
+            // 
+            this.PauseButton.Location = new System.Drawing.Point(108, 13);
+            this.PauseButton.Name = "PauseButton";
+            this.PauseButton.Size = new System.Drawing.Size(75, 23);
+            this.PauseButton.TabIndex = 1;
+            this.PauseButton.Text = "Pause";
+            this.PauseButton.UseVisualStyleBackColor = true;
+            this.PauseButton.Click += new System.EventHandler(this.PauseButton_Click);
+            // 
+            // StopButton
+            // 
+            this.StopButton.Location = new System.Drawing.Point(203, 13);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(75, 23);
+            this.StopButton.TabIndex = 2;
+            this.StopButton.Text = "Stop";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // MainForm
             // 
@@ -213,6 +237,8 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.Panel ControlsPanel;
         private System.Windows.Forms.Button PlayButton;
+        private System.Windows.Forms.Button StopButton;
+        private System.Windows.Forms.Button PauseButton;
     }
 }
 

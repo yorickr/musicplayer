@@ -12,47 +12,109 @@ namespace MusicPlayer
 {
     public class AudioHandler
     {
-        public static Stream ms = new MemoryStream();
+        public enum AudioState { PLAYING, STOPPED, PAUSED }
+        public AudioState State { get; set; }
 
-        public static void PlayMp3FromUrl(string url)
+        private Stream ms;
+
+        private Thread network;
+        private Thread audio;
+
+        private Song CurrentSong;
+
+        public AudioHandler()
         {
-            new Thread(delegate (object o)
-            {
-                var response = WebRequest.Create(url).GetResponse();
-                using (var stream = response.GetResponseStream())
-                {
-                    byte[] buffer = new byte[65536]; // 64KB chunks
-                    int read;
-                    while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        var pos = ms.Position;
-                        ms.Position = ms.Length;
-                        ms.Write(buffer, 0, read);
-                        ms.Position = pos;
-                    }
-                }
-            }).Start();
+            ms = new MemoryStream();
+            network = new Thread(LoadAudio);
+            audio = new Thread(PlayAudio);
+            network.IsBackground = true;
+            audio.IsBackground = true;
+            State = AudioState.STOPPED;
+        }
 
-            new Thread(delegate (object o)
+        public void Play(Song s)
+        {
+            if (CurrentSong == s)
+                State = AudioState.PLAYING;
+            else
             {
-                // Pre-buffering some data to allow NAudio to start playing
-                while (ms.Length < 65536 * 10)
-                    Thread.Sleep(1000);
+                State = AudioState.STOPPED;
 
-                ms.Position = 0;
-                using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(ms))))
+                network = new Thread(LoadAudio);
+                audio = new Thread(PlayAudio);
+
+                CurrentSong = s;
+                network.Start(s);
+                audio.Start();
+            }
+        }
+
+        public void Stop()
+        {
+            State = AudioState.STOPPED;
+        }
+
+        public void Pause()
+        {
+            State = AudioState.PAUSED;
+        }
+
+        private void PlayAudio()
+        {
+            while (ms.Length < 65536 * 10)
+                Thread.Sleep(1000);
+
+            ms.Position = 0;
+            using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(ms))))
+            {
+                using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
                 {
-                    using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
+                    waveOut.Init(blockAlignedStream);
+                    waveOut.Play();
+                    while (waveOut.PlaybackState != PlaybackState.Stopped)
                     {
-                        waveOut.Init(blockAlignedStream);
-                        waveOut.Play();
-                        while (waveOut.PlaybackState == PlaybackState.Playing)
+                        System.Threading.Thread.Sleep(100);
+                        if(State == AudioState.PAUSED && waveOut.PlaybackState == PlaybackState.Playing)
                         {
-                            System.Threading.Thread.Sleep(100);
+                            waveOut.Pause();
+                        }
+                        if (State == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
+                        {
+                            waveOut.Play();
+                        }
+                        if (State == AudioState.STOPPED)
+                        {
+                            waveOut.Stop();
                         }
                     }
+                    State = AudioState.STOPPED;
                 }
-            }).Start();
+            }
         }
+
+        private void LoadAudio(object o)
+        {
+            Song s = (Song) o;
+            var response = WebRequest.Create(s.Url).GetResponse();
+            State = AudioState.PLAYING;
+            using (var stream = response.GetResponseStream())
+            {
+                byte[] buffer = new byte[65536]; // 64KB chunks
+                int read;
+                while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    var pos = ms.Position;
+                    ms.Position = ms.Length;
+                    ms.Write(buffer, 0, read);
+                    ms.Position = pos;
+                    if(State == AudioState.STOPPED)
+                    {
+                        stream.Close();
+                        return;
+                    }
+                }
+            }
+        }
+
     }
 }

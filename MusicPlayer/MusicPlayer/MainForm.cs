@@ -34,12 +34,22 @@ namespace MusicPlayer
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            AudioHandler.PlayMp3FromUrl("http://imegumii.nl/music/English/Monstercat/Direct%20-%20Eternity.mp3");
+            main.audio.Play(new Song("102", "Test", "Test", "Test", main.api));
         }
 
         private void SongsTableView_SelectionChanged(object sender, EventArgs e)
         {
             DataGridViewSelectedRowCollection col = SongsTableView.SelectedRows;
+        }
+
+        private void PauseButton_Click(object sender, EventArgs e)
+        {
+            main.audio.Pause();
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            main.audio.Stop();
         }
     }
 }
