@@ -21,7 +21,7 @@
         }
 
         #region Windows Form Designer generated code
-
+        bool clicked = false;
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -41,18 +41,20 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
-            this.StopButton = new System.Windows.Forms.Button();
-            this.BufferBar = new System.Windows.Forms.ProgressBar();
-            this.PositionBar = new System.Windows.Forms.ProgressBar();
-            this.BufferLabel = new System.Windows.Forms.Label();
             this.PositionLabel = new System.Windows.Forms.Label();
-            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.BufferLabel = new System.Windows.Forms.Label();
+            this.PositionBar = new System.Windows.Forms.ProgressBar();
+            this.BufferBar = new System.Windows.Forms.ProgressBar();
+            this.StopButton = new System.Windows.Forms.Button();
             this.PauseButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
+            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.PositionTrackBar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // SongsTableView
@@ -170,6 +172,7 @@
             // ControlsPanel
             // 
             this.ControlsPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ControlsPanel.Controls.Add(this.PositionTrackBar);
             this.ControlsPanel.Controls.Add(this.PositionLabel);
             this.ControlsPanel.Controls.Add(this.BufferLabel);
             this.ControlsPanel.Controls.Add(this.PositionBar);
@@ -182,6 +185,38 @@
             this.ControlsPanel.Name = "ControlsPanel";
             this.ControlsPanel.Size = new System.Drawing.Size(784, 119);
             this.ControlsPanel.TabIndex = 4;
+            // 
+            // PositionLabel
+            // 
+            this.PositionLabel.AutoSize = true;
+            this.PositionLabel.Location = new System.Drawing.Point(285, 90);
+            this.PositionLabel.Name = "PositionLabel";
+            this.PositionLabel.Size = new System.Drawing.Size(44, 13);
+            this.PositionLabel.TabIndex = 6;
+            this.PositionLabel.Text = "Position";
+            // 
+            // BufferLabel
+            // 
+            this.BufferLabel.AutoSize = true;
+            this.BufferLabel.Location = new System.Drawing.Point(285, 60);
+            this.BufferLabel.Name = "BufferLabel";
+            this.BufferLabel.Size = new System.Drawing.Size(35, 13);
+            this.BufferLabel.TabIndex = 5;
+            this.BufferLabel.Text = "Buffer";
+            // 
+            // PositionBar
+            // 
+            this.PositionBar.Location = new System.Drawing.Point(13, 90);
+            this.PositionBar.Name = "PositionBar";
+            this.PositionBar.Size = new System.Drawing.Size(265, 23);
+            this.PositionBar.TabIndex = 4;
+            // 
+            // BufferBar
+            // 
+            this.BufferBar.Location = new System.Drawing.Point(13, 60);
+            this.BufferBar.Name = "BufferBar";
+            this.BufferBar.Size = new System.Drawing.Size(265, 23);
+            this.BufferBar.TabIndex = 3;
             // 
             // StopButton
             // 
@@ -213,42 +248,37 @@
             this.PlayButton.UseVisualStyleBackColor = true;
             this.PlayButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
-            // BufferBar
-            // 
-            this.BufferBar.Location = new System.Drawing.Point(13, 60);
-            this.BufferBar.Name = "BufferBar";
-            this.BufferBar.Size = new System.Drawing.Size(265, 23);
-            this.BufferBar.TabIndex = 3;
-            // 
-            // PositionBar
-            // 
-            this.PositionBar.Location = new System.Drawing.Point(13, 90);
-            this.PositionBar.Name = "PositionBar";
-            this.PositionBar.Size = new System.Drawing.Size(265, 23);
-            this.PositionBar.TabIndex = 4;
-            // 
-            // BufferLabel
-            // 
-            this.BufferLabel.AutoSize = true;
-            this.BufferLabel.Location = new System.Drawing.Point(285, 60);
-            this.BufferLabel.Name = "BufferLabel";
-            this.BufferLabel.Size = new System.Drawing.Size(35, 13);
-            this.BufferLabel.TabIndex = 5;
-            this.BufferLabel.Text = "Buffer";
-            // 
-            // PositionLabel
-            // 
-            this.PositionLabel.AutoSize = true;
-            this.PositionLabel.Location = new System.Drawing.Point(285, 90);
-            this.PositionLabel.Name = "PositionLabel";
-            this.PositionLabel.Size = new System.Drawing.Size(44, 13);
-            this.PositionLabel.TabIndex = 6;
-            this.PositionLabel.Text = "Position";
-            // 
             // UpdateTimer
             // 
             this.UpdateTimer.Interval = 600;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
+            // 
+            // PositionTrackBar
+            // 
+            this.PositionTrackBar.Location = new System.Drawing.Point(346, 13);
+            this.PositionTrackBar.Maximum = 100;
+            this.PositionTrackBar.Name = "PositionTrackBar";
+            this.PositionTrackBar.Size = new System.Drawing.Size(426, 45);
+            this.PositionTrackBar.TabIndex = 7;
+            
+            PositionTrackBar.Scroll += (s,e) =>
+            {
+                if (clicked)
+                    return;
+                this.PositionTrackBar_ValueChanged();
+            };
+            PositionTrackBar.MouseDown += (s,e) =>
+            {
+                clicked = true;
+            };
+            PositionTrackBar.MouseUp += (s,e) =>
+            {
+                if (!clicked)
+                    return;
+
+                clicked = false;
+                this.PositionTrackBar_ValueChanged();
+            };
             // 
             // MainForm
             // 
@@ -270,6 +300,7 @@
             this.MenuStrip.PerformLayout();
             this.ControlsPanel.ResumeLayout(false);
             this.ControlsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +327,7 @@
         private System.Windows.Forms.ProgressBar PositionBar;
         private System.Windows.Forms.ProgressBar BufferBar;
         private System.Windows.Forms.Timer UpdateTimer;
+        private System.Windows.Forms.TrackBar PositionTrackBar;
     }
 }
 

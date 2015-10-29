@@ -62,6 +62,7 @@ namespace MusicPlayer
         {
             BufferBar.Value = main.audio.Buffered;
             PositionBar.Value = main.audio.Position;
+            PositionTrackBar.Value = main.audio.Position;
         }
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -84,6 +85,11 @@ namespace MusicPlayer
         {
             main.audio.Play(SongsTableView.CurrentRow.DataBoundItem as Song);
 
+        }
+
+        private void PositionTrackBar_ValueChanged()
+        {
+            main.audio.Seek(PositionTrackBar.Value);
         }
     }
 }

@@ -12,16 +12,17 @@ namespace MusicPlayer
 {
     public class AudioHandler
     {
-        public enum AudioState { PLAYING, WAITING, STOPPED, PAUSED }
+        public enum AudioState { PLAYING, WAITING, STOPPED, PAUSED, SEEKING }
         public enum BufferState { EMPTY, BUFFERING, DONE }
         public AudioState AState { get; set; }
         public BufferState BState { get; set; }
 
-        public int Buffered { get { return Math.Min((int)((bufpos / Length) * 100), 100); } }
-        public int Position { get { return Math.Min((int)((playpos / Length) * 100), 100); } }
-        public double Length { get; set; }
+        public int Buffered { get { return Math.Min((int)((bufpos / (double)Length) * 100), 100); } }
+        public int Position { get { return Math.Min((int)((playpos / (double)Length) * 100), 100); } }
+        public long Length { get; set; }
         private long bufpos = 0;
         private long playpos = 0;
+        private long seek = 0;
 
         private Stream ms;
 
@@ -67,6 +68,16 @@ namespace MusicPlayer
             }
         }
 
+        public void Seek(int position)
+        {
+            if (position >= Buffered-1)
+                return;
+
+            seek = Length / 100 * position;
+            AState = AudioState.SEEKING;
+            
+        }
+
         public void Stop()
         {
             CreateThreads();
@@ -108,7 +119,13 @@ namespace MusicPlayer
                             position = blockAlignedStream.Position;
                             waveOut.Pause();
                         }
-                        if(AState == AudioState.STOPPED)
+                        if (AState == AudioState.SEEKING)
+                        {
+                            blockAlignedStream.Position = seek - (seek % blockAlignedStream.WaveFormat.BlockAlign);
+                            AState = AudioState.PLAYING;
+                            waveOut.Play();
+                        }
+                        if (AState == AudioState.STOPPED)
                         {
                             waveOut.Stop();
                         }
