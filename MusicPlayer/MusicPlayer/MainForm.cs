@@ -18,7 +18,6 @@ namespace MusicPlayer
         public MainForm()
         {
             InitializeComponent();
-//            nw.SendString("GET / HTTP/1.1");
 
         }
 

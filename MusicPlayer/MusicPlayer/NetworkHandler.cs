@@ -4,6 +4,8 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json.Linq;
+
 
 namespace MusicPlayer
 {
@@ -11,15 +13,13 @@ namespace MusicPlayer
     {
         private int port = 8585;
         private string ip;
-        private APIHandler api;
  
-        public NetworkHandler(string ip, APIHandler apihandler)
+        public NetworkHandler(string ip)
         {
             this.ip = ip;
-            this.api = apihandler;
         }
 
-        public void SendString(string m)
+        public JObject SendString(string m)
         {
             HttpWebRequest server =   (HttpWebRequest)WebRequest.Create(ip+":"+port+"/"+m);
             server.KeepAlive = false;
@@ -35,10 +35,11 @@ namespace MusicPlayer
                 data +=outputData;
                 count = streamRead.Read(readBuff, 0, 256);
             }
-            System.Console.WriteLine(data);
+            JObject o = JObject.Parse(data);
             respond.Close();
             streamResponse.Close();
             streamRead.Close();
+            return o;
         }
     }
 }

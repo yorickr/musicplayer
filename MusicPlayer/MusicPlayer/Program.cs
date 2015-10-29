@@ -14,9 +14,9 @@ namespace MusicPlayer
         [STAThread]
         static void Main()
         {
-            APIHandler api = new APIHandler();
-            NetworkHandler nw = new NetworkHandler("http://www.imegumii.nl", api);
-            nw.SendString("getsongbyid?id=102");
+            NetworkHandler nw = new NetworkHandler("http://www.imegumii.nl");
+            APIHandler api = new APIHandler(nw);
+            Console.WriteLine(api.GetSongURLByID("102"));
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
