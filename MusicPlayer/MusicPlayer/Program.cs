@@ -16,10 +16,13 @@ namespace MusicPlayer
         {
             NetworkHandler nw = new NetworkHandler("http://www.imegumii.nl");
             APIHandler api = new APIHandler(nw);
-            Console.WriteLine(api.GetSongURLByID("102"));
+            MainForm form = new MainForm();
+
+            new Main(nw, api, form);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(form);
         }
     }
 }
