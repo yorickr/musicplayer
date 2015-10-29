@@ -19,6 +19,22 @@ namespace MusicPlayer
 
             NetworkHandler nw = new NetworkHandler("http://www.imegumii.nl");
             APIHandler api = new APIHandler(nw);
+//            api.GetSongsByArtist("Amon Amarth").ForEach(s =>
+//            {
+//                Console.WriteLine(s.SongID);
+//            });
+//            api.GetSongsByYear("2009").ForEach(s =>
+//            {
+//                Console.WriteLine(s.Name);
+//            });
+            api.GetSongsByGenre("Melodic Death Metal").ForEach(s =>
+            {
+                Console.WriteLine(s.Name);
+            });
+//            api.GetSongsByAlbum("Stronger").ForEach(s =>
+//            {
+//                Console.WriteLine(s.Name);
+//            });
             MainForm form = new MainForm();
             new Main(nw, api, form);
 
