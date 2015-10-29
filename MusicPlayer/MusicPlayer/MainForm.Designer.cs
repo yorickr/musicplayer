@@ -41,6 +41,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
+            this.PositionTrackBar = new System.Windows.Forms.TrackBar();
             this.PositionLabel = new System.Windows.Forms.Label();
             this.BufferLabel = new System.Windows.Forms.Label();
             this.PositionBar = new System.Windows.Forms.ProgressBar();
@@ -49,7 +50,8 @@
             this.PauseButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.PositionTrackBar = new System.Windows.Forms.TrackBar();
+            this.LabelCurrentTime = new System.Windows.Forms.Label();
+            this.LabelTotalTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
@@ -67,7 +69,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.SongsTableView.AutoGenerateColumns = true;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Location = new System.Drawing.Point(12, 153);
             this.SongsTableView.MultiSelect = false;
@@ -79,7 +80,6 @@
             this.SongsTableView.Size = new System.Drawing.Size(760, 148);
             this.SongsTableView.TabIndex = 0;
             this.SongsTableView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SongsTableView_CellDoubleClick);
-            this.SongsTableView.SelectionChanged += new System.EventHandler(this.SongsTableView_SelectionChanged);
             // 
             // GenreListBox
             // 
@@ -173,6 +173,8 @@
             // ControlsPanel
             // 
             this.ControlsPanel.BackColor = System.Drawing.SystemColors.WindowFrame;
+            this.ControlsPanel.Controls.Add(this.LabelTotalTime);
+            this.ControlsPanel.Controls.Add(this.LabelCurrentTime);
             this.ControlsPanel.Controls.Add(this.PositionTrackBar);
             this.ControlsPanel.Controls.Add(this.PositionLabel);
             this.ControlsPanel.Controls.Add(this.BufferLabel);
@@ -186,6 +188,32 @@
             this.ControlsPanel.Name = "ControlsPanel";
             this.ControlsPanel.Size = new System.Drawing.Size(784, 119);
             this.ControlsPanel.TabIndex = 4;
+            // 
+            // PositionTrackBar
+            // 
+            this.PositionTrackBar.Location = new System.Drawing.Point(346, 13);
+            this.PositionTrackBar.Maximum = 100;
+            this.PositionTrackBar.Name = "PositionTrackBar";
+            this.PositionTrackBar.Size = new System.Drawing.Size(426, 45);
+            this.PositionTrackBar.TabIndex = 7;
+            PositionTrackBar.Scroll += (s, e) =>
+            {
+                if (clicked)
+                    return;
+                this.PositionTrackBar_ValueChanged();
+            };
+            PositionTrackBar.MouseDown += (s, e) =>
+            {
+                clicked = true;
+            };
+            PositionTrackBar.MouseUp += (s, e) =>
+            {
+                if (!clicked)
+                    return;
+
+                clicked = false;
+                this.PositionTrackBar_ValueChanged();
+            };
             // 
             // PositionLabel
             // 
@@ -254,32 +282,23 @@
             this.UpdateTimer.Interval = 600;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
-            // PositionTrackBar
+            // LabelCurrentTime
             // 
-            this.PositionTrackBar.Location = new System.Drawing.Point(346, 13);
-            this.PositionTrackBar.Maximum = 100;
-            this.PositionTrackBar.Name = "PositionTrackBar";
-            this.PositionTrackBar.Size = new System.Drawing.Size(426, 45);
-            this.PositionTrackBar.TabIndex = 7;
-            
-            PositionTrackBar.Scroll += (s,e) =>
-            {
-                if (clicked)
-                    return;
-                this.PositionTrackBar_ValueChanged();
-            };
-            PositionTrackBar.MouseDown += (s,e) =>
-            {
-                clicked = true;
-            };
-            PositionTrackBar.MouseUp += (s,e) =>
-            {
-                if (!clicked)
-                    return;
-
-                clicked = false;
-                this.PositionTrackBar_ValueChanged();
-            };
+            this.LabelCurrentTime.AutoSize = true;
+            this.LabelCurrentTime.Location = new System.Drawing.Point(358, 60);
+            this.LabelCurrentTime.Name = "LabelCurrentTime";
+            this.LabelCurrentTime.Size = new System.Drawing.Size(49, 13);
+            this.LabelCurrentTime.TabIndex = 8;
+            this.LabelCurrentTime.Text = "00:00:00";
+            // 
+            // LabelTotalTime
+            // 
+            this.LabelTotalTime.AutoSize = true;
+            this.LabelTotalTime.Location = new System.Drawing.Point(693, 60);
+            this.LabelTotalTime.Name = "LabelTotalTime";
+            this.LabelTotalTime.Size = new System.Drawing.Size(49, 13);
+            this.LabelTotalTime.TabIndex = 9;
+            this.LabelTotalTime.Text = "00:00:00";
             // 
             // MainForm
             // 
@@ -329,6 +348,8 @@
         private System.Windows.Forms.ProgressBar BufferBar;
         private System.Windows.Forms.Timer UpdateTimer;
         private System.Windows.Forms.TrackBar PositionTrackBar;
+        private System.Windows.Forms.Label LabelTotalTime;
+        private System.Windows.Forms.Label LabelCurrentTime;
     }
 }
 
