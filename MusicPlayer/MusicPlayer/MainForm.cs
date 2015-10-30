@@ -231,6 +231,8 @@ namespace MusicPlayer
         private void ExitProgram()
         {
             main.audio.AState = AudioHandler.AudioState.STOPPED;
+            NotifyIcon.Visible = false;
+            NotifyIcon.Icon = null;
             System.Windows.Forms.Application.Exit();
         }
 

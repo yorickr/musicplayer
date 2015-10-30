@@ -110,8 +110,18 @@ namespace MusicPlayer
         {
             long position = 0;
             ms.Position = position;
+            Mp3FileReader mp3fr = null;
 
-            Mp3FileReader mp3fr = new Mp3FileReader(ms);
+            try
+            {
+                mp3fr = new Mp3FileReader(ms);
+            }
+            catch(Exception e)
+            {
+                AState = AudioState.STOPPED;
+                return;
+            }
+            
             
             using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3fr)))
             {
