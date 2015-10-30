@@ -26,6 +26,26 @@ namespace MusicPlayer
         public MainForm()
         {
             InitializeComponent();
+
+            PositionTrackBar.Scroll += (s, e) =>
+            {
+                if (clicked)
+                    return;
+                this.PositionTrackBar_ValueChanged();
+            };
+            PositionTrackBar.MouseDown += (s, e) =>
+            {
+                clicked = true;
+            };
+            PositionTrackBar.MouseUp += (s, e) =>
+            {
+                if (!clicked)
+                    return;
+
+                clicked = false;
+                this.PositionTrackBar_ValueChanged();
+            };
+
             p = new NotificationPopup(this);
         }
 
@@ -81,11 +101,15 @@ namespace MusicPlayer
         private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             SongsTable s = new SongsTable();
-            var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
-            var row = drv.Row as DataRow;
-            s.ImportRow(row);
-            System.Console.WriteLine((s.Rows[0][3] as Song).SongID);
-            main.audio.Play((s.Rows[0][3] as Song));
+            if(SongsTableView.SelectedRows.Count > 0)
+            {
+                var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+                var row = drv.Row as DataRow;
+                s.ImportRow(row);
+                System.Console.WriteLine((s.Rows[0][3] as Song).SongID);
+                main.audio.Play((s.Rows[0][3] as Song));
+            }
+            
         }
 
         private void PositionTrackBar_ValueChanged()

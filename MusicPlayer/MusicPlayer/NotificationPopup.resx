@@ -120,16 +120,16 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAHFSURBVFhH7ZVpTsMwEIUrwb16gcROgLBehZ2/SEWquAEC
-        tagcsEUqb+xxmqTjePlLn/Sk1uOZ+bKNJ0pV2wQ/TAIqS/0o5HmdAnDPPYJKgYgCQME7rh2tWIgYgFuu
-        mawYiACAWnCtbCmlV3Jt61GAolC/WusLrpUspeobqiHVdg4+glyImOZkAUAthompEJ7mGzyO5WBtD8C8
-        cNQsF8LXvCj0KcWHL2YLMPzUyrI6xzqod5vhGYe9wlXOuzmAWaPWCYeNuhAOQBwyuJoGMQOBK3jj5aCw
-        /93mqDUeac3LPTkI2jw6XlHgDHte+W+0kDPzNXciCP550EEH/WeFhgFmySX2fDRNc8RLQU2n02NMzi8a
-        YrwkyvSmceiDwAy/2h0sakGFOeQV7UHet82hMV43HOoJPZ9ojwEgDyFw8l3vn2rqk8Ne2Svv5lQbOtg4
-        bIS1ZxdvAcgOAtSe83z8lpLoiu3efq6DQI+XbqwHYK1Xuc2dqJnN2dWgmlj/6a6RBYA9JzV3kiAkhwCy
-        mjsRhHA3ew4A6CXXypZ027sOPgLfJxqj4QsnOeYdyIJAXvupjTkKgJwCgb1myMQ4GoAcA0F7pFzZ1fYP
-        Y4waC45g6MYAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAcVJREFUWEftlWlOwzAQhSvBvXqBxE6AsF6Fnb9IRaq4AQK1qBywRSpv7HGapON4
+        +Uuf9KTW45n5so0nSlXbBD9MAipL/SjkeZ0CcM89gkqBiAJAwTuuHa1YiBiAW66ZrBiIAIBacK1sKaVX
+        cm3rUYCiUL9a6wuulSyl6huqIdV2Dj6CXIiY5mQBQC2GiakQnuYbPI7lYG0PwLxw1CwXwte8KPQpxYcv
+        Zgsw/NTKsjrHOqh3m+EZh73CVc67OYBZo9YJh426EA5AHDK4mgYxA4EreOPloLD/3eaoNR5pzcs9OQja
+        PDpeUeAMe175b7SQM/M1dyII/nnQQQf9Z4WGAWbJJfZ8NE1zxEtBTafTY0zOLxpivCTK9KZx6IPADL/a
+        HSxqQYU55BXtQd63zaExXjcc6gk9n2iPASAPIXDyXe+fauqTw17ZK+/mVBs62DhshLVnF28ByA4C1J7z
+        fPyWkuiK7d5+roNAj5durAdgrVe5zZ2omc3Z1aCaWP/prpEFgD0nNXeSICSHALKaOxGEcDd7DgDoJdfK
+        lnTbuw4+At8nGqPhCyc55h3IgkBe+6mNOQqAnAKBvWbIxDgagBwDQXukXNnV9g9jjBoLjmDoxgAAAABJ
+        RU5ErkJggg==
 </value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

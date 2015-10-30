@@ -31,5 +31,10 @@ namespace MusicPlayer
         {
             f.WindowState = FormWindowState.Normal;
         }
+
+        private void NotificationPopup_Leave(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
     }
 }
