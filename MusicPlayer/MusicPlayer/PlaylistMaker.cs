@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,7 +26,6 @@ namespace MusicPlayer
             this.allPlaylistSongs = new List<Song>();
             this.allsongs = new List<Song>();
             InitializeComponent();
-            Populate();
         }
 
         public void PlaylistSelectBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,8 +40,10 @@ namespace MusicPlayer
 
         public void Repopulate()
         {
-            PlaylistSelectBox.Items.Clear();
+            int selection = PlaylistSelectBox.SelectedIndex;
+            PlaylistSelectBox.Items.Clear();      
             pl.GetPlaylists().ForEach(p => PlaylistSelectBox.Items.Add(p.name));
+            PlaylistSelectBox.SelectedIndex = selection;
             if (PlaylistSelectBox.SelectedItem != null)
             {
                 PlaylistSongContainer.Items.Clear();
@@ -53,8 +55,16 @@ namespace MusicPlayer
         public void Populate()
         {
             pl.GetPlaylists().ForEach(p => PlaylistSelectBox.Items.Add(p.name));
+            if (PlaylistSelectBox.Items.Count > 0)
+                PlaylistSelectBox.SelectedIndex = 0;
             allsongs = api.GetAllSongs();
             allsongs.ForEach(s => PlaylistSongSelector.Items.Add(s.Name));
+
+            if (PlaylistSelectBox.SelectedItem != null)
+            {
+                allPlaylistSongs = pl.GetPlaylistByName(PlaylistSelectBox.SelectedItem.ToString()).GetSongs();
+                allPlaylistSongs.ForEach(s => PlaylistSongContainer.Items.Add(s.Name));
+            }
         }
 
         private void PlaylistAddSongsButton_Click(object sender, EventArgs e)
@@ -74,6 +84,7 @@ namespace MusicPlayer
                 }
                 currentPlaylist.WriteToFile();
             }
+            Thread.Sleep(10);
             Repopulate();
         }
 
@@ -81,6 +92,11 @@ namespace MusicPlayer
         {
             pl.MakeNewPlaylistByName(PlaylistNewInputfield.Text);
             Repopulate();
+        }
+
+        private void PlaylistMaker_Load(object sender, EventArgs e)
+        {
+            Populate();
         }
     }
 }
