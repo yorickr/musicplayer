@@ -109,6 +109,7 @@ namespace MusicPlayer
             ms.Position = position;
 
             Mp3FileReader mp3fr = new Mp3FileReader(ms);
+            
             using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3fr)))
             {
                 blockAlignedStream.Position = pos;
@@ -136,9 +137,9 @@ namespace MusicPlayer
                         }
                         if (AState == AudioState.SEEKING)
                         {
-                            blockAlignedStream.Position = seek - (seek % blockAlignedStream.WaveFormat.BlockAlign);
+                            blockAlignedStream.Seek(seek - (seek % blockAlignedStream.WaveFormat.BlockAlign), SeekOrigin.Begin);
                             AState = AudioState.PLAYING;
-                            waveOut.Play();
+                            //waveOut.Play();
                         }
                         if (AState == AudioState.STOPPED)
                         {
@@ -196,7 +197,8 @@ namespace MusicPlayer
             LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
-                byte[] buffer = new byte[65536]; // 64KB chunks
+                //byte[] buffer = new byte[65536]; // 64KB chunks
+                byte[] buffer = new byte[65536*4]; // 256KB chunks
                 int read;
                 BState = BufferState.BUFFERING;
                 AState = AudioState.WAITING;
@@ -209,7 +211,7 @@ namespace MusicPlayer
                     ms.Position = pos;
 
 
-                    this.bufpos += buffer.Length;
+                    this.bufpos = ms.Length;
                 }
             }
 
