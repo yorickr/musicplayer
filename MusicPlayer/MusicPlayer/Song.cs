@@ -48,5 +48,10 @@ namespace MusicPlayer
         {
             url = str;
         }
+
+        public override string ToString()
+        {
+            return $"{this.SongID}|{this.Name}|{this.Album}|{this.Artist}|{this.Seconds}|{this.Genre}";
+        }
     }
 }

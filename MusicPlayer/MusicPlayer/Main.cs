@@ -11,16 +11,18 @@ namespace MusicPlayer
         public APIHandler api;
         public MainForm form;
         public NetworkHandler nw;
+        public PlaylistHandler pl;
         public AudioHandler audio;
 
         private SongsTable table;
 
-        public Main(NetworkHandler nw, APIHandler api, MainForm form)
+        public Main(NetworkHandler nw, APIHandler api, MainForm form, PlaylistHandler pl)
         {
             this.nw = nw;
             this.api = api;
             this.form = form;
             form.main = this;
+            this.pl = pl;
 
             audio = new AudioHandler();
             table = new SongsTable();
@@ -34,6 +36,7 @@ namespace MusicPlayer
             this.api.GetAlbums().ForEach(a => form.AlbumListView.Items.Add(a.albumnaam));
             this.api.GetArtists().ForEach(a => form.ArtistListBox.Items.Add(a.naam));
             this.api.GetGenres().ForEach(g => form.GenreListBox.Items.Add(g.name));
+            this.pl.GetPlaylists().ForEach(p => form.PlaylistBox.Items.Add(p.name));
         }
 
         public void ArtistFilter(string artist)

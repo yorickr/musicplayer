@@ -431,7 +431,7 @@
         private System.Windows.Forms.Label GenreListLabel;
         private System.Windows.Forms.ToolStripMenuItem playlistsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overviewToolStripMenuItem;
-        private System.Windows.Forms.ListBox PlaylistBox;
+        public System.Windows.Forms.ListBox PlaylistBox;
         private System.Windows.Forms.Label PlaylistListLabel;
     }
 }

@@ -73,6 +73,8 @@
     <Compile Include="NotificationPopup.Designer.cs">
       <DependentUpon>NotificationPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Playlist.cs" />
+    <Compile Include="PlaylistHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Song.cs" />
