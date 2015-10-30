@@ -106,14 +106,14 @@ namespace MusicPlayer
         private void PlayAudio()
         {
             AState = AudioState.WAITING;
-            while (ms.Length < 65536 * 10 && BState != BufferState.DONE)
-                Thread.Sleep(1000);
+            while (ms.Length < 65536 * 4 * 10 && BState != BufferState.DONE)
+                Thread.Sleep(75);
             AState = AudioState.PLAYING;
 
             long position = 0;
 
-            ms.Position = position;
             Mp3FileReader mp3fr = new Mp3FileReader(ms);
+            
             using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3fr)))
             {
 
@@ -141,14 +141,16 @@ namespace MusicPlayer
                         }
                         if (AState == AudioState.SEEKING)
                         {
-                            blockAlignedStream.Position = seek - (seek % blockAlignedStream.WaveFormat.BlockAlign);
+                            blockAlignedStream.Seek(seek - (seek % blockAlignedStream.WaveFormat.BlockAlign), SeekOrigin.Begin);
                             AState = AudioState.PLAYING;
-                            waveOut.Play();
+                            //waveOut.Play();
                         }
                         if (AState == AudioState.STOPPED)
                         {
                             waveOut.Stop();
                         }
+
+                        Console.WriteLine(waveOut.PlaybackState + " | " + blockAlignedStream.Position + " | " + ms.Position);
 
                         playpos = blockAlignedStream.Position;
                         CurrentTime = (int)(playpos / waveOut.OutputWaveFormat.AverageBytesPerSecond);
@@ -183,7 +185,8 @@ namespace MusicPlayer
             LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
-                byte[] buffer = new byte[65536]; // 64KB chunks
+                //byte[] buffer = new byte[65536]; // 64KB chunks
+                byte[] buffer = new byte[65536*4]; // 256KB chunks
                 int read;
                 BState = BufferState.BUFFERING;
                 AState = AudioState.WAITING;
@@ -196,7 +199,7 @@ namespace MusicPlayer
                     ms.Position = pos;
 
 
-                    this.bufpos += buffer.Length;
+                    this.bufpos = ms.Length;
                 }
             }
 

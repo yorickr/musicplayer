@@ -280,7 +280,7 @@
             // 
             // UpdateTimer
             // 
-            this.UpdateTimer.Interval = 600;
+            this.UpdateTimer.Interval = 150;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
             // notifyIcon1
