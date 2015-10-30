@@ -43,12 +43,22 @@ namespace MusicPlayer
                 form.ArtistListBox.Items.Add(a.naam);
 
             }
+            this.api.GetGenres().ForEach(g => form.GenreListBox.Items.Add(g.name));
         }
 
         public void ArtistFilter(string artist)
         {
             table.Clear();
             api.GetSongsByArtist(artist).ForEach(s =>
+            {
+                table.Add(s);
+            });
+        }
+
+        public void GenreFilter(string genre)
+        {
+            table.Clear();
+            api.GetSongsByGenre(genre).ForEach(s =>
             {
                 table.Add(s);
             });

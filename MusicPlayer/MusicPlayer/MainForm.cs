@@ -89,6 +89,9 @@ namespace MusicPlayer
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (GenreListBox.SelectedItems.Count != 0) {
+                 main.GenreFilter(GenreListBox.SelectedItems[0].ToString());
+            }
         }
 
         private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
