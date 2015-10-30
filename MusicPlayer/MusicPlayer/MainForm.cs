@@ -148,19 +148,29 @@ namespace MusicPlayer
         {
             if (GenreListBox.SelectedItems.Count != 0) {
                  main.GenreFilter(GenreListBox.SelectedItems[0].ToString());
+                ArtistListBox.ClearSelected();
+                AlbumListView.SelectedIndices.Clear();
             }
         }
 
         private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ArtistListBox.SelectedItems.Count != 0)
+            {
                 main.ArtistFilter(ArtistListBox.SelectedItems[0].ToString());
+                GenreListBox.ClearSelected();
+                AlbumListView.SelectedIndices.Clear();
+            }
         }
 
         private void AlbumListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(AlbumListView.SelectedItems.Count != 0)
+            if (AlbumListView.SelectedItems.Count != 0)
+            {
                 main.AlbumFilter(AlbumListView.SelectedItems[0].Text);
+                ArtistListBox.ClearSelected();
+                GenreListBox.ClearSelected();
+            }
         }
 
         private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

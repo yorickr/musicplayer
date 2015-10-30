@@ -122,7 +122,9 @@
             this.AlbumListView.Size = new System.Drawing.Size(448, 134);
             this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
+            this.AlbumListView.TileSize = new System.Drawing.Size(140, 30);
             this.AlbumListView.UseCompatibleStateImageBehavior = false;
+            this.AlbumListView.View = System.Windows.Forms.View.Tile;
             this.AlbumListView.SelectedIndexChanged += new System.EventHandler(this.AlbumListView_SelectedIndexChanged);
             // 
             // ArtistListBox
