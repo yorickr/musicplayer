@@ -103,20 +103,15 @@ namespace MusicPlayer
             AState = AudioState.PAUSED;
         }
 
-        private void PlayAudio()
+        private void StreamFromMP3(Stream s, long pos, bool firstrun)
         {
-            AState = AudioState.WAITING;
-            while (ms.Length < 65536 * 10 && BState != BufferState.DONE)
-                Thread.Sleep(1000);
-            AState = AudioState.PLAYING;
-
             long position = 0;
-
             ms.Position = position;
+
             Mp3FileReader mp3fr = new Mp3FileReader(ms);
             using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(mp3fr)))
             {
-
+                blockAlignedStream.Position = pos;
                 using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
                 {
                     waveOut.Init(blockAlignedStream);
@@ -129,7 +124,7 @@ namespace MusicPlayer
                     {
                         System.Threading.Thread.Sleep(10);
 
-                        if(AState == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
+                        if (AState == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
                         {
                             blockAlignedStream.Position = position;
                             waveOut.Play();
@@ -149,6 +144,13 @@ namespace MusicPlayer
                         {
                             waveOut.Stop();
                         }
+                        if (BState == BufferState.DONE && firstrun )
+                        {
+                            position = mp3fr.Position;
+                            mp3fr.Close();
+                            StreamFromMP3(ms,position, false);
+                            break;
+                        }
 
                         playpos = blockAlignedStream.Position;
                         CurrentTime = (int)(playpos / waveOut.OutputWaveFormat.AverageBytesPerSecond);
@@ -160,6 +162,17 @@ namespace MusicPlayer
                     CurrentTime = 0;
                 }
             }
+        }
+
+        private void PlayAudio()
+        {
+            AState = AudioState.WAITING;
+            while (ms.Length < 65536 * 10 && BState != BufferState.DONE)
+                Thread.Sleep(1000);
+            AState = AudioState.PLAYING;
+
+            StreamFromMP3(ms,0, true);
+            
         }
 
         private void LoadAudio(object o)
