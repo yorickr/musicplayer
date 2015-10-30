@@ -27,6 +27,7 @@ namespace MusicPlayer
             Album = album;
             Artist = artist;
             Seconds = seconds;
+            Genre = genre;
 
             this.api = api;
 
