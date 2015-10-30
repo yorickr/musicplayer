@@ -38,7 +38,7 @@ namespace MusicPlayer
         private Thread network;
         private Thread audio;
 
-        private Song CurrentSong;
+        public Song CurrentSong;
 
         public AudioHandler()
         {
