@@ -210,6 +210,7 @@
             // 
             // PositionTrackBar
             // 
+            this.PositionTrackBar.Enabled = false;
             this.PositionTrackBar.Location = new System.Drawing.Point(346, 13);
             this.PositionTrackBar.Maximum = 100;
             this.PositionTrackBar.Name = "PositionTrackBar";

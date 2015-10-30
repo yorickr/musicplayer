@@ -25,7 +25,7 @@ namespace MusicPlayer
             audio = new AudioHandler();
             table = new SongsTable();
             form.SongsTableView.DataSource = table;
-            form.SongsTableView.Columns[3].Visible = false;
+            form.SongsTableView.Columns[4].Visible = false;
             Populate();
         }
 

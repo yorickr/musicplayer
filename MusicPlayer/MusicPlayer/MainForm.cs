@@ -72,6 +72,11 @@ namespace MusicPlayer
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            if (main.audio.BState == AudioHandler.BufferState.DONE)
+                PositionTrackBar.Enabled = true;
+            else
+                PositionTrackBar.Enabled = false;
+
             BufferBar.Value = main.audio.Buffered;
             PositionBar.Value = main.audio.Position;
 
@@ -106,8 +111,7 @@ namespace MusicPlayer
                 var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
                 var row = drv.Row as DataRow;
                 s.ImportRow(row);
-                System.Console.WriteLine((s.Rows[0][3] as Song).SongID);
-                main.audio.Play((s.Rows[0][3] as Song));
+                main.audio.Play((s.Rows[0][4] as Song));
             }
             
         }

@@ -15,12 +15,13 @@ namespace MusicPlayer
             this.Columns.Add("Naam", typeof(string));
             this.Columns.Add("Album", typeof(string));
             this.Columns.Add("Artiest", typeof(string));
+            this.Columns.Add("Genre", typeof(string));
             this.Columns.Add("song", typeof(Song));
         }
 
         public void Add(Song s)
         {
-            this.Rows.Add(s.Name, s.Album, s.Artist, s);
+            this.Rows.Add(s.Name, s.Album, s.Artist, s.Genre, s);
         }
             
     }
