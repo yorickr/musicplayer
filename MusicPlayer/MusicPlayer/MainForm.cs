@@ -159,5 +159,21 @@ namespace MusicPlayer
             this.ArtistListLabel.Visible = false;
             this.PlaylistListLabel.Visible = true;
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExitProgram();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ExitProgram();
+        }
+
+        private void ExitProgram()
+        {
+            main.audio.AState = AudioHandler.AudioState.STOPPED;
+            System.Windows.Forms.Application.Exit();
+        }
     }
 }
