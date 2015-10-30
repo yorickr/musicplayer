@@ -51,6 +51,7 @@
             this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.CurrentSongLabel = new System.Windows.Forms.Label();
             this.SeperatorLabel = new System.Windows.Forms.Label();
@@ -195,6 +196,7 @@
             this.PlaylistBox.Size = new System.Drawing.Size(760, 131);
             this.PlaylistBox.TabIndex = 4;
             this.PlaylistBox.Visible = false;
+            this.PlaylistBox.SelectedIndexChanged += new System.EventHandler(this.PlaylistBox_SelectedIndexChanged);
             // 
             // PlaylistListLabel
             // 
@@ -294,7 +296,8 @@
             // 
             this.playlistToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveToolStripMenuItem1,
-            this.loadToolStripMenuItem});
+            this.loadToolStripMenuItem,
+            this.makeToolStripMenuItem});
             this.playlistToolStripMenuItem.Name = "playlistToolStripMenuItem";
             this.playlistToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.playlistToolStripMenuItem.Text = "Playlist";
@@ -302,14 +305,21 @@
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.loadToolStripMenuItem.Text = "Load";
+            // 
+            // makeToolStripMenuItem
+            // 
+            this.makeToolStripMenuItem.Name = "makeToolStripMenuItem";
+            this.makeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.makeToolStripMenuItem.Text = "Make";
+            this.makeToolStripMenuItem.Click += new System.EventHandler(this.makeToolStripMenuItem_Click);
             // 
             // ControlsPanel
             // 
@@ -558,7 +568,7 @@
         private System.Windows.Forms.Label GenreListLabel;
         private System.Windows.Forms.ToolStripMenuItem playlistsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overviewToolStripMenuItem;
-        private System.Windows.Forms.ListBox PlaylistBox;
+        public System.Windows.Forms.ListBox PlaylistBox;
         private System.Windows.Forms.Label PlaylistListLabel;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem playlistToolStripMenuItem;
@@ -573,6 +583,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingSongLabel;
         private System.Windows.Forms.SplitContainer SplitContainer;
+        private System.Windows.Forms.ToolStripMenuItem makeToolStripMenuItem;
     }
 }
 

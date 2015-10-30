@@ -147,6 +147,18 @@ namespace MusicPlayer
             {
                 main.GenreFilter(GenreListBox.SelectedItems[0].ToString());
                 ArtistListBox.ClearSelected();
+                PlaylistBox.ClearSelected();
+                AlbumListView.SelectedIndices.Clear();
+            }
+        }
+
+        private void PlaylistBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PlaylistBox.SelectedItems.Count != 0)
+            {
+                main.PlaylistFilter(PlaylistBox.SelectedItems[0].ToString());
+                GenreListBox.ClearSelected();
+                ArtistListBox.ClearSelected();
                 AlbumListView.SelectedIndices.Clear();
             }
         }
@@ -157,6 +169,7 @@ namespace MusicPlayer
             {
                 main.ArtistFilter(ArtistListBox.SelectedItems[0].ToString());
                 GenreListBox.ClearSelected();
+                PlaylistBox.ClearSelected();
                 AlbumListView.SelectedIndices.Clear();
             }
         }
@@ -166,6 +179,7 @@ namespace MusicPlayer
             if (AlbumListView.SelectedItems.Count != 0)
             {
                 main.AlbumFilter(AlbumListView.SelectedItems[0].Text);
+                PlaylistBox.ClearSelected();
                 ArtistListBox.ClearSelected();
                 GenreListBox.ClearSelected();
             }
@@ -263,6 +277,13 @@ namespace MusicPlayer
         private void NotifyMenuStripStopButton_Click(object sender, EventArgs e)
         {
             StopButton_Click(sender, e);
+        }
+
+        private void makeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new PlaylistMaker(main.pl, main.api).Show();
+
+
         }
     }
 }
