@@ -173,10 +173,10 @@
             // 
             // SplitContainer.Panel1
             // 
-            this.SplitContainer.Panel1.Controls.Add(this.PlaylistBox);
             this.SplitContainer.Panel1.Controls.Add(this.AlbumListView);
             this.SplitContainer.Panel1.Controls.Add(this.ArtistListBox);
             this.SplitContainer.Panel1.Controls.Add(this.GenreListBox);
+            this.SplitContainer.Panel1.Controls.Add(this.PlaylistBox);
             // 
             // SplitContainer.Panel2
             // 
@@ -225,12 +225,11 @@
             // 
             // PlaylistBox
             // 
-            this.PlaylistBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlaylistBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlaylistBox.FormattingEnabled = true;
-            this.PlaylistBox.Location = new System.Drawing.Point(3, 3);
+            this.PlaylistBox.Location = new System.Drawing.Point(0, 0);
             this.PlaylistBox.Name = "PlaylistBox";
-            this.PlaylistBox.Size = new System.Drawing.Size(757, 121);
+            this.PlaylistBox.Size = new System.Drawing.Size(760, 131);
             this.PlaylistBox.TabIndex = 4;
             this.PlaylistBox.Visible = false;
             // 

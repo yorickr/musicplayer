@@ -68,7 +68,6 @@ namespace MusicPlayer
             main.audio.Stop();
         }
 
-
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             //Trackbar
@@ -88,13 +87,13 @@ namespace MusicPlayer
             LabelTotalTime.Text = Main.SecondsToTimestamp(main.audio.TotalTime);
 
             //Current song label
-            if(main.audio.CurrentSong == null)
+            if (main.audio.CurrentSong == null)
                 CurrentSongLabel.Text = "Not playing any songs";
             else
                 CurrentSongLabel.Text = "Currently playing: " + main.audio.CurrentSong.Name;
 
             //Buttons and context menu
-            if(main.audio.AState == AudioHandler.AudioState.PLAYING)
+            if (main.audio.AState == AudioHandler.AudioState.PLAYING)
             {
                 PlayButton.Enabled = false;
                 NotifyMenuStripPlayButton.Enabled = false;
@@ -139,15 +138,13 @@ namespace MusicPlayer
                 StopButton.Enabled = true;
                 NotifyMenuStripStopButton.Enabled = true;
             }
-
-
-
         }
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (GenreListBox.SelectedItems.Count != 0) {
-                 main.GenreFilter(GenreListBox.SelectedItems[0].ToString());
+            if (GenreListBox.SelectedItems.Count != 0)
+            {
+                main.GenreFilter(GenreListBox.SelectedItems[0].ToString());
                 ArtistListBox.ClearSelected();
                 AlbumListView.SelectedIndices.Clear();
             }
@@ -176,22 +173,22 @@ namespace MusicPlayer
         private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             SongsTable s = new SongsTable();
-            if(SongsTableView.SelectedRows.Count > 0)
+            if (SongsTableView.SelectedRows.Count > 0)
             {
                 var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
                 var row = drv.Row as DataRow;
                 s.ImportRow(row);
                 main.audio.Play((s.Rows[0][5] as Song));
             }
-            
+
         }
 
         private void PositionTrackBar_ValueChanged()
         {
-            if(!clicked)
+            if (!clicked)
                 main.audio.Seek(PositionTrackBar.Value);
 
-            LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value/1000) * main.audio.CurrentSong.Seconds));
+            LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value / 1000) * main.audio.CurrentSong.Seconds));
         }
 
         private void NotifyIcon_Click(object sender, EventArgs e)
