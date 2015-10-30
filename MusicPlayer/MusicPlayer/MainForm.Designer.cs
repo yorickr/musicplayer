@@ -35,6 +35,7 @@
             this.AlbumListView = new System.Windows.Forms.ListView();
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.AlbumListLabel = new System.Windows.Forms.Label();
             this.ArtistListLabel = new System.Windows.Forms.Label();
@@ -64,18 +65,24 @@
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.NotifyMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NotifyMenuStripPlayingLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifyMenuStripPlayingSongLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripPlayButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPauseButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripStopButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.NotifyMenuStripPlayingLabel = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.NotifyMenuStripPlayingSongLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitter2 = new System.Windows.Forms.Splitter();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).BeginInit();
             this.NotifyMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SongsTableView
@@ -89,22 +96,24 @@
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SongsTableView.Location = new System.Drawing.Point(12, 165);
+            this.SongsTableView.Location = new System.Drawing.Point(3, 3);
             this.SongsTableView.MultiSelect = false;
             this.SongsTableView.Name = "SongsTableView";
             this.SongsTableView.ReadOnly = true;
             this.SongsTableView.RowHeadersVisible = false;
             this.SongsTableView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.SongsTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.SongsTableView.Size = new System.Drawing.Size(760, 175);
+            this.SongsTableView.Size = new System.Drawing.Size(757, 180);
             this.SongsTableView.TabIndex = 0;
             this.SongsTableView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SongsTableView_CellDoubleClick);
             // 
             // GenreListBox
             // 
+            this.GenreListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.GenreListBox.BackColor = System.Drawing.SystemColors.Control;
             this.GenreListBox.FormattingEnabled = true;
-            this.GenreListBox.Location = new System.Drawing.Point(12, 25);
+            this.GenreListBox.Location = new System.Drawing.Point(3, 4);
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(150, 134);
             this.GenreListBox.Sorted = true;
@@ -113,13 +122,14 @@
             // 
             // AlbumListView
             // 
-            this.AlbumListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.AlbumListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumListView.BackColor = System.Drawing.SystemColors.Control;
-            this.AlbumListView.Location = new System.Drawing.Point(324, 25);
+            this.AlbumListView.Location = new System.Drawing.Point(309, 4);
             this.AlbumListView.MultiSelect = false;
             this.AlbumListView.Name = "AlbumListView";
-            this.AlbumListView.Size = new System.Drawing.Size(448, 134);
+            this.AlbumListView.Size = new System.Drawing.Size(448, 130);
             this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
             this.AlbumListView.TileSize = new System.Drawing.Size(140, 30);
@@ -129,9 +139,11 @@
             // 
             // ArtistListBox
             // 
+            this.ArtistListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ArtistListBox.BackColor = System.Drawing.SystemColors.Control;
             this.ArtistListBox.FormattingEnabled = true;
-            this.ArtistListBox.Location = new System.Drawing.Point(168, 25);
+            this.ArtistListBox.Location = new System.Drawing.Point(156, 3);
             this.ArtistListBox.Name = "ArtistListBox";
             this.ArtistListBox.Size = new System.Drawing.Size(150, 134);
             this.ArtistListBox.Sorted = true;
@@ -144,19 +156,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.BackColor = System.Drawing.SystemColors.Window;
+            this.MainPanel.Controls.Add(this.splitContainer1);
+            this.MainPanel.Controls.Add(this.splitter1);
             this.MainPanel.Controls.Add(this.PlaylistListLabel);
             this.MainPanel.Controls.Add(this.AlbumListLabel);
             this.MainPanel.Controls.Add(this.ArtistListLabel);
             this.MainPanel.Controls.Add(this.GenreListLabel);
-            this.MainPanel.Controls.Add(this.GenreListBox);
-            this.MainPanel.Controls.Add(this.ArtistListBox);
-            this.MainPanel.Controls.Add(this.AlbumListView);
-            this.MainPanel.Controls.Add(this.SongsTableView);
             this.MainPanel.Controls.Add(this.PlaylistBox);
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(784, 352);
             this.MainPanel.TabIndex = 5;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 352);
+            this.splitter1.TabIndex = 8;
+            this.splitter1.TabStop = false;
             // 
             // PlaylistListLabel
             // 
@@ -425,10 +443,32 @@
             this.NotifyMenuStrip.Name = "NotifyMenuStrip";
             this.NotifyMenuStrip.Size = new System.Drawing.Size(119, 98);
             // 
+            // NotifyMenuStripPlayingLabel
+            // 
+            this.NotifyMenuStripPlayingLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NotifyMenuStripPlayingSongLabel});
+            this.NotifyMenuStripPlayingLabel.Enabled = false;
+            this.NotifyMenuStripPlayingLabel.Name = "NotifyMenuStripPlayingLabel";
+            this.NotifyMenuStripPlayingLabel.Size = new System.Drawing.Size(118, 22);
+            this.NotifyMenuStripPlayingLabel.Text = "Stopped";
+            // 
+            // NotifyMenuStripPlayingSongLabel
+            // 
+            this.NotifyMenuStripPlayingSongLabel.Enabled = false;
+            this.NotifyMenuStripPlayingSongLabel.Name = "NotifyMenuStripPlayingSongLabel";
+            this.NotifyMenuStripPlayingSongLabel.Size = new System.Drawing.Size(118, 22);
+            this.NotifyMenuStripPlayingSongLabel.Text = "Stopped";
+            this.NotifyMenuStripPlayingSongLabel.Visible = false;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(115, 6);
+            // 
             // NotifyMenuStripPlayButton
             // 
             this.NotifyMenuStripPlayButton.Name = "NotifyMenuStripPlayButton";
-            this.NotifyMenuStripPlayButton.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripPlayButton.Size = new System.Drawing.Size(118, 22);
             this.NotifyMenuStripPlayButton.Text = "Play";
             this.NotifyMenuStripPlayButton.Click += new System.EventHandler(this.NotifyMenuStripPlayButton_Click);
             // 
@@ -436,7 +476,7 @@
             // 
             this.NotifyMenuStripPauseButton.Enabled = false;
             this.NotifyMenuStripPauseButton.Name = "NotifyMenuStripPauseButton";
-            this.NotifyMenuStripPauseButton.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripPauseButton.Size = new System.Drawing.Size(118, 22);
             this.NotifyMenuStripPauseButton.Text = "Pause";
             this.NotifyMenuStripPauseButton.Click += new System.EventHandler(this.NotifyMenuStripPauseButton_Click);
             // 
@@ -444,31 +484,41 @@
             // 
             this.NotifyMenuStripStopButton.Enabled = false;
             this.NotifyMenuStripStopButton.Name = "NotifyMenuStripStopButton";
-            this.NotifyMenuStripStopButton.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripStopButton.Size = new System.Drawing.Size(118, 22);
             this.NotifyMenuStripStopButton.Text = "Stop";
             this.NotifyMenuStripStopButton.Click += new System.EventHandler(this.NotifyMenuStripStopButton_Click);
             // 
-            // NotifyMenuStripPlayingLabel
+            // splitContainer1
             // 
-            this.NotifyMenuStripPlayingLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.NotifyMenuStripPlayingSongLabel});
-            this.NotifyMenuStripPlayingLabel.Enabled = false;
-            this.NotifyMenuStripPlayingLabel.Name = "NotifyMenuStripPlayingLabel";
-            this.NotifyMenuStripPlayingLabel.Size = new System.Drawing.Size(152, 22);
-            this.NotifyMenuStripPlayingLabel.Text = "Stopped";
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(12, 25);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // toolStripSeparator2
+            // splitContainer1.Panel1
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.splitContainer1.Panel1.Controls.Add(this.AlbumListView);
+            this.splitContainer1.Panel1.Controls.Add(this.ArtistListBox);
+            this.splitContainer1.Panel1.Controls.Add(this.GenreListBox);
             // 
-            // NotifyMenuStripPlayingSongLabel
+            // splitContainer1.Panel2
             // 
-            this.NotifyMenuStripPlayingSongLabel.Enabled = false;
-            this.NotifyMenuStripPlayingSongLabel.Name = "NotifyMenuStripPlayingSongLabel";
-            this.NotifyMenuStripPlayingSongLabel.Size = new System.Drawing.Size(152, 22);
-            this.NotifyMenuStripPlayingSongLabel.Text = "Stopped";
-            this.NotifyMenuStripPlayingSongLabel.Visible = false;
+            this.splitContainer1.Panel2.Controls.Add(this.splitter2);
+            this.splitContainer1.Panel2.Controls.Add(this.SongsTableView);
+            this.splitContainer1.Size = new System.Drawing.Size(760, 327);
+            this.splitContainer1.SplitterDistance = 137;
+            this.splitContainer1.TabIndex = 9;
+            // 
+            // splitter2
+            // 
+            this.splitter2.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.splitter2.Location = new System.Drawing.Point(0, 0);
+            this.splitter2.Name = "splitter2";
+            this.splitter2.Size = new System.Drawing.Size(3, 186);
+            this.splitter2.TabIndex = 1;
+            this.splitter2.TabStop = false;
             // 
             // MainForm
             // 
@@ -494,6 +544,10 @@
             this.ControlsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).EndInit();
             this.NotifyMenuStrip.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,6 +595,9 @@
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingSongLabel;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Splitter splitter2;
     }
 }
 
