@@ -42,8 +42,6 @@
             this.PlaylistBox = new System.Windows.Forms.ListBox();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -222,25 +220,11 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem.Text = "Save";
             // 
             // toolStripSeparator1
             // 
@@ -522,8 +506,6 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.MenuStrip MenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.Panel ControlsPanel;
         private System.Windows.Forms.Button PlayButton;

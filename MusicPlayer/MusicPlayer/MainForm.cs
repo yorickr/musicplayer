@@ -18,6 +18,7 @@ namespace MusicPlayer
     public partial class MainForm : Form
     {
         NotificationPopup p;
+
         public Main main
         {
             get; set;

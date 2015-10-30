@@ -142,7 +142,7 @@ namespace MusicPlayer
                         {
                             blockAlignedStream.Seek(seek - (seek % blockAlignedStream.WaveFormat.BlockAlign), SeekOrigin.Begin);
                             AState = AudioState.PLAYING;
-                            //waveOut.Play();
+                            waveOut.Play();
                         }
                         if (AState == AudioState.STOPPED)
                         {
