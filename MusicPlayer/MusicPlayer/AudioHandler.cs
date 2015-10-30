@@ -17,12 +17,12 @@ namespace MusicPlayer
         public AudioState AState { get; set; }
         public BufferState BState { get; set; }
 
-        public int Buffered { get { return Math.Min((int)((bufpos / (double)LengthBuffer) * 100), 100); } }
+        public int Buffered { get { return Math.Min((int)((bufpos / (double)LengthBuffer) * 1000), 1000); } }
         private long LengthBuffer { get; set; }
         private long bufpos = 0;
 
 
-        public int Position { get { return Math.Min((int)((playpos / (double)Length) * 100), 100); } }
+        public int Position { get { return Math.Min((int)((playpos / (double)Length) * 1000), 1000); } }
         private long Length { get; set; }
         private long playpos = 0;
 
@@ -88,7 +88,7 @@ namespace MusicPlayer
             if (position >= Buffered-1)
                 return;
 
-            seek = Length / 100 * position;
+            seek = Length / 1000 * position;
             AState = AudioState.SEEKING;
             
         }
@@ -100,7 +100,10 @@ namespace MusicPlayer
 
         public void Pause()
         {
-            AState = AudioState.PAUSED;
+            if(CurrentSong == null)
+                AState = AudioState.STOPPED;
+            else
+                AState = AudioState.PAUSED;
         }
 
         private void StreamFromMP3(Stream s, long pos, bool firstrun)

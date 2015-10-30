@@ -35,6 +35,7 @@
             this.AlbumListView = new System.Windows.Forms.ListView();
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.AlbumListLabel = new System.Windows.Forms.Label();
             this.ArtistListLabel = new System.Windows.Forms.Label();
             this.GenreListLabel = new System.Windows.Forms.Label();
@@ -43,9 +44,14 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.CurrentSongLabel = new System.Windows.Forms.Label();
             this.SeperatorLabel = new System.Windows.Forms.Label();
@@ -58,18 +64,20 @@
             this.PauseButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.PlaylistListLabel = new System.Windows.Forms.Label();
-            this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.NotifyMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NotifyMenuStripPlayButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifyMenuStripPauseButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifyMenuStripStopButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifyMenuStripPlayingLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.NotifyMenuStripPlayingSongLabel = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).BeginInit();
+            this.NotifyMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // SongsTableView
@@ -150,6 +158,16 @@
             this.MainPanel.Size = new System.Drawing.Size(784, 352);
             this.MainPanel.TabIndex = 5;
             // 
+            // PlaylistListLabel
+            // 
+            this.PlaylistListLabel.AutoSize = true;
+            this.PlaylistListLabel.Location = new System.Drawing.Point(12, 8);
+            this.PlaylistListLabel.Name = "PlaylistListLabel";
+            this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
+            this.PlaylistListLabel.TabIndex = 7;
+            this.PlaylistListLabel.Text = "Playlist";
+            this.PlaylistListLabel.Visible = false;
+            // 
             // AlbumListLabel
             // 
             this.AlbumListLabel.AutoSize = true;
@@ -224,6 +242,18 @@
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -233,6 +263,13 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
             // 
+            // overviewToolStripMenuItem
+            // 
+            this.overviewToolStripMenuItem.Name = "overviewToolStripMenuItem";
+            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.overviewToolStripMenuItem.Text = "Overview";
+            this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewToolStripMenuItem_Click);
+            // 
             // playlistsToolStripMenuItem
             // 
             this.playlistsToolStripMenuItem.Name = "playlistsToolStripMenuItem";
@@ -240,12 +277,26 @@
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
             // 
-            // overviewToolStripMenuItem
+            // playlistToolStripMenuItem
             // 
-            this.overviewToolStripMenuItem.Name = "overviewToolStripMenuItem";
-            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.overviewToolStripMenuItem.Text = "Overview";
-            this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewToolStripMenuItem_Click);
+            this.playlistToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem1,
+            this.loadToolStripMenuItem});
+            this.playlistToolStripMenuItem.Name = "playlistToolStripMenuItem";
+            this.playlistToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.playlistToolStripMenuItem.Text = "Playlist";
+            // 
+            // saveToolStripMenuItem1
+            // 
+            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem1.Text = "Save";
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
             // 
             // ControlsPanel
             // 
@@ -308,10 +359,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PositionTrackBar.Enabled = false;
             this.PositionTrackBar.Location = new System.Drawing.Point(3, 3);
-            this.PositionTrackBar.Maximum = 100;
+            this.PositionTrackBar.Maximum = 1000;
             this.PositionTrackBar.Name = "PositionTrackBar";
             this.PositionTrackBar.Size = new System.Drawing.Size(778, 45);
             this.PositionTrackBar.TabIndex = 7;
+            this.PositionTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             // 
             // BufferLabel
             // 
@@ -333,6 +385,7 @@
             // 
             // StopButton
             // 
+            this.StopButton.Enabled = false;
             this.StopButton.Location = new System.Drawing.Point(174, 51);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(75, 23);
@@ -343,6 +396,7 @@
             // 
             // PauseButton
             // 
+            this.PauseButton.Enabled = false;
             this.PauseButton.Location = new System.Drawing.Point(93, 51);
             this.PauseButton.Name = "PauseButton";
             this.PauseButton.Size = new System.Drawing.Size(75, 23);
@@ -366,55 +420,69 @@
             this.UpdateTimer.Interval = 150;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
-            // notifyIcon1
+            // NotifyIcon
             // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
+            this.NotifyIcon.ContextMenuStrip = this.NotifyMenuStrip;
+            this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
+            this.NotifyIcon.Text = "NotifyIcon";
+            this.NotifyIcon.Visible = true;
+            this.NotifyIcon.Click += new System.EventHandler(this.NotifyIcon_Click);
             // 
-            // PlaylistListLabel
+            // NotifyMenuStrip
             // 
-            this.PlaylistListLabel.AutoSize = true;
-            this.PlaylistListLabel.Location = new System.Drawing.Point(12, 8);
-            this.PlaylistListLabel.Name = "PlaylistListLabel";
-            this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
-            this.PlaylistListLabel.TabIndex = 7;
-            this.PlaylistListLabel.Text = "Playlist";
-            this.PlaylistListLabel.Visible = false;
+            this.NotifyMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NotifyMenuStripPlayingLabel,
+            this.toolStripSeparator2,
+            this.NotifyMenuStripPlayButton,
+            this.NotifyMenuStripPauseButton,
+            this.NotifyMenuStripStopButton});
+            this.NotifyMenuStrip.Name = "NotifyMenuStrip";
+            this.NotifyMenuStrip.Size = new System.Drawing.Size(119, 98);
             // 
-            // playlistToolStripMenuItem
+            // NotifyMenuStripPlayButton
             // 
-            this.playlistToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem1,
-            this.loadToolStripMenuItem});
-            this.playlistToolStripMenuItem.Name = "playlistToolStripMenuItem";
-            this.playlistToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.playlistToolStripMenuItem.Text = "Playlist";
+            this.NotifyMenuStripPlayButton.Name = "NotifyMenuStripPlayButton";
+            this.NotifyMenuStripPlayButton.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripPlayButton.Text = "Play";
+            this.NotifyMenuStripPlayButton.Click += new System.EventHandler(this.NotifyMenuStripPlayButton_Click);
             // 
-            // saveToolStripMenuItem1
+            // NotifyMenuStripPauseButton
             // 
-            this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.saveToolStripMenuItem1.Text = "Save";
+            this.NotifyMenuStripPauseButton.Enabled = false;
+            this.NotifyMenuStripPauseButton.Name = "NotifyMenuStripPauseButton";
+            this.NotifyMenuStripPauseButton.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripPauseButton.Text = "Pause";
+            this.NotifyMenuStripPauseButton.Click += new System.EventHandler(this.NotifyMenuStripPauseButton_Click);
             // 
-            // loadToolStripMenuItem
+            // NotifyMenuStripStopButton
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.loadToolStripMenuItem.Text = "Load";
+            this.NotifyMenuStripStopButton.Enabled = false;
+            this.NotifyMenuStripStopButton.Name = "NotifyMenuStripStopButton";
+            this.NotifyMenuStripStopButton.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripStopButton.Text = "Stop";
+            this.NotifyMenuStripStopButton.Click += new System.EventHandler(this.NotifyMenuStripStopButton_Click);
             // 
-            // exitToolStripMenuItem
+            // NotifyMenuStripPlayingLabel
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.NotifyMenuStripPlayingLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NotifyMenuStripPlayingSongLabel});
+            this.NotifyMenuStripPlayingLabel.Enabled = false;
+            this.NotifyMenuStripPlayingLabel.Name = "NotifyMenuStripPlayingLabel";
+            this.NotifyMenuStripPlayingLabel.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripPlayingLabel.Text = "Stopped";
             // 
-            // toolStripSeparator1
+            // toolStripSeparator2
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // NotifyMenuStripPlayingSongLabel
+            // 
+            this.NotifyMenuStripPlayingSongLabel.Enabled = false;
+            this.NotifyMenuStripPlayingSongLabel.Name = "NotifyMenuStripPlayingSongLabel";
+            this.NotifyMenuStripPlayingSongLabel.Size = new System.Drawing.Size(152, 22);
+            this.NotifyMenuStripPlayingSongLabel.Text = "Stopped";
+            this.NotifyMenuStripPlayingSongLabel.Visible = false;
             // 
             // MainForm
             // 
@@ -439,6 +507,7 @@
             this.ControlsPanel.ResumeLayout(false);
             this.ControlsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).EndInit();
+            this.NotifyMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -466,7 +535,7 @@
         private System.Windows.Forms.TrackBar PositionTrackBar;
         private System.Windows.Forms.Label LabelTotalTime;
         private System.Windows.Forms.Label LabelCurrentTime;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.NotifyIcon NotifyIcon;
         private System.Windows.Forms.Label CurrentSongLabel;
         private System.Windows.Forms.Label SeperatorLabel;
         private System.Windows.Forms.Label AlbumListLabel;
@@ -481,6 +550,13 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ContextMenuStrip NotifyMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayButton;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPauseButton;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripStopButton;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingSongLabel;
     }
 }
 

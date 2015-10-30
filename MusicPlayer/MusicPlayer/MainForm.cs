@@ -29,8 +29,6 @@ namespace MusicPlayer
 
             PositionTrackBar.Scroll += (s, e) =>
             {
-                if (clicked)
-                    return;
                 this.PositionTrackBar_ValueChanged();
             };
             PositionTrackBar.MouseDown += (s, e) =>
@@ -72,23 +70,77 @@ namespace MusicPlayer
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            //Trackbar
             if (main.audio.BState == AudioHandler.BufferState.DONE)
                 PositionTrackBar.Enabled = true;
             else
                 PositionTrackBar.Enabled = false;
-
-            BufferBar.Value = main.audio.Buffered;
-
-            if(!clicked)
+            if (!clicked)
                 PositionTrackBar.Value = main.audio.Position;
 
-            LabelCurrentTime.Text = Main.SecondsToTimestamp(main.audio.CurrentTime);
+            //Buffer display
+            BufferBar.Value = main.audio.Buffered / 10;
+
+            //Time labels
+            if (!clicked)
+                LabelCurrentTime.Text = Main.SecondsToTimestamp(main.audio.CurrentTime);
             LabelTotalTime.Text = Main.SecondsToTimestamp(main.audio.TotalTime);
 
+            //Current song label
             if(main.audio.CurrentSong == null)
                 CurrentSongLabel.Text = "Not playing any songs";
             else
                 CurrentSongLabel.Text = "Currently playing: " + main.audio.CurrentSong.Name;
+
+            //Buttons and context menu
+            if(main.audio.AState == AudioHandler.AudioState.PLAYING)
+            {
+                PlayButton.Enabled = false;
+                NotifyMenuStripPlayButton.Enabled = false;
+                NotifyMenuStripPlayingLabel.Text = "Playing";
+                NotifyMenuStripPlayingLabel.Enabled = true;
+                NotifyMenuStripPlayingSongLabel.Visible = true;
+                NotifyMenuStripPlayingSongLabel.Text = main.audio.CurrentSong.Name;
+            }
+            else
+            {
+                PlayButton.Enabled = true;
+                NotifyMenuStripPlayButton.Enabled = true;
+                NotifyMenuStripPlayingSongLabel.Visible = false;
+            }
+
+            if (main.audio.AState == AudioHandler.AudioState.PAUSED)
+            {
+                PauseButton.Enabled = false;
+                NotifyMenuStripPauseButton.Enabled = false;
+                NotifyMenuStripPlayingLabel.Text = "Paused";
+                NotifyMenuStripPlayingLabel.Enabled = true;
+                NotifyMenuStripPlayingSongLabel.Visible = true;
+                NotifyMenuStripPlayingSongLabel.Text = main.audio.CurrentSong.Name;
+            }
+            else
+            {
+                PauseButton.Enabled = true;
+                NotifyMenuStripPauseButton.Enabled = true;
+            }
+
+            if (main.audio.AState == AudioHandler.AudioState.STOPPED)
+            {
+                StopButton.Enabled = false;
+                NotifyMenuStripStopButton.Enabled = false;
+                NotifyMenuStripPlayingLabel.Text = "Stopped";
+                NotifyMenuStripPlayingLabel.Enabled = false;
+                NotifyMenuStripPlayingSongLabel.Visible = false;
+                NotifyMenuStripPlayingSongLabel.Text = "Stopped";
+            }
+            else
+            {
+                StopButton.Enabled = true;
+                NotifyMenuStripStopButton.Enabled = true;
+            }
+
+
+
         }
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,15 +177,20 @@ namespace MusicPlayer
 
         private void PositionTrackBar_ValueChanged()
         {
-            main.audio.Seek(PositionTrackBar.Value);
+            if(!clicked)
+                main.audio.Seek(PositionTrackBar.Value);
+
+            LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value/1000) * main.audio.CurrentSong.Seconds));
         }
 
-        private void notifyIcon1_Click(object sender, EventArgs e)
+        private void NotifyIcon_Click(object sender, EventArgs e)
         {
+            /*
             if (p.Visible)
                 p.Visible = false;
             else
                 p.Visible = true;
+                */
         }
 
         private void overviewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -174,6 +231,21 @@ namespace MusicPlayer
         {
             main.audio.AState = AudioHandler.AudioState.STOPPED;
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void NotifyMenuStripPlayButton_Click(object sender, EventArgs e)
+        {
+            PlayButton_Click(sender, e);
+        }
+
+        private void NotifyMenuStripPauseButton_Click(object sender, EventArgs e)
+        {
+            PauseButton_Click(sender, e);
+        }
+
+        private void NotifyMenuStripStopButton_Click(object sender, EventArgs e)
+        {
+            StopButton_Click(sender, e);
         }
     }
 }
