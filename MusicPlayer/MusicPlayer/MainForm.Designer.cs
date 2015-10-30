@@ -36,11 +36,11 @@
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
+            this.PlaylistBox = new System.Windows.Forms.ListBox();
             this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.AlbumListLabel = new System.Windows.Forms.Label();
             this.ArtistListLabel = new System.Windows.Forms.Label();
             this.GenreListLabel = new System.Windows.Forms.Label();
-            this.PlaylistBox = new System.Windows.Forms.ListBox();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -186,6 +186,16 @@
             this.SplitContainer.SplitterWidth = 8;
             this.SplitContainer.TabIndex = 9;
             // 
+            // PlaylistBox
+            // 
+            this.PlaylistBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PlaylistBox.FormattingEnabled = true;
+            this.PlaylistBox.Location = new System.Drawing.Point(0, 0);
+            this.PlaylistBox.Name = "PlaylistBox";
+            this.PlaylistBox.Size = new System.Drawing.Size(760, 131);
+            this.PlaylistBox.TabIndex = 4;
+            this.PlaylistBox.Visible = false;
+            // 
             // PlaylistListLabel
             // 
             this.PlaylistListLabel.AutoSize = true;
@@ -222,16 +232,6 @@
             this.GenreListLabel.Size = new System.Drawing.Size(36, 13);
             this.GenreListLabel.TabIndex = 4;
             this.GenreListLabel.Text = "Genre";
-            // 
-            // PlaylistBox
-            // 
-            this.PlaylistBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PlaylistBox.FormattingEnabled = true;
-            this.PlaylistBox.Location = new System.Drawing.Point(0, 0);
-            this.PlaylistBox.Name = "PlaylistBox";
-            this.PlaylistBox.Size = new System.Drawing.Size(760, 131);
-            this.PlaylistBox.TabIndex = 4;
-            this.PlaylistBox.Visible = false;
             // 
             // MenuStrip
             // 
@@ -439,7 +439,7 @@
             this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
             this.NotifyIcon.Text = "NotifyIcon";
             this.NotifyIcon.Visible = true;
-            this.NotifyIcon.Click += new System.EventHandler(this.NotifyIcon_Click);
+            this.NotifyIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_Click);
             // 
             // NotifyMenuStrip
             // 

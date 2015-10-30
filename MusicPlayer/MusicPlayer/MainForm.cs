@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -191,7 +192,7 @@ namespace MusicPlayer
             LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value / 1000) * main.audio.CurrentSong.Seconds));
         }
 
-        private void NotifyIcon_Click(object sender, EventArgs e)
+        private void NotifyIcon_Click(object sender, MouseEventArgs e)
         {
             /*
             if (p.Visible)
@@ -199,6 +200,12 @@ namespace MusicPlayer
             else
                 p.Visible = true;
                 */
+
+            if (e.Button == MouseButtons.Left)
+            {
+                MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
+                mi.Invoke(NotifyIcon, null);
+            }
         }
 
         private void overviewToolStripMenuItem_Click(object sender, EventArgs e)
