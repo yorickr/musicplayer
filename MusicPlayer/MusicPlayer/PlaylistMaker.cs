@@ -38,18 +38,26 @@ namespace MusicPlayer
             }
         }
 
-        public void Repopulate()
+        public void Repopulate(bool lastIndex)
         {
             int selection = PlaylistSelectBox.SelectedIndex;
             PlaylistSelectBox.Items.Clear();      
             pl.GetPlaylists().ForEach(p => PlaylistSelectBox.Items.Add(p.name));
-            PlaylistSelectBox.SelectedIndex = selection;
+            if (lastIndex)
+                PlaylistSelectBox.SelectedIndex = PlaylistSelectBox.Items.Count - 1;
+            else
+                PlaylistSelectBox.SelectedIndex = selection;
             if (PlaylistSelectBox.SelectedItem != null)
             {
                 PlaylistSongContainer.Items.Clear();
                 allPlaylistSongs = pl.GetPlaylistByName(PlaylistSelectBox.SelectedItem.ToString()).GetSongs();
                 allPlaylistSongs.ForEach(s => PlaylistSongContainer.Items.Add(s.Name));
             }
+        }
+
+        public void Repopulate()
+        {
+            Repopulate(false);
         }
 
         public void Populate()
@@ -91,7 +99,7 @@ namespace MusicPlayer
         private void PlaylistNewButton_Click(object sender, EventArgs e)
         {
             pl.MakeNewPlaylistByName(PlaylistNewInputfield.Text);
-            Repopulate();
+            Repopulate(true);
         }
 
         private void PlaylistMaker_Load(object sender, EventArgs e)
