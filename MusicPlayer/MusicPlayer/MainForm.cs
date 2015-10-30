@@ -281,8 +281,9 @@ namespace MusicPlayer
 
         private void makeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new PlaylistMaker(main.pl, main.api).Show();
-
+            PlaylistMaker p = new PlaylistMaker(main.pl, main.api);
+            p.ShowDialog();
+            main.Repopulate();
 
         }
     }
