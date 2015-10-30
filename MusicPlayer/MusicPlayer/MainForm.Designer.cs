@@ -41,6 +41,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
+            this.LabelTotalTime = new System.Windows.Forms.Label();
+            this.LabelCurrentTime = new System.Windows.Forms.Label();
             this.PositionTrackBar = new System.Windows.Forms.TrackBar();
             this.PositionLabel = new System.Windows.Forms.Label();
             this.BufferLabel = new System.Windows.Forms.Label();
@@ -50,8 +52,7 @@
             this.PauseButton = new System.Windows.Forms.Button();
             this.PlayButton = new System.Windows.Forms.Button();
             this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.LabelCurrentTime = new System.Windows.Forms.Label();
-            this.LabelTotalTime = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             this.MenuStrip.SuspendLayout();
@@ -189,6 +190,24 @@
             this.ControlsPanel.Size = new System.Drawing.Size(784, 119);
             this.ControlsPanel.TabIndex = 4;
             // 
+            // LabelTotalTime
+            // 
+            this.LabelTotalTime.AutoSize = true;
+            this.LabelTotalTime.Location = new System.Drawing.Point(693, 60);
+            this.LabelTotalTime.Name = "LabelTotalTime";
+            this.LabelTotalTime.Size = new System.Drawing.Size(49, 13);
+            this.LabelTotalTime.TabIndex = 9;
+            this.LabelTotalTime.Text = "00:00:00";
+            // 
+            // LabelCurrentTime
+            // 
+            this.LabelCurrentTime.AutoSize = true;
+            this.LabelCurrentTime.Location = new System.Drawing.Point(358, 60);
+            this.LabelCurrentTime.Name = "LabelCurrentTime";
+            this.LabelCurrentTime.Size = new System.Drawing.Size(49, 13);
+            this.LabelCurrentTime.TabIndex = 8;
+            this.LabelCurrentTime.Text = "00:00:00";
+            // 
             // PositionTrackBar
             // 
             this.PositionTrackBar.Location = new System.Drawing.Point(346, 13);
@@ -196,24 +215,6 @@
             this.PositionTrackBar.Name = "PositionTrackBar";
             this.PositionTrackBar.Size = new System.Drawing.Size(426, 45);
             this.PositionTrackBar.TabIndex = 7;
-            PositionTrackBar.Scroll += (s, e) =>
-            {
-                if (clicked)
-                    return;
-                this.PositionTrackBar_ValueChanged();
-            };
-            PositionTrackBar.MouseDown += (s, e) =>
-            {
-                clicked = true;
-            };
-            PositionTrackBar.MouseUp += (s, e) =>
-            {
-                if (!clicked)
-                    return;
-
-                clicked = false;
-                this.PositionTrackBar_ValueChanged();
-            };
             // 
             // PositionLabel
             // 
@@ -282,23 +283,12 @@
             this.UpdateTimer.Interval = 600;
             this.UpdateTimer.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
-            // LabelCurrentTime
+            // notifyIcon1
             // 
-            this.LabelCurrentTime.AutoSize = true;
-            this.LabelCurrentTime.Location = new System.Drawing.Point(358, 60);
-            this.LabelCurrentTime.Name = "LabelCurrentTime";
-            this.LabelCurrentTime.Size = new System.Drawing.Size(49, 13);
-            this.LabelCurrentTime.TabIndex = 8;
-            this.LabelCurrentTime.Text = "00:00:00";
-            // 
-            // LabelTotalTime
-            // 
-            this.LabelTotalTime.AutoSize = true;
-            this.LabelTotalTime.Location = new System.Drawing.Point(693, 60);
-            this.LabelTotalTime.Name = "LabelTotalTime";
-            this.LabelTotalTime.Size = new System.Drawing.Size(49, 13);
-            this.LabelTotalTime.TabIndex = 9;
-            this.LabelTotalTime.Text = "00:00:00";
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
             // 
             // MainForm
             // 
@@ -350,6 +340,7 @@
         private System.Windows.Forms.TrackBar PositionTrackBar;
         private System.Windows.Forms.Label LabelTotalTime;
         private System.Windows.Forms.Label LabelCurrentTime;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 

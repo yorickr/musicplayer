@@ -16,8 +16,8 @@ using System.Windows.Forms;
 namespace MusicPlayer
 {
     public partial class MainForm : Form
-    { 
-
+    {
+        NotificationPopup p;
         public Main main
         {
             get; set;
@@ -26,6 +26,7 @@ namespace MusicPlayer
         public MainForm()
         {
             InitializeComponent();
+            p = new NotificationPopup(this);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -90,6 +91,14 @@ namespace MusicPlayer
         private void PositionTrackBar_ValueChanged()
         {
             main.audio.Seek(PositionTrackBar.Value);
+        }
+
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            if (p.Visible)
+                p.Visible = false;
+            else
+                p.Visible = true;
         }
     }
 }
