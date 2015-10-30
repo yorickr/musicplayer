@@ -104,5 +104,19 @@ namespace MusicPlayer
             }
             return yearlist;
         }
+
+        public List<Genre> GetGenres()
+        {
+            List<Genre> genreslist = new List<Genre>();
+            JObject o = nw.SendString("getgenres?id=hallo");
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["genres"].Count(); i++)
+                {
+                    genreslist.Add(new Genre(o["genres"][i][0].ToString()));
+                }
+            }
+            return genreslist;
+        }
     }
 }

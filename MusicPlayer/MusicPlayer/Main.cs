@@ -31,24 +31,24 @@ namespace MusicPlayer
 
         private void Populate()
         {
-            form.AlbumListView.Items.Add("Alle albums");
-            foreach (Album a in this.api.GetAlbums())
-            {
-                form.AlbumListView.Items.Add(a.albumnaam);
-
-            }
-            form.ArtistListBox.Items.Add("Alle artiesten");
-            foreach (Artist a in this.api.GetArtists())
-            {
-                form.ArtistListBox.Items.Add(a.naam);
-
-            }
+            this.api.GetAlbums().ForEach(a => form.AlbumListView.Items.Add(a.albumnaam));
+            this.api.GetArtists().ForEach(a => form.ArtistListBox.Items.Add(a.naam));
+            this.api.GetGenres().ForEach(g => form.GenreListBox.Items.Add(g.name));
         }
 
         public void ArtistFilter(string artist)
         {
             table.Clear();
             api.GetSongsByArtist(artist).ForEach(s =>
+            {
+                table.Add(s);
+            });
+        }
+
+        public void GenreFilter(string genre)
+        {
+            table.Clear();
+            api.GetSongsByGenre(genre).ForEach(s =>
             {
                 table.Add(s);
             });
