@@ -131,5 +131,21 @@ namespace MusicPlayer
             else
                 p.Visible = true;
         }
+
+        private void overviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.PlaylistBox.Visible = false;
+            this.GenreListBox.Visible = true;
+            this.ArtistListBox.Visible = true;
+            this.AlbumListView.Visible = true;
+        }
+
+        private void playlistsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.PlaylistBox.Visible = true;
+            this.GenreListBox.Visible = false;
+            this.ArtistListBox.Visible = false;
+            this.AlbumListView.Visible = false;
+        }
     }
 }
