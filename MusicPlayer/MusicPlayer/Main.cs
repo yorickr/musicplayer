@@ -39,6 +39,18 @@ namespace MusicPlayer
             this.pl.GetPlaylists().ForEach(p => form.PlaylistBox.Items.Add(p.name));
         }
 
+        public void Repopulate()
+        {
+            form.AlbumListView.Items.Clear();
+            form.ArtistListBox.Items.Clear();
+            form.GenreListBox.Items.Clear();
+            form.PlaylistBox.Items.Clear();
+            this.api.GetAlbums().ForEach(a => form.AlbumListView.Items.Add(a.albumnaam));
+            this.api.GetArtists().ForEach(a => form.ArtistListBox.Items.Add(a.naam));
+            this.api.GetGenres().ForEach(g => form.GenreListBox.Items.Add(g.name));
+            this.pl.GetPlaylists().ForEach(p => form.PlaylistBox.Items.Add(p.name));
+        }
+
         public void ArtistFilter(string artist)
         {
             table.Clear();
@@ -55,6 +67,13 @@ namespace MusicPlayer
             {
                 table.Add(s);
             });
+        }
+
+        public void PlaylistFilter(string name)
+        {
+            table.Clear();
+            pl.GetPlaylistByName(name).GetSongs().ForEach(s => table.Add(s));
+
         }
 
         public void AlbumFilter(string album)

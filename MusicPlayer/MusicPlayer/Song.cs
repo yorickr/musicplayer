@@ -51,7 +51,7 @@ namespace MusicPlayer
 
         public override string ToString()
         {
-            return $"{this.SongID}|{this.Name}|{this.Album}|{this.Artist}|{this.Seconds}|{this.Genre}";
+            return $"{this.SongID}|{this.Name}|{this.Album}|{this.Artist}|{this.Genre}|{this.Seconds}";
         }
     }
 }

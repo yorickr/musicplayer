@@ -98,6 +98,14 @@ namespace MusicPlayer
             }
         }
 
+        private void PlaylistBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PlaylistBox.SelectedItems.Count != 0)
+            {
+                main.PlaylistFilter(PlaylistBox.SelectedItems[0].ToString());
+            }
+        }
+
         private void ArtistListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ArtistListBox.SelectedItems.Count != 0)
@@ -174,6 +182,13 @@ namespace MusicPlayer
         {
             main.audio.AState = AudioHandler.AudioState.STOPPED;
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void makeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new PlaylistMaker(main.pl, main.api).Show();
+
+
         }
     }
 }
