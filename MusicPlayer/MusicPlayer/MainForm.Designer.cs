@@ -35,7 +35,7 @@
             this.AlbumListView = new System.Windows.Forms.ListView();
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.AlbumListLabel = new System.Windows.Forms.Label();
             this.ArtistListLabel = new System.Windows.Forms.Label();
@@ -71,18 +71,16 @@
             this.NotifyMenuStripPlayButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPauseButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripStopButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitter2 = new System.Windows.Forms.Splitter();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
+            this.SplitContainer.Panel1.SuspendLayout();
+            this.SplitContainer.Panel2.SuspendLayout();
+            this.SplitContainer.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).BeginInit();
             this.NotifyMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // SongsTableView
@@ -90,20 +88,18 @@
             this.SongsTableView.AllowUserToAddRows = false;
             this.SongsTableView.AllowUserToDeleteRows = false;
             this.SongsTableView.AllowUserToResizeRows = false;
-            this.SongsTableView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.SongsTableView.Location = new System.Drawing.Point(3, 3);
+            this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SongsTableView.Location = new System.Drawing.Point(0, 0);
             this.SongsTableView.MultiSelect = false;
             this.SongsTableView.Name = "SongsTableView";
             this.SongsTableView.ReadOnly = true;
             this.SongsTableView.RowHeadersVisible = false;
             this.SongsTableView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.SongsTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.SongsTableView.Size = new System.Drawing.Size(757, 180);
+            this.SongsTableView.Size = new System.Drawing.Size(760, 175);
             this.SongsTableView.TabIndex = 0;
             this.SongsTableView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SongsTableView_CellDoubleClick);
             // 
@@ -113,9 +109,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GenreListBox.BackColor = System.Drawing.SystemColors.Control;
             this.GenreListBox.FormattingEnabled = true;
-            this.GenreListBox.Location = new System.Drawing.Point(3, 4);
+            this.GenreListBox.Location = new System.Drawing.Point(3, 3);
             this.GenreListBox.Name = "GenreListBox";
-            this.GenreListBox.Size = new System.Drawing.Size(150, 134);
+            this.GenreListBox.Size = new System.Drawing.Size(150, 121);
             this.GenreListBox.Sorted = true;
             this.GenreListBox.TabIndex = 1;
             this.GenreListBox.SelectedIndexChanged += new System.EventHandler(this.GenreListBox_SelectedIndexChanged);
@@ -126,10 +122,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumListView.BackColor = System.Drawing.SystemColors.Control;
-            this.AlbumListView.Location = new System.Drawing.Point(309, 4);
+            this.AlbumListView.Location = new System.Drawing.Point(309, 3);
             this.AlbumListView.MultiSelect = false;
             this.AlbumListView.Name = "AlbumListView";
-            this.AlbumListView.Size = new System.Drawing.Size(448, 130);
+            this.AlbumListView.Size = new System.Drawing.Size(451, 121);
             this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
             this.AlbumListView.TileSize = new System.Drawing.Size(140, 30);
@@ -145,7 +141,7 @@
             this.ArtistListBox.FormattingEnabled = true;
             this.ArtistListBox.Location = new System.Drawing.Point(156, 3);
             this.ArtistListBox.Name = "ArtistListBox";
-            this.ArtistListBox.Size = new System.Drawing.Size(150, 134);
+            this.ArtistListBox.Size = new System.Drawing.Size(150, 121);
             this.ArtistListBox.Sorted = true;
             this.ArtistListBox.TabIndex = 3;
             this.ArtistListBox.SelectedIndexChanged += new System.EventHandler(this.ArtistListBox_SelectedIndexChanged);
@@ -156,25 +152,39 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.BackColor = System.Drawing.SystemColors.Window;
-            this.MainPanel.Controls.Add(this.splitContainer1);
-            this.MainPanel.Controls.Add(this.splitter1);
+            this.MainPanel.Controls.Add(this.SplitContainer);
             this.MainPanel.Controls.Add(this.PlaylistListLabel);
             this.MainPanel.Controls.Add(this.AlbumListLabel);
             this.MainPanel.Controls.Add(this.ArtistListLabel);
             this.MainPanel.Controls.Add(this.GenreListLabel);
-            this.MainPanel.Controls.Add(this.PlaylistBox);
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(784, 352);
             this.MainPanel.TabIndex = 5;
             // 
-            // splitter1
+            // SplitContainer
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 352);
-            this.splitter1.TabIndex = 8;
-            this.splitter1.TabStop = false;
+            this.SplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SplitContainer.Location = new System.Drawing.Point(12, 25);
+            this.SplitContainer.Name = "SplitContainer";
+            this.SplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // SplitContainer.Panel1
+            // 
+            this.SplitContainer.Panel1.Controls.Add(this.PlaylistBox);
+            this.SplitContainer.Panel1.Controls.Add(this.AlbumListView);
+            this.SplitContainer.Panel1.Controls.Add(this.ArtistListBox);
+            this.SplitContainer.Panel1.Controls.Add(this.GenreListBox);
+            // 
+            // SplitContainer.Panel2
+            // 
+            this.SplitContainer.Panel2.Controls.Add(this.SongsTableView);
+            this.SplitContainer.Size = new System.Drawing.Size(760, 314);
+            this.SplitContainer.SplitterDistance = 131;
+            this.SplitContainer.SplitterWidth = 8;
+            this.SplitContainer.TabIndex = 9;
             // 
             // PlaylistListLabel
             // 
@@ -218,9 +228,9 @@
             this.PlaylistBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PlaylistBox.FormattingEnabled = true;
-            this.PlaylistBox.Location = new System.Drawing.Point(12, 25);
+            this.PlaylistBox.Location = new System.Drawing.Point(3, 3);
             this.PlaylistBox.Name = "PlaylistBox";
-            this.PlaylistBox.Size = new System.Drawing.Size(760, 134);
+            this.PlaylistBox.Size = new System.Drawing.Size(757, 121);
             this.PlaylistBox.TabIndex = 4;
             this.PlaylistBox.Visible = false;
             // 
@@ -249,12 +259,12 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(89, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -342,7 +352,7 @@
             // LabelTotalTime
             // 
             this.LabelTotalTime.AutoSize = true;
-            this.LabelTotalTime.Location = new System.Drawing.Point(85, 35);
+            this.LabelTotalTime.Location = new System.Drawing.Point(90, 35);
             this.LabelTotalTime.Name = "LabelTotalTime";
             this.LabelTotalTime.Size = new System.Drawing.Size(49, 13);
             this.LabelTotalTime.TabIndex = 9;
@@ -488,38 +498,6 @@
             this.NotifyMenuStripStopButton.Text = "Stop";
             this.NotifyMenuStripStopButton.Click += new System.EventHandler(this.NotifyMenuStripStopButton_Click);
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(12, 25);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.AlbumListView);
-            this.splitContainer1.Panel1.Controls.Add(this.ArtistListBox);
-            this.splitContainer1.Panel1.Controls.Add(this.GenreListBox);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.splitter2);
-            this.splitContainer1.Panel2.Controls.Add(this.SongsTableView);
-            this.splitContainer1.Size = new System.Drawing.Size(760, 327);
-            this.splitContainer1.SplitterDistance = 137;
-            this.splitContainer1.TabIndex = 9;
-            // 
-            // splitter2
-            // 
-            this.splitter2.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.splitter2.Location = new System.Drawing.Point(0, 0);
-            this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 186);
-            this.splitter2.TabIndex = 1;
-            this.splitter2.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -538,16 +516,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).EndInit();
             this.MainPanel.ResumeLayout(false);
             this.MainPanel.PerformLayout();
+            this.SplitContainer.Panel1.ResumeLayout(false);
+            this.SplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).EndInit();
+            this.SplitContainer.ResumeLayout(false);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
             this.ControlsPanel.ResumeLayout(false);
             this.ControlsPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).EndInit();
             this.NotifyMenuStrip.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -595,9 +573,7 @@
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingLabel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingSongLabel;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.SplitContainer SplitContainer;
     }
 }
 
