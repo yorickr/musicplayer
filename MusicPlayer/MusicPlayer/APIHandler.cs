@@ -55,7 +55,7 @@ namespace MusicPlayer
                 dynamic songs = o["songs"];
                 for (int i = 0; i < songs.Count; i++)
                 {
-                    songslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), this));
+                    songslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
                 }
             }
             return songslist;

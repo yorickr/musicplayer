@@ -78,8 +78,8 @@ namespace MusicPlayer
             if(!clicked)
                 PositionTrackBar.Value = main.audio.Position;
 
-            LabelCurrentTime.Text = main.audio.CurrentTime;
-            LabelTotalTime.Text = main.audio.TotalTime;
+            LabelCurrentTime.Text = main.audio.CurrentTime + "";
+            LabelTotalTime.Text = main.audio.TotalTime + "";
         }
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)

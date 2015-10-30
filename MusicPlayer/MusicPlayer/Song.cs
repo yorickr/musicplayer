@@ -12,18 +12,21 @@ namespace MusicPlayer
         public string Name { get; set; }
         public string Album { get; set; }
         public string Artist { get; set; }
+        public string Genre { get; set; }
         public string Url { get { return GetURL(); } set { SetURL(value); } }
+        public int Seconds { get; set; }
 
         private APIHandler api;
 
         private string url;
 
-        public Song(string songid, string name, string album, string artist, APIHandler api)
+        public Song(string songid, string name, string album, string artist, string genre, int seconds, APIHandler api)
         {
             SongID = songid;
             Name = name;
             Album = album;
             Artist = artist;
+            Seconds = seconds;
 
             this.api = api;
 
