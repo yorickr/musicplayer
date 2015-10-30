@@ -142,6 +142,10 @@ namespace MusicPlayer
             this.GenreListBox.Visible = true;
             this.ArtistListBox.Visible = true;
             this.AlbumListView.Visible = true;
+            this.GenreListLabel.Visible = true;
+            this.AlbumListLabel.Visible = true;
+            this.ArtistListLabel.Visible = true;
+            this.PlaylistListLabel.Visible = false;
         }
 
         private void playlistsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -150,6 +154,10 @@ namespace MusicPlayer
             this.GenreListBox.Visible = false;
             this.ArtistListBox.Visible = false;
             this.AlbumListView.Visible = false;
+            this.GenreListLabel.Visible = false;
+            this.AlbumListLabel.Visible = false;
+            this.ArtistListLabel.Visible = false;
+            this.PlaylistListLabel.Visible = true;
         }
     }
 }
