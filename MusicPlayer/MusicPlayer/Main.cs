@@ -25,7 +25,7 @@ namespace MusicPlayer
             audio = new AudioHandler();
             table = new SongsTable();
             form.SongsTableView.DataSource = table;
-            form.SongsTableView.Columns[4].Visible = false;
+            form.SongsTableView.Columns[5].Visible = false;
             Populate();
         }
 
@@ -61,6 +61,24 @@ namespace MusicPlayer
             {
                 table.Add(s);
             });
+        }
+
+        public static string SecondsToTimestamp(int seconds)
+        {
+            string str = "";
+
+            //Hours
+            str += (seconds / 3600).ToString("D2") + ":";
+            seconds %= 3600;
+
+            //Minutes
+            str += (seconds / 60).ToString("D2") + ":";
+            seconds %= 60;
+
+            //Seconds
+            str += seconds.ToString("D2");
+
+            return str;
         }
     }
 

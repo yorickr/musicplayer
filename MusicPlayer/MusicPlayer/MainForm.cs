@@ -78,13 +78,17 @@ namespace MusicPlayer
                 PositionTrackBar.Enabled = false;
 
             BufferBar.Value = main.audio.Buffered;
-            PositionBar.Value = main.audio.Position;
 
             if(!clicked)
                 PositionTrackBar.Value = main.audio.Position;
 
-            LabelCurrentTime.Text = main.audio.CurrentTime + "";
-            LabelTotalTime.Text = main.audio.TotalTime + "";
+            LabelCurrentTime.Text = Main.SecondsToTimestamp(main.audio.CurrentTime);
+            LabelTotalTime.Text = Main.SecondsToTimestamp(main.audio.TotalTime);
+
+            if(main.audio.CurrentSong == null)
+                CurrentSongLabel.Text = "Not playing any songs";
+            else
+                CurrentSongLabel.Text = "Currently playing: " + main.audio.CurrentSong.Name;
         }
 
         private void GenreListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -114,7 +118,7 @@ namespace MusicPlayer
                 var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
                 var row = drv.Row as DataRow;
                 s.ImportRow(row);
-                main.audio.Play((s.Rows[0][4] as Song));
+                main.audio.Play((s.Rows[0][5] as Song));
             }
             
         }
@@ -138,6 +142,10 @@ namespace MusicPlayer
             this.GenreListBox.Visible = true;
             this.ArtistListBox.Visible = true;
             this.AlbumListView.Visible = true;
+            this.GenreListLabel.Visible = true;
+            this.AlbumListLabel.Visible = true;
+            this.ArtistListLabel.Visible = true;
+            this.PlaylistListLabel.Visible = false;
         }
 
         private void playlistsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -146,6 +154,10 @@ namespace MusicPlayer
             this.GenreListBox.Visible = false;
             this.ArtistListBox.Visible = false;
             this.AlbumListView.Visible = false;
+            this.GenreListLabel.Visible = false;
+            this.AlbumListLabel.Visible = false;
+            this.ArtistListLabel.Visible = false;
+            this.PlaylistListLabel.Visible = true;
         }
     }
 }
