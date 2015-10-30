@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MusicPlayer;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Drawing;
 
 namespace MusicPlayer
 {
@@ -95,13 +97,21 @@ namespace MusicPlayer
         public List<Album> GetAlbums()
         {
             List<Album> albumlist = new List<Album>();
-
+            Image def = Image.FromStream(nw.downloadArtwork("default-cover.png"));
             JObject o = nw.SendString("getalbums?id=hallo");
             if (o["result"].ToString() == "OK")
             {
                 for (int i = 0; i < o["albums"].Count(); i++)
                 {
-                    albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                    MemoryStream stream = nw.downloadArtwork(o["albums"][i][0].ToString() + ".jpg");
+                    if (stream != null) { 
+                        albumlist.Add(new Album(o["albums"][i][0].ToString(), Image.FromStream(stream)));
+                        stream.Close();
+                    }
+                    else
+                    {
+                        albumlist.Add(new Album(o["albums"][i][0].ToString(), def));
+                    }
                 }
             }
 

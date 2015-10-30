@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MusicPlayer
 {
@@ -15,6 +16,7 @@ namespace MusicPlayer
         public AudioHandler audio;
 
         private SongsTable table;
+        private ImageList imagelist;
 
         public Main(NetworkHandler nw, APIHandler api, MainForm form, PlaylistHandler pl)
         {
@@ -26,6 +28,7 @@ namespace MusicPlayer
 
             audio = new AudioHandler();
             table = new SongsTable();
+            imagelist = new ImageList();
             form.SongsTableView.DataSource = table;
             form.SongsTableView.Columns[5].Visible = false;
             Populate();
@@ -33,7 +36,8 @@ namespace MusicPlayer
 
         private void Populate()
         {
-            this.api.GetAlbums().ForEach(a => form.AlbumListView.Items.Add(a.albumnaam));
+            form.AlbumListView.LargeImageList = imagelist;
+            this.api.GetAlbums().ForEach(a => { var item = form.AlbumListView.Items.Add(a.albumnaam); imagelist.Images.Add(a.albumnaam, a.cover); item.ImageKey = a.albumnaam;});
             this.api.GetArtists().ForEach(a => form.ArtistListBox.Items.Add(a.naam));
             this.api.GetGenres().ForEach(g => form.GenreListBox.Items.Add(g.name));
             this.pl.GetPlaylists().ForEach(p => form.PlaylistBox.Items.Add(p.name));
