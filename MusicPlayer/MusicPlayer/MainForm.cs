@@ -16,8 +16,7 @@ using System.Windows.Forms;
 namespace MusicPlayer
 {
     public partial class MainForm : Form
-    {
-        Song testsong;
+    { 
 
         public Main main
         {
@@ -54,7 +53,10 @@ namespace MusicPlayer
         {
             BufferBar.Value = main.audio.Buffered;
             PositionBar.Value = main.audio.Position;
-            PositionTrackBar.Value = main.audio.Position;
+
+            if(!clicked)
+                PositionTrackBar.Value = main.audio.Position;
+
             LabelCurrentTime.Text = main.audio.CurrentTime;
             LabelTotalTime.Text = main.audio.TotalTime;
         }
