@@ -97,6 +97,8 @@ namespace MusicPlayer
         public List<Album> GetAlbums()
         {
             List<Album> albumlist = new List<Album>();
+            return albumlist;
+
             Image def = Image.FromStream(nw.downloadArtwork("default-cover.png"));
             JObject o = nw.SendString("getalbums?id=hallo");
             if (o["result"].ToString() == "OK")
