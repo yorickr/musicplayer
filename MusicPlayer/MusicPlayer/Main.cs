@@ -55,20 +55,16 @@ namespace MusicPlayer
             delegate (object o, DoWorkEventArgs args)
             {
                 BackgroundWorker b = o as BackgroundWorker;
-                var i = 0;
                 ImageList imagelist = new ImageList();
                 foreach (ListViewItem item in form.AlbumListView.Items)
                 {
-                    imagelist.Images.Add(i.ToString(), api.getAlbumCover(item.Text));
-                    i++;
+                    imagelist.Images.Add(item.ToString(), api.getAlbumCover(item.Text));
                 }
-                i = 0;
                 Action action = () => {
                     form.AlbumListView.LargeImageList = imagelist;
                     foreach (ListViewItem item in form.AlbumListView.Items)
                     {
-                        item.ImageKey = i.ToString(); 
-                        i++;
+                        item.ImageKey = item.ToString(); 
                     }
                 };
                 form.Invoke(action);
