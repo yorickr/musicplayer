@@ -122,6 +122,7 @@ namespace MusicPlayer
             catch(Exception e)
             {
                 AState = AudioState.STOPPED;
+                main.form.SongFinished();
                 return;
             }
             
@@ -207,6 +208,7 @@ namespace MusicPlayer
             {
                 BState = BufferState.EMPTY;
                 AState = AudioState.STOPPED;
+                main.form.SongFinished();
                 return;
             }
 
