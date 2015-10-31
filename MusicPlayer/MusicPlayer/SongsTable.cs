@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MusicPlayer
 {
-    class SongsTable : DataTable
+    public class SongsTable : DataTable
     {
         public SongsTable() : base()
         {

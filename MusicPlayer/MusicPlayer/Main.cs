@@ -15,11 +15,13 @@ namespace MusicPlayer
         public PlaylistHandler pl;
         public AudioHandler audio;
 
-        private SongsTable table;
+        public SongsTable table;
         private ImageList imagelist;
 
         private List<string> genres;
         private List<string> artists;
+
+        public List<Song> currentPlayingList;
 
         public Main(NetworkHandler nw, APIHandler api, MainForm form, PlaylistHandler pl)
         {
@@ -37,6 +39,8 @@ namespace MusicPlayer
 
             genres = new List<string>();
             artists = new List<string>();
+
+            currentPlayingList = new List<Song>();
 
             Populate();
         }
@@ -66,6 +70,15 @@ namespace MusicPlayer
         {
             table.Clear();
             api.GetSongsByArtist(artist).ForEach(s =>
+            {
+                table.Add(s);
+            });
+        }
+
+        public void FilterCurrentPlaying()
+        {
+            table.Clear();
+            currentPlayingList.ForEach(s =>
             {
                 table.Add(s);
             });

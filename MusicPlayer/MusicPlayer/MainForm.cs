@@ -58,7 +58,10 @@ namespace MusicPlayer
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            SongsTableView_CellDoubleClick(sender, new DataGridViewCellEventArgs(0, 0));
+            if (main.audio.AState == AudioHandler.AudioState.PAUSED)
+                main.audio.Play(main.audio.CurrentSong);
+            else
+                SongsTableView_CellDoubleClick(sender, new DataGridViewCellEventArgs(0, 0));
         }
 
         private void PauseButton_Click(object sender, EventArgs e)
@@ -157,6 +160,29 @@ namespace MusicPlayer
                 ShuffleSongButton.Checked = false;
             }
 
+            if (main.currentPlayingList.Count <= 1)
+            {
+                PreviousButton.Enabled = false;
+                NextButton.Enabled = false;
+                NotifyMenuStripPreviousButton.Enabled = false;
+                NotifyMenuStripNextButton.Enabled = false;
+            }
+            else
+            {
+                NextButton.Enabled = true;
+                NotifyMenuStripNextButton.Enabled = true;
+
+                if (ShuffleSongButton.Checked)
+                {
+                    PreviousButton.Enabled = false;
+                    NotifyMenuStripPreviousButton.Enabled = false;
+                }
+                else
+                {
+                    PreviousButton.Enabled = true;
+                    NotifyMenuStripPreviousButton.Enabled = true;
+                }
+            }
 
             if (songFinished)
             {
@@ -164,33 +190,7 @@ namespace MusicPlayer
 
                 if (PlayNextSongButton.Checked)
                 {
-
-                    int selected = 0;
-
-                    if(ShuffleSongButton.Checked)
-                    {
-                        Random r = new Random();
-                        selected = r.Next(0, SongsTableView.Rows.Count);
-                        while (selected == SongsTableView.SelectedRows[0].Index && SongsTableView.Rows.Count > 1)
-                            selected = r.Next(0, SongsTableView.Rows.Count);
-                    }
-                    else
-                        selected = SongsTableView.SelectedRows[0].Index + 1;
-
-                    if (selected >= SongsTableView.Rows.Count)
-                    {
-                        if (LoopSongButton.Checked)
-                            selected = 0;
-                        else
-                        {
-                            songFinished = false;
-                            return;
-                        }
-                    }
-
-                    SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
-                    SongsTableView_CellDoubleClick(this, new DataGridViewCellEventArgs(0, selected));
-
+                    NextButton_Click(this, new EventArgs());
                 }
                 else if (LoopSongButton.Checked)
                 {
@@ -247,15 +247,19 @@ namespace MusicPlayer
 
         private void SongsTableView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            SongsTable s = new SongsTable();
-            if (SongsTableView.SelectedRows.Count > 0)
+            if (e.RowIndex != -1)
             {
-                var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
-                var row = drv.Row as DataRow;
-                s.ImportRow(row);
-                main.audio.Play((s.Rows[0][5] as Song));
-            }
+                SongsTable s = new SongsTable();
+                if (SongsTableView.SelectedRows.Count > 0)
+                {
+                    main.currentPlayingList = main.table.AsEnumerable().Select(x => x[5] as Song).ToList();
 
+                    var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+                    var row = drv.Row as DataRow;
+                    s.ImportRow(row);
+                    main.audio.Play((s.Rows[0][5] as Song));
+                }
+            }
         }
 
         private void PositionTrackBar_ValueChanged()
@@ -384,5 +388,63 @@ namespace MusicPlayer
             dblValue = ((double)(e.X+PositionTrackBar.Location.X) / (double)(PositionTrackBar.Width + PositionTrackBar.Location.X)) * (PositionTrackBar.Maximum - PositionTrackBar.Minimum);
             PositionTrackBar.Value = Convert.ToInt32(dblValue);
         }
+
+        private void PreviousButton_Click(object sender, EventArgs e)
+        {
+            int selected = 0;
+            selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong) - 1;
+
+            if (selected < 0)
+            {
+                if (LoopSongButton.Checked)
+                    selected = main.currentPlayingList.Count-1;
+            }
+
+            main.FilterCurrentPlaying();
+            SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+            main.audio.Play(main.currentPlayingList[selected]);
+        }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+            int selected = 0;
+
+            if (ShuffleSongButton.Checked)
+            {
+                Random r = new Random();
+                selected = r.Next(0, main.currentPlayingList.Count);
+                while (selected == main.currentPlayingList.IndexOf(main.audio.CurrentSong) && main.currentPlayingList.Count > 1)
+                    selected = r.Next(0, main.currentPlayingList.Count);
+            }
+            else
+                selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong) + 1;
+
+            if (selected >= main.currentPlayingList.Count)
+            {
+                if (LoopSongButton.Checked)
+                    selected = 0;
+                else
+                {
+                    songFinished = false;
+                    return;
+                }
+            }
+
+            main.FilterCurrentPlaying();
+            SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+            main.audio.Play(main.currentPlayingList[selected]);
+        }
+
+        private void NotifyMenuStripNextButton_Click(object sender, EventArgs e)
+        {
+            NextButton_Click(sender, e);
+        }
+
+        private void NotifyMenuStripPreviousButton_Click(object sender, EventArgs e)
+        {
+            PreviousButton_Click(sender, e);
+        }
+
+        
     }
 }
