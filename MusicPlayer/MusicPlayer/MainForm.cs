@@ -19,6 +19,7 @@ namespace MusicPlayer
     public partial class MainForm : Form
     {
         bool songFinished;
+        bool draggedstarted;
 
         public Main main
         {
@@ -441,6 +442,46 @@ namespace MusicPlayer
             main.FilterCurrentPlaying();
             int selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong);
             SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+        }
+
+   
+        private void SongsTableView_MouseDown(object sender, MouseEventArgs e)
+        {
+            draggedstarted = true;
+            Cursor.Current = Cursors.Hand;
+        }
+
+        private void SongsTableView_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (draggedstarted)
+            {
+                Cursor.Current = Cursors.Default;
+                Point point = PlaylistBox.PointToClient(Cursor.Position);
+                int index = PlaylistBox.IndexFromPoint(point);
+                if (index < 0) //nope, niet op een playlist gesleept
+                {
+                    draggedstarted = false;
+                    return;
+                }
+                Playlist currentPlaylist = main.pl.GetPlaylistByName(PlaylistBox.Items[index].ToString());
+                SongsTable s = new SongsTable();
+                if (SongsTableView.SelectedRows.Count > 0)
+                {
+                    var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+                    var row = drv.Row as DataRow;
+                    s.ImportRow(row);
+                    currentPlaylist.AddSong((s.Rows[0][5] as Song));
+                    currentPlaylist.WriteToFile();
+                }
+            }
+        }
+
+        private void SongsTableView_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (draggedstarted)
+            {
+                Cursor.Current = Cursors.Hand;
+            }
         }
     }
 }
