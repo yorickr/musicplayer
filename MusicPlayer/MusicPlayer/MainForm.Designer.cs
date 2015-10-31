@@ -51,6 +51,8 @@ namespace MusicPlayer
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.ViewCurrentPlaylistButton = new System.Windows.Forms.ToolStripMenuItem();
             this.playbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlayNextSongButton = new System.Windows.Forms.ToolStripMenuItem();
             this.LoopSongButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,8 +90,6 @@ namespace MusicPlayer
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripNextButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPreviousButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.ViewCurrentPlaylistButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -322,6 +322,18 @@ namespace MusicPlayer
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(151, 6);
+            // 
+            // ViewCurrentPlaylistButton
+            // 
+            this.ViewCurrentPlaylistButton.Name = "ViewCurrentPlaylistButton";
+            this.ViewCurrentPlaylistButton.Size = new System.Drawing.Size(154, 22);
+            this.ViewCurrentPlaylistButton.Text = "Current Playlist";
+            this.ViewCurrentPlaylistButton.Click += new System.EventHandler(this.ViewCurrentPlaylistButton_Click);
+            // 
             // playbackToolStripMenuItem
             // 
             this.playbackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -479,6 +491,7 @@ namespace MusicPlayer
             // 
             // LabelTotalTime
             // 
+            this.LabelTotalTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LabelTotalTime.AutoSize = true;
             this.LabelTotalTime.Location = new System.Drawing.Point(723, 26);
             this.LabelTotalTime.Name = "LabelTotalTime";
@@ -648,18 +661,6 @@ namespace MusicPlayer
             this.NotifyMenuStripPreviousButton.Size = new System.Drawing.Size(119, 22);
             this.NotifyMenuStripPreviousButton.Text = "Previous";
             this.NotifyMenuStripPreviousButton.Click += new System.EventHandler(this.NotifyMenuStripPreviousButton_Click);
-            // 
-            // ViewCurrentPlaylistButton
-            // 
-            this.ViewCurrentPlaylistButton.Name = "ViewCurrentPlaylistButton";
-            this.ViewCurrentPlaylistButton.Size = new System.Drawing.Size(154, 22);
-            this.ViewCurrentPlaylistButton.Text = "Current Playlist";
-            this.ViewCurrentPlaylistButton.Click += new System.EventHandler(this.ViewCurrentPlaylistButton_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(151, 6);
             // 
             // MainForm
             // 

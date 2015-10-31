@@ -217,8 +217,8 @@ namespace MusicPlayer
             LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
-                //byte[] buffer = new byte[65536]; // 64KB chunks
-                byte[] buffer = new byte[65536*4]; // 256KB chunks
+                byte[] buffer = new byte[65536]; // 64KB chunks
+                //byte[] buffer = new byte[65536*4]; // 256KB chunks
                 int read;
                 BState = BufferState.BUFFERING;
                 AState = AudioState.WAITING;
