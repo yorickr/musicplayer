@@ -96,6 +96,28 @@ namespace MusicPlayer
             Repopulate();
         }
 
+        public void SearchAllSongs(string search)
+        {
+            PlaylistSongSelector.Items.Clear();
+
+            if (search.Length > 1)
+            {
+                string sPattern = search;
+
+                foreach (Song s in allsongs)
+                {
+                    if (System.Text.RegularExpressions.Regex.IsMatch(s.Name, sPattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                    {
+                        PlaylistSongSelector.Items.Add(s.Name);
+                    }
+                }
+            }
+            else
+            {
+                allsongs.ForEach(s => PlaylistSongSelector.Items.Add(s.Name));
+            }
+        }
+
         private void PlaylistNewButton_Click(object sender, EventArgs e)
         {
             pl.MakeNewPlaylistByName(PlaylistNewInputfield.Text);
@@ -105,6 +127,11 @@ namespace MusicPlayer
         private void PlaylistMaker_Load(object sender, EventArgs e)
         {
             Populate();
+        }
+
+        private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            SearchAllSongs(FilterTextBox.Text);
         }
     }
 }

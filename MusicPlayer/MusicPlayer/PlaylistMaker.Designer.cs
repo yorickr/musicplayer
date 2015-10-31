@@ -41,6 +41,8 @@ namespace MusicPlayer
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.FilterTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PlaylistSelectBox
@@ -145,11 +147,30 @@ namespace MusicPlayer
             this.label4.TabIndex = 9;
             this.label4.Text = "All songs";
             // 
+            // FilterTextBox
+            // 
+            this.FilterTextBox.Location = new System.Drawing.Point(172, 127);
+            this.FilterTextBox.Name = "FilterTextBox";
+            this.FilterTextBox.Size = new System.Drawing.Size(144, 20);
+            this.FilterTextBox.TabIndex = 10;
+            this.FilterTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FilterTextBox_KeyUp);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(137, 130);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Filter";
+            // 
             // PlaylistMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 411);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.FilterTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -160,8 +181,8 @@ namespace MusicPlayer
             this.Controls.Add(this.PlaylistAddSongsButton);
             this.Controls.Add(this.PlaylistSongSelector);
             this.Controls.Add(this.PlaylistSelectBox);
-            this.MinimumSize = new System.Drawing.Size(300, 425);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(300, 425);
             this.Name = "PlaylistMaker";
             this.Text = "Create / Edit playlists";
             this.Shown += new System.EventHandler(this.PlaylistMaker_Load);
@@ -182,5 +203,7 @@ namespace MusicPlayer
         private Label label2;
         private Label label3;
         private Label label4;
+        private TextBox FilterTextBox;
+        private Label label5;
     }
 }
