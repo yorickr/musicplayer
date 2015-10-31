@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,7 @@ namespace MusicPlayer
         public AudioHandler audio;
 
         public SongsTable table;
-        private ImageList imagelist;
-
+       
         private List<string> genres;
         private List<string> artists;
 
@@ -33,7 +33,6 @@ namespace MusicPlayer
 
             audio = new AudioHandler(this);
             table = new SongsTable();
-            imagelist = new ImageList();
             form.SongsTableView.DataSource = table;
             form.SongsTableView.Columns[5].Visible = false;
 
@@ -47,11 +46,34 @@ namespace MusicPlayer
 
         private void Populate()
         {
-            form.AlbumListView.LargeImageList = imagelist;
-            this.api.GetAlbums().ForEach(a => { var item = form.AlbumListView.Items.Add(a.albumnaam); imagelist.Images.Add(a.albumnaam, a.cover); item.ImageKey = a.albumnaam;});
+            this.api.GetAlbums().ForEach(a => { form.AlbumListView.Items.Add(a.albumnaam);});
             this.api.GetArtists().ForEach(a => { artists.Add(a.naam); form.ArtistListBox.Items.Add(a.naam); });
             this.api.GetGenres().ForEach(g => { genres.Add(g.name); form.GenreListBox.Items.Add(g.name); });
             this.pl.GetPlaylists().ForEach(p =>  form.PlaylistBox.Items.Add(p.name));
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.DoWork += new DoWorkEventHandler(
+            delegate (object o, DoWorkEventArgs args)
+            {
+                BackgroundWorker b = o as BackgroundWorker;
+                var i = 0;
+                ImageList imagelist = new ImageList();
+                foreach (ListViewItem item in form.AlbumListView.Items)
+                {
+                    imagelist.Images.Add(i.ToString(), api.getAlbumCover(item.Text));
+                    i++;
+                }
+                i = 0;
+                Action action = () => {
+                    form.AlbumListView.LargeImageList = imagelist;
+                    foreach (ListViewItem item in form.AlbumListView.Items)
+                    {
+                        item.ImageKey = i.ToString(); 
+                        i++;
+                    }
+                };
+                form.Invoke(action);
+            });
+            bw.RunWorkerAsync();
         }
 
         public void Repopulate()

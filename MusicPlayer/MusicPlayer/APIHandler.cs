@@ -13,10 +13,11 @@ namespace MusicPlayer
     public class APIHandler
     {
         private NetworkHandler nw;
-
+        private Image defaultCover;
         public APIHandler(NetworkHandler nw)
         {
             this.nw = nw;
+            defaultCover = Image.FromStream(nw.downloadArtwork("default-cover.png"));
         }
 
         public string GetSongURLByID(string id)
@@ -94,26 +95,26 @@ namespace MusicPlayer
             return artistlist;
         }
 
+        public Image getAlbumCover(string album)
+        {
+            MemoryStream stream = nw.downloadArtwork(album + ".jpg");
+            if(stream != null)
+            {
+                return Image.FromStream(stream);
+            }
+            return defaultCover;
+        }
+
         public List<Album> GetAlbums()
         {
             List<Album> albumlist = new List<Album>();
-            return albumlist;
 
-            Image def = Image.FromStream(nw.downloadArtwork("default-cover.png"));
             JObject o = nw.SendString("getalbums?id=hallo");
             if (o["result"].ToString() == "OK")
             {
                 for (int i = 0; i < o["albums"].Count(); i++)
                 {
-                    MemoryStream stream = nw.downloadArtwork(o["albums"][i][0].ToString() + ".jpg");
-                    if (stream != null) { 
-                        albumlist.Add(new Album(o["albums"][i][0].ToString(), Image.FromStream(stream)));
-                        stream.Close();
-                    }
-                    else
-                    {
-                        albumlist.Add(new Album(o["albums"][i][0].ToString(), def));
-                    }
+                    albumlist.Add(new Album(o["albums"][i][0].ToString()));
                 }
             }
 
