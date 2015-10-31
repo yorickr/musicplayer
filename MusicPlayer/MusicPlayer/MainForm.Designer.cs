@@ -114,7 +114,7 @@ namespace MusicPlayer
             this.SongsTableView.RowHeadersVisible = false;
             this.SongsTableView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.SongsTableView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.SongsTableView.Size = new System.Drawing.Size(760, 175);
+            this.SongsTableView.Size = new System.Drawing.Size(760, 174);
             this.SongsTableView.TabIndex = 0;
             this.SongsTableView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SongsTableView_CellDoubleClick);
             // 
@@ -174,7 +174,7 @@ namespace MusicPlayer
             this.MainPanel.Controls.Add(this.GenreListLabel);
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
-            this.MainPanel.Size = new System.Drawing.Size(784, 352);
+            this.MainPanel.Size = new System.Drawing.Size(784, 351);
             this.MainPanel.TabIndex = 5;
             // 
             // SplitContainer
@@ -196,7 +196,7 @@ namespace MusicPlayer
             // SplitContainer.Panel2
             // 
             this.SplitContainer.Panel2.Controls.Add(this.SongsTableView);
-            this.SplitContainer.Size = new System.Drawing.Size(760, 314);
+            this.SplitContainer.Size = new System.Drawing.Size(760, 313);
             this.SplitContainer.SplitterDistance = 131;
             this.SplitContainer.SplitterWidth = 8;
             this.SplitContainer.TabIndex = 9;
@@ -448,7 +448,7 @@ namespace MusicPlayer
             this.ControlsPanel.Controls.Add(this.PauseButton);
             this.ControlsPanel.Controls.Add(this.PlayButton);
             this.ControlsPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ControlsPanel.Location = new System.Drawing.Point(0, 379);
+            this.ControlsPanel.Location = new System.Drawing.Point(0, 378);
             this.ControlsPanel.Name = "ControlsPanel";
             this.ControlsPanel.Size = new System.Drawing.Size(784, 83);
             this.ControlsPanel.TabIndex = 4;
@@ -624,7 +624,7 @@ namespace MusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 462);
+            this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(this.ControlsPanel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MenuStrip);
