@@ -160,12 +160,10 @@ namespace MusicPlayer
 
             if (songFinished)
             {
-                Console.WriteLine("Song finished");
                 Thread.Sleep(20);
 
                 if (PlayNextSongButton.Checked)
                 {
-                    Console.WriteLine("Playing next song");
 
                     int selected = 0;
 
@@ -179,10 +177,16 @@ namespace MusicPlayer
                     else
                         selected = SongsTableView.SelectedRows[0].Index + 1;
 
-                    if (selected >= SongsTableView.Rows.Count && LoopSongButton.Checked)
-                        selected = 0;
-
-                    Console.WriteLine(selected);
+                    if (selected >= SongsTableView.Rows.Count)
+                    {
+                        if (LoopSongButton.Checked)
+                            selected = 0;
+                        else
+                        {
+                            songFinished = false;
+                            return;
+                        }
+                    }
 
                     SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
                     SongsTableView_CellDoubleClick(this, new DataGridViewCellEventArgs(0, selected));
