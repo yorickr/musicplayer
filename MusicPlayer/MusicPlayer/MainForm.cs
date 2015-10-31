@@ -18,7 +18,6 @@ namespace MusicPlayer
 {
     public partial class MainForm : Form
     {
-        NotificationPopup p;
         bool songFinished;
 
         public Main main
@@ -47,7 +46,6 @@ namespace MusicPlayer
                 this.PositionTrackBar_ValueChanged();
             };
 
-            p = new NotificationPopup(this);
             songFinished = false;
         }
 
@@ -272,13 +270,6 @@ namespace MusicPlayer
 
         private void NotifyIcon_Click(object sender, MouseEventArgs e)
         {
-            /*
-            if (p.Visible)
-                p.Visible = false;
-            else
-                p.Visible = true;
-                */
-
             if (e.Button == MouseButtons.Left)
             {
                 MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -445,6 +436,11 @@ namespace MusicPlayer
             PreviousButton_Click(sender, e);
         }
 
-        
+        private void ViewCurrentPlaylistButton_Click(object sender, EventArgs e)
+        {
+            main.FilterCurrentPlaying();
+            int selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong);
+            SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+        }
     }
 }
