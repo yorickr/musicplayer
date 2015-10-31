@@ -30,6 +30,7 @@ namespace MusicPlayer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlaylistMaker));
             this.PlaylistSelectBox = new System.Windows.Forms.ComboBox();
             this.PlaylistSongSelector = new System.Windows.Forms.ListBox();
             this.PlaylistAddSongsButton = new System.Windows.Forms.Button();
@@ -44,27 +45,34 @@ namespace MusicPlayer
             // 
             // PlaylistSelectBox
             // 
+            this.PlaylistSelectBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlaylistSelectBox.FormattingEnabled = true;
             this.PlaylistSelectBox.Location = new System.Drawing.Point(10, 96);
             this.PlaylistSelectBox.Name = "PlaylistSelectBox";
-            this.PlaylistSelectBox.Size = new System.Drawing.Size(354, 21);
+            this.PlaylistSelectBox.Size = new System.Drawing.Size(306, 21);
             this.PlaylistSelectBox.TabIndex = 0;
             this.PlaylistSelectBox.SelectedIndexChanged += new System.EventHandler(this.PlaylistSelectBox_SelectedIndexChanged);
             // 
             // PlaylistSongSelector
             // 
+            this.PlaylistSongSelector.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlaylistSongSelector.FormattingEnabled = true;
             this.PlaylistSongSelector.Location = new System.Drawing.Point(11, 149);
             this.PlaylistSongSelector.Name = "PlaylistSongSelector";
             this.PlaylistSongSelector.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.PlaylistSongSelector.Size = new System.Drawing.Size(353, 121);
+            this.PlaylistSongSelector.Size = new System.Drawing.Size(305, 108);
             this.PlaylistSongSelector.TabIndex = 1;
             // 
             // PlaylistAddSongsButton
             // 
-            this.PlaylistAddSongsButton.Location = new System.Drawing.Point(10, 276);
+            this.PlaylistAddSongsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlaylistAddSongsButton.Location = new System.Drawing.Point(10, 263);
             this.PlaylistAddSongsButton.Name = "PlaylistAddSongsButton";
-            this.PlaylistAddSongsButton.Size = new System.Drawing.Size(354, 23);
+            this.PlaylistAddSongsButton.Size = new System.Drawing.Size(306, 23);
             this.PlaylistAddSongsButton.TabIndex = 2;
             this.PlaylistAddSongsButton.Text = "Add selected to playlist";
             this.PlaylistAddSongsButton.UseVisualStyleBackColor = true;
@@ -72,15 +80,18 @@ namespace MusicPlayer
             // 
             // PlaylistSongContainer
             // 
+            this.PlaylistSongContainer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlaylistSongContainer.FormattingEnabled = true;
-            this.PlaylistSongContainer.Location = new System.Drawing.Point(10, 327);
+            this.PlaylistSongContainer.Location = new System.Drawing.Point(10, 319);
             this.PlaylistSongContainer.Name = "PlaylistSongContainer";
-            this.PlaylistSongContainer.Size = new System.Drawing.Size(354, 82);
+            this.PlaylistSongContainer.Size = new System.Drawing.Size(306, 82);
             this.PlaylistSongContainer.TabIndex = 3;
             // 
             // PlaylistNewButton
             // 
-            this.PlaylistNewButton.Location = new System.Drawing.Point(290, 23);
+            this.PlaylistNewButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.PlaylistNewButton.Location = new System.Drawing.Point(242, 23);
             this.PlaylistNewButton.Name = "PlaylistNewButton";
             this.PlaylistNewButton.Size = new System.Drawing.Size(75, 23);
             this.PlaylistNewButton.TabIndex = 4;
@@ -90,9 +101,11 @@ namespace MusicPlayer
             // 
             // PlaylistNewInputfield
             // 
+            this.PlaylistNewInputfield.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PlaylistNewInputfield.Location = new System.Drawing.Point(11, 25);
             this.PlaylistNewInputfield.Name = "PlaylistNewInputfield";
-            this.PlaylistNewInputfield.Size = new System.Drawing.Size(273, 20);
+            this.PlaylistNewInputfield.Size = new System.Drawing.Size(225, 20);
             this.PlaylistNewInputfield.TabIndex = 5;
             // 
             // label1
@@ -115,8 +128,9 @@ namespace MusicPlayer
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 311);
+            this.label3.Location = new System.Drawing.Point(7, 303);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 13);
             this.label3.TabIndex = 8;
@@ -135,7 +149,7 @@ namespace MusicPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 419);
+            this.ClientSize = new System.Drawing.Size(334, 411);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -146,6 +160,8 @@ namespace MusicPlayer
             this.Controls.Add(this.PlaylistAddSongsButton);
             this.Controls.Add(this.PlaylistSongSelector);
             this.Controls.Add(this.PlaylistSelectBox);
+            this.MinimumSize = new System.Drawing.Size(300, 425);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PlaylistMaker";
             this.Text = "Create / Edit playlists";
             this.Shown += new System.EventHandler(this.PlaylistMaker_Load);
