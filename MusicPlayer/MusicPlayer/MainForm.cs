@@ -85,7 +85,7 @@ namespace MusicPlayer
             else
                 PositionTrackBar.Enabled = false;
             if (!clicked)
-                PositionTrackBar.Value = main.audio.Position;
+                PositionTrackBar.Value = Math.Max(main.audio.Position, 0);
 
             //Buffer display
             BufferBar.Value = main.audio.Buffered / 10;
