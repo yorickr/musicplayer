@@ -49,9 +49,11 @@ namespace MusicPlayer
             {
                 WebRequest req = WebRequest.Create((ip + "/music/artwork/"+album).Replace(" ", "%20"));
                 WebResponse response = req.GetResponse();
-                Stream stream = response.GetResponseStream();
+                Stream stream = response.GetResponseStream();
+
                 //Download in chuncks
-                byte[] buffer = new byte[1024];                //Get Total Size
+                byte[] buffer = new byte[1024];
+                //Get Total Size
                 int dataLength = (int)response.ContentLength;
                 //Download to memory
                 MemoryStream memStream = new MemoryStream();
@@ -64,16 +66,19 @@ namespace MusicPlayer
                         break;
                     }
                     else
-                    {                        memStream.Write(buffer, 0, bytesRead);
+                    {
+                        memStream.Write(buffer, 0, bytesRead);
                     }
-                }                //Clean up
+                }
+                //Clean up
                 stream.Close();
 
                 //Convert the downloaded stream to a byte array
                 return memStream;
             }
             catch (Exception)
-            {                return null;
+            {
+                return null;
             }
         }
     }
