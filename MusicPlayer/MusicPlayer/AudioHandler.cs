@@ -40,9 +40,12 @@ namespace MusicPlayer
 
         public Song CurrentSong;
 
-        public AudioHandler()
+        private Main main;
+
+        public AudioHandler(Main main)
         {
-            CreateThreads();
+            this.main = main;
+            CreateThreads(); 
         }
 
         private void CreateThreads()
@@ -171,6 +174,8 @@ namespace MusicPlayer
 
                     }
 
+                    if(AState == AudioState.PLAYING)
+                        main.form.SongFinished();
                     AState = AudioState.STOPPED;
                     playpos = 0;
                     CurrentTime = 0;

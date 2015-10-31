@@ -19,6 +19,7 @@ namespace MusicPlayer
     public partial class MainForm : Form
     {
         NotificationPopup p;
+        bool songFinished;
 
         public Main main
         {
@@ -47,6 +48,7 @@ namespace MusicPlayer
             };
 
             p = new NotificationPopup(this);
+            songFinished = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -67,6 +69,11 @@ namespace MusicPlayer
         private void StopButton_Click(object sender, EventArgs e)
         {
             main.audio.Stop();
+        }
+
+        public void SongFinished()
+        {
+            songFinished = true;
         }
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
@@ -138,6 +145,55 @@ namespace MusicPlayer
             {
                 StopButton.Enabled = true;
                 NotifyMenuStripStopButton.Enabled = true;
+            }
+
+            if(PlayNextSongButton.Checked)
+            {
+                ShuffleSongButton.Enabled = true;
+            }
+            else
+            {
+                ShuffleSongButton.Enabled = false;
+                ShuffleSongButton.Checked = false;
+            }
+
+
+            if (songFinished)
+            {
+                Console.WriteLine("Song finished");
+                Thread.Sleep(20);
+
+                if (PlayNextSongButton.Checked)
+                {
+                    Console.WriteLine("Playing next song");
+
+                    int selected = 0;
+
+                    if(ShuffleSongButton.Checked)
+                    {
+                        Random r = new Random();
+                        selected = r.Next(0, SongsTableView.Rows.Count);
+                        while (selected == SongsTableView.SelectedRows[0].Index && SongsTableView.Rows.Count > 1)
+                            selected = r.Next(0, SongsTableView.Rows.Count);
+                    }
+                    else
+                        selected = SongsTableView.SelectedRows[0].Index + 1;
+
+                    if (selected >= SongsTableView.Rows.Count && LoopSongButton.Checked)
+                        selected = 0;
+
+                    Console.WriteLine(selected);
+
+                    SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+                    SongsTableView_CellDoubleClick(this, new DataGridViewCellEventArgs(0, selected));
+
+                }
+                else if (LoopSongButton.Checked)
+                {
+                    main.audio.Play(main.audio.CurrentSong);
+                }
+
+                songFinished = false;
             }
         }
 
@@ -284,7 +340,38 @@ namespace MusicPlayer
             PlaylistMaker p = new PlaylistMaker(main.pl, main.api);
             p.ShowDialog();
             main.Repopulate();
+        }
 
+        private void SearchArtistsTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            main.SearchArtist(SearchArtistsTextBox.Text);
+            if (SearchArtistsTextBox.Text.Length < 1)
+                ClearArtistSearchButton.Enabled = false;
+            else
+                ClearArtistSearchButton.Enabled = true;
+        }
+
+        private void SearchGenresTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            main.SearchGenre(SearchGenresTextBox.Text);
+            if (SearchGenresTextBox.Text.Length < 1)
+                ClearGenreSearchButton.Enabled = false;
+            else
+                ClearGenreSearchButton.Enabled = true;
+        }
+
+        private void ClearArtistSearchButton_Click(object sender, EventArgs e)
+        {
+            main.SearchArtist("");
+            SearchArtistsTextBox.Text = "";
+            ClearArtistSearchButton.Enabled = false;
+        }
+
+        private void ClearGenreSearchButton_Click(object sender, EventArgs e)
+        {
+            main.SearchGenre("");
+            SearchGenresTextBox.Text = "";
+            ClearGenreSearchButton.Enabled = false;
         }
     }
 }

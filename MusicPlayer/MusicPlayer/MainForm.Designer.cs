@@ -1,4 +1,6 @@
-﻿namespace MusicPlayer
+﻿using System;
+
+namespace MusicPlayer
 {
     partial class MainForm
     {
@@ -48,10 +50,22 @@
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.overviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PlayNextSongButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoopSongButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShuffleSongButton = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.makeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchGenresToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchGenresTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.ClearGenreSearchButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchArtistToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchArtistsTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.ClearArtistSearchButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.CurrentSongLabel = new System.Windows.Forms.Label();
             this.SeperatorLabel = new System.Windows.Forms.Label();
@@ -241,7 +255,9 @@
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.playlistToolStripMenuItem});
+            this.playbackToolStripMenuItem,
+            this.playlistToolStripMenuItem,
+            this.searchToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 24);
@@ -292,34 +308,131 @@
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
             // 
+            // playbackToolStripMenuItem
+            // 
+            this.playbackToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PlayNextSongButton,
+            this.LoopSongButton,
+            this.ShuffleSongButton});
+            this.playbackToolStripMenuItem.Name = "playbackToolStripMenuItem";
+            this.playbackToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.playbackToolStripMenuItem.Text = "Playback";
+            // 
+            // PlayNextSongButton
+            // 
+            this.PlayNextSongButton.Checked = true;
+            this.PlayNextSongButton.CheckOnClick = true;
+            this.PlayNextSongButton.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.PlayNextSongButton.Name = "PlayNextSongButton";
+            this.PlayNextSongButton.Size = new System.Drawing.Size(152, 22);
+            this.PlayNextSongButton.Text = "Play Next";
+            // 
+            // LoopSongButton
+            // 
+            this.LoopSongButton.Checked = true;
+            this.LoopSongButton.CheckOnClick = true;
+            this.LoopSongButton.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.LoopSongButton.Name = "LoopSongButton";
+            this.LoopSongButton.Size = new System.Drawing.Size(152, 22);
+            this.LoopSongButton.Text = "Loop";
+            // 
+            // ShuffleSongButton
+            // 
+            this.ShuffleSongButton.CheckOnClick = true;
+            this.ShuffleSongButton.Enabled = false;
+            this.ShuffleSongButton.Name = "ShuffleSongButton";
+            this.ShuffleSongButton.Size = new System.Drawing.Size(152, 22);
+            this.ShuffleSongButton.Text = "Shuffle";
+            // 
             // playlistToolStripMenuItem
             // 
             this.playlistToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.makeToolStripMenuItem,
+            this.toolStripSeparator3,
             this.saveToolStripMenuItem1,
-            this.loadToolStripMenuItem,
-            this.makeToolStripMenuItem});
+            this.loadToolStripMenuItem});
             this.playlistToolStripMenuItem.Name = "playlistToolStripMenuItem";
             this.playlistToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.playlistToolStripMenuItem.Text = "Playlist";
             // 
+            // makeToolStripMenuItem
+            // 
+            this.makeToolStripMenuItem.Name = "makeToolStripMenuItem";
+            this.makeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.makeToolStripMenuItem.Text = "Create / Edit";
+            this.makeToolStripMenuItem.Click += new System.EventHandler(this.makeToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(136, 6);
+            // 
             // saveToolStripMenuItem1
             // 
             this.saveToolStripMenuItem1.Name = "saveToolStripMenuItem1";
-            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.saveToolStripMenuItem1.Text = "Save";
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.loadToolStripMenuItem.Text = "Load";
             // 
-            // makeToolStripMenuItem
+            // searchToolStripMenuItem
             // 
-            this.makeToolStripMenuItem.Name = "makeToolStripMenuItem";
-            this.makeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.makeToolStripMenuItem.Text = "Create / Edit";
-            this.makeToolStripMenuItem.Click += new System.EventHandler(this.makeToolStripMenuItem_Click);
+            this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchGenresToolStripLabel,
+            this.SearchArtistToolStripLabel});
+            this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.searchToolStripMenuItem.Text = "Search";
+            // 
+            // SearchGenresToolStripLabel
+            // 
+            this.SearchGenresToolStripLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchGenresTextBox,
+            this.ClearGenreSearchButton});
+            this.SearchGenresToolStripLabel.Name = "SearchGenresToolStripLabel";
+            this.SearchGenresToolStripLabel.Size = new System.Drawing.Size(110, 22);
+            this.SearchGenresToolStripLabel.Text = "Genres";
+            // 
+            // SearchGenresTextBox
+            // 
+            this.SearchGenresTextBox.Name = "SearchGenresTextBox";
+            this.SearchGenresTextBox.Size = new System.Drawing.Size(100, 23);
+            this.SearchGenresTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchGenresTextBox_KeyUp);
+            // 
+            // ClearGenreSearchButton
+            // 
+            this.ClearGenreSearchButton.Enabled = false;
+            this.ClearGenreSearchButton.Name = "ClearGenreSearchButton";
+            this.ClearGenreSearchButton.Size = new System.Drawing.Size(160, 22);
+            this.ClearGenreSearchButton.Text = "Clear Search";
+            this.ClearGenreSearchButton.Click += new System.EventHandler(this.ClearGenreSearchButton_Click);
+            // 
+            // SearchArtistToolStripLabel
+            // 
+            this.SearchArtistToolStripLabel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchArtistsTextBox,
+            this.ClearArtistSearchButton});
+            this.SearchArtistToolStripLabel.Name = "SearchArtistToolStripLabel";
+            this.SearchArtistToolStripLabel.Size = new System.Drawing.Size(110, 22);
+            this.SearchArtistToolStripLabel.Text = "Artists";
+            // 
+            // SearchArtistsTextBox
+            // 
+            this.SearchArtistsTextBox.Name = "SearchArtistsTextBox";
+            this.SearchArtistsTextBox.Size = new System.Drawing.Size(100, 23);
+            this.SearchArtistsTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SearchArtistsTextBox_KeyUp);
+            // 
+            // ClearArtistSearchButton
+            // 
+            this.ClearArtistSearchButton.Enabled = false;
+            this.ClearArtistSearchButton.Name = "ClearArtistSearchButton";
+            this.ClearArtistSearchButton.Size = new System.Drawing.Size(160, 22);
+            this.ClearArtistSearchButton.Text = "Clear Search";
+            this.ClearArtistSearchButton.Click += new System.EventHandler(this.ClearArtistSearchButton_Click);
             // 
             // ControlsPanel
             // 
@@ -584,6 +697,18 @@
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPlayingSongLabel;
         private System.Windows.Forms.SplitContainer SplitContainer;
         private System.Windows.Forms.ToolStripMenuItem makeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SearchArtistToolStripLabel;
+        private System.Windows.Forms.ToolStripTextBox SearchArtistsTextBox;
+        private System.Windows.Forms.ToolStripMenuItem SearchGenresToolStripLabel;
+        private System.Windows.Forms.ToolStripTextBox SearchGenresTextBox;
+        private System.Windows.Forms.ToolStripMenuItem ClearArtistSearchButton;
+        private System.Windows.Forms.ToolStripMenuItem ClearGenreSearchButton;
+        private System.Windows.Forms.ToolStripMenuItem playbackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ShuffleSongButton;
+        private System.Windows.Forms.ToolStripMenuItem LoopSongButton;
+        private System.Windows.Forms.ToolStripMenuItem PlayNextSongButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 
