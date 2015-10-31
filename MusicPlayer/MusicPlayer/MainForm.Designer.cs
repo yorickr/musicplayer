@@ -324,7 +324,7 @@ namespace MusicPlayer
             this.PlayNextSongButton.CheckOnClick = true;
             this.PlayNextSongButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.PlayNextSongButton.Name = "PlayNextSongButton";
-            this.PlayNextSongButton.Size = new System.Drawing.Size(152, 22);
+            this.PlayNextSongButton.Size = new System.Drawing.Size(123, 22);
             this.PlayNextSongButton.Text = "Play Next";
             // 
             // LoopSongButton
@@ -333,7 +333,7 @@ namespace MusicPlayer
             this.LoopSongButton.CheckOnClick = true;
             this.LoopSongButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.LoopSongButton.Name = "LoopSongButton";
-            this.LoopSongButton.Size = new System.Drawing.Size(152, 22);
+            this.LoopSongButton.Size = new System.Drawing.Size(123, 22);
             this.LoopSongButton.Text = "Loop";
             // 
             // ShuffleSongButton
@@ -341,7 +341,7 @@ namespace MusicPlayer
             this.ShuffleSongButton.CheckOnClick = true;
             this.ShuffleSongButton.Enabled = false;
             this.ShuffleSongButton.Name = "ShuffleSongButton";
-            this.ShuffleSongButton.Size = new System.Drawing.Size(152, 22);
+            this.ShuffleSongButton.Size = new System.Drawing.Size(123, 22);
             this.ShuffleSongButton.Text = "Shuffle";
             // 
             // playlistToolStripMenuItem
@@ -500,6 +500,7 @@ namespace MusicPlayer
             this.PositionTrackBar.Size = new System.Drawing.Size(778, 45);
             this.PositionTrackBar.TabIndex = 7;
             this.PositionTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.PositionTrackBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PositionTrackBar_MouseDown);
             // 
             // BufferLabel
             // 
