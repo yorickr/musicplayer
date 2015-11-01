@@ -191,18 +191,25 @@ namespace MusicPlayer
             }
             else
             {
-                NextButton.Enabled = true;
-                NotifyMenuStripNextButton.Enabled = true;
-
-                if (ShuffleSongButton.Checked)
+                if (main.audio.CurrentSong is RadioStation)
                 {
-                    PreviousButton.Enabled = false;
-                    NotifyMenuStripPreviousButton.Enabled = false;
+                    main.currentPlayingList.Clear();
                 }
                 else
                 {
-                    PreviousButton.Enabled = true;
-                    NotifyMenuStripPreviousButton.Enabled = true;
+                    NextButton.Enabled = true;
+                    NotifyMenuStripNextButton.Enabled = true;
+
+                    if (ShuffleSongButton.Checked)
+                    {
+                        PreviousButton.Enabled = false;
+                        NotifyMenuStripPreviousButton.Enabled = false;
+                    }
+                    else
+                    {
+                        PreviousButton.Enabled = true;
+                        NotifyMenuStripPreviousButton.Enabled = true;
+                    }
                 }
             }
 
