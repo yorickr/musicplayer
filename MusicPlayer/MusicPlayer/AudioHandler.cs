@@ -187,7 +187,7 @@ namespace MusicPlayer
         private void PlayAudio()
         {
             AState = AudioState.WAITING;
-            while (ms.Length < 65536 * 10 && BState != BufferState.DONE)
+            while (ms.Length < 32768 * 5 && BState != BufferState.DONE)
                 Thread.Sleep(1000);
             AState = AudioState.PLAYING;
 
@@ -217,8 +217,12 @@ namespace MusicPlayer
             LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
-                byte[] buffer = new byte[65536]; // 64KB chunks
-                //byte[] buffer = new byte[65536*4]; // 256KB chunks
+                byte[] buffer;
+                if (CurrentSong is RadioStation)
+                   buffer  = new byte[32768]; // 32KB chunks
+                else
+                   buffer = new byte[65536]; // 32KB chunks
+
                 int read;
                 BState = BufferState.BUFFERING;
                 AState = AudioState.WAITING;
