@@ -547,6 +547,11 @@ namespace MusicPlayer
             main.audio.Play(new RadioStation("3FM", main.api, "http://icecast.omroep.nl:80/3fm-bb-mp3"));
         }
 
+        private void slamFMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("Slam-FM", main.api, "http://vip-icecast.538.lw.triple-it.nl/SLAMFM_MP3"));
+        }
+
         private void SetRadioStationButton_Click(object sender, EventArgs e)
         {
             string input = RadioStationTextBox.Text;
@@ -558,7 +563,5 @@ namespace MusicPlayer
 
             RadioStationTextBox.Text = "";
         }
-
-        
     }
 }

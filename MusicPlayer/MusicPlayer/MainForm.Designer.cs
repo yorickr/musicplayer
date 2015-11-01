@@ -31,7 +31,7 @@ namespace MusicPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
@@ -59,12 +59,6 @@ namespace MusicPlayer
             this.ShuffleSongButton = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.radioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.qDanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.RadioStationTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.SetRadioStationButton = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchGenresToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchGenresTextBox = new System.Windows.Forms.ToolStripTextBox();
@@ -75,6 +69,14 @@ namespace MusicPlayer
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectServerJancoButton = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectServerYorickButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.radioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qDanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.customToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RadioStationTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.SetRadioStationButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
@@ -99,8 +101,7 @@ namespace MusicPlayer
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripNextButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPreviousButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.fMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.slamFMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -120,14 +121,14 @@ namespace MusicPlayer
             this.SongsTableView.AllowUserToResizeRows = false;
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongsTableView.Location = new System.Drawing.Point(0, 0);
@@ -402,53 +403,6 @@ namespace MusicPlayer
             this.makeToolStripMenuItem.Text = "Create / Edit";
             this.makeToolStripMenuItem.Click += new System.EventHandler(this.makeToolStripMenuItem_Click);
             // 
-            // radioToolStripMenuItem
-            // 
-            this.radioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem2,
-            this.fMToolStripMenuItem,
-            this.qDanceToolStripMenuItem,
-            this.toolStripSeparator5,
-            this.customToolStripMenuItem});
-            this.radioToolStripMenuItem.Name = "radioToolStripMenuItem";
-            this.radioToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.radioToolStripMenuItem.Text = "Radio";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem2.Text = "538";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
-            // qDanceToolStripMenuItem
-            // 
-            this.qDanceToolStripMenuItem.Name = "qDanceToolStripMenuItem";
-            this.qDanceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.qDanceToolStripMenuItem.Text = "Q-Dance";
-            this.qDanceToolStripMenuItem.Click += new System.EventHandler(this.qDanceToolStripMenuItem_Click);
-            // 
-            // customToolStripMenuItem
-            // 
-            this.customToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.RadioStationTextBox,
-            this.SetRadioStationButton});
-            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
-            this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.customToolStripMenuItem.Text = "Custom";
-            // 
-            // RadioStationTextBox
-            // 
-            this.RadioStationTextBox.Name = "RadioStationTextBox";
-            this.RadioStationTextBox.Size = new System.Drawing.Size(100, 23);
-            // 
-            // SetRadioStationButton
-            // 
-            this.SetRadioStationButton.Name = "SetRadioStationButton";
-            this.SetRadioStationButton.Size = new System.Drawing.Size(160, 22);
-            this.SetRadioStationButton.Text = "Set";
-            this.SetRadioStationButton.Click += new System.EventHandler(this.SetRadioStationButton_Click);
-            // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -526,6 +480,66 @@ namespace MusicPlayer
             this.SelectServerYorickButton.Size = new System.Drawing.Size(148, 22);
             this.SelectServerYorickButton.Text = "imegumii.nl";
             this.SelectServerYorickButton.Click += new System.EventHandler(this.SelectServerYorickButton_Click);
+            // 
+            // radioToolStripMenuItem
+            // 
+            this.radioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem2,
+            this.fMToolStripMenuItem,
+            this.slamFMToolStripMenuItem,
+            this.qDanceToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.customToolStripMenuItem});
+            this.radioToolStripMenuItem.Name = "radioToolStripMenuItem";
+            this.radioToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.radioToolStripMenuItem.Text = "Radio";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem2.Text = "538";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // fMToolStripMenuItem
+            // 
+            this.fMToolStripMenuItem.Name = "fMToolStripMenuItem";
+            this.fMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fMToolStripMenuItem.Text = "3FM";
+            this.fMToolStripMenuItem.Click += new System.EventHandler(this.fMToolStripMenuItem_Click);
+            // 
+            // qDanceToolStripMenuItem
+            // 
+            this.qDanceToolStripMenuItem.Name = "qDanceToolStripMenuItem";
+            this.qDanceToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.qDanceToolStripMenuItem.Text = "Q-Dance";
+            this.qDanceToolStripMenuItem.Click += new System.EventHandler(this.qDanceToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            // 
+            // customToolStripMenuItem
+            // 
+            this.customToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RadioStationTextBox,
+            this.SetRadioStationButton});
+            this.customToolStripMenuItem.Name = "customToolStripMenuItem";
+            this.customToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customToolStripMenuItem.Text = "Custom";
+            // 
+            // RadioStationTextBox
+            // 
+            this.RadioStationTextBox.Name = "RadioStationTextBox";
+            this.RadioStationTextBox.Size = new System.Drawing.Size(100, 23);
+            // 
+            // SetRadioStationButton
+            // 
+            this.SetRadioStationButton.Name = "SetRadioStationButton";
+            this.SetRadioStationButton.Size = new System.Drawing.Size(160, 22);
+            this.SetRadioStationButton.Text = "Set";
+            this.SetRadioStationButton.Click += new System.EventHandler(this.SetRadioStationButton_Click);
             // 
             // ControlsPanel
             // 
@@ -749,17 +763,12 @@ namespace MusicPlayer
             this.NotifyMenuStripPreviousButton.Text = "Previous";
             this.NotifyMenuStripPreviousButton.Click += new System.EventHandler(this.NotifyMenuStripPreviousButton_Click);
             // 
-            // toolStripSeparator5
+            // slamFMToolStripMenuItem
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
-            // 
-            // fMToolStripMenuItem
-            // 
-            this.fMToolStripMenuItem.Name = "fMToolStripMenuItem";
-            this.fMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fMToolStripMenuItem.Text = "3FM";
-            this.fMToolStripMenuItem.Click += new System.EventHandler(this.fMToolStripMenuItem_Click);
+            this.slamFMToolStripMenuItem.Name = "slamFMToolStripMenuItem";
+            this.slamFMToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.slamFMToolStripMenuItem.Text = "Slam-FM";
+            this.slamFMToolStripMenuItem.Click += new System.EventHandler(this.slamFMToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -864,6 +873,7 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem SetRadioStationButton;
         private System.Windows.Forms.ToolStripMenuItem fMToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem slamFMToolStripMenuItem;
     }
 }
 
