@@ -14,7 +14,7 @@ namespace MusicPlayer
     public class NetworkHandler
     {
         private int port = 8585;
-        private string ip;
+        public string ip { get; set; }
  
         public NetworkHandler(string ip)
         {

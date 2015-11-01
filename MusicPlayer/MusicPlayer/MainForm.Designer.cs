@@ -40,10 +40,10 @@ namespace MusicPlayer
             this.MainPanel = new System.Windows.Forms.Panel();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.PlaylistBox = new System.Windows.Forms.ListBox();
-            this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.AlbumListLabel = new System.Windows.Forms.Label();
             this.ArtistListLabel = new System.Windows.Forms.Label();
             this.GenreListLabel = new System.Windows.Forms.Label();
+            this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,6 +66,9 @@ namespace MusicPlayer
             this.SearchArtistToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchArtistsTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.ClearArtistSearchButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectServerJancoButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectServerYorickButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
@@ -129,6 +132,9 @@ namespace MusicPlayer
             this.SongsTableView.Size = new System.Drawing.Size(760, 174);
             this.SongsTableView.TabIndex = 0;
             this.SongsTableView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SongsTableView_CellDoubleClick);
+            this.SongsTableView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SongsTableView_MouseDown);
+            this.SongsTableView.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SongsTableView_MouseMove);
+            this.SongsTableView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SongsTableView_MouseUp);
             // 
             // GenreListBox
             // 
@@ -136,7 +142,7 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GenreListBox.BackColor = System.Drawing.SystemColors.Control;
             this.GenreListBox.FormattingEnabled = true;
-            this.GenreListBox.Location = new System.Drawing.Point(3, 3);
+            this.GenreListBox.Location = new System.Drawing.Point(0, 0);
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(150, 121);
             this.GenreListBox.Sorted = true;
@@ -149,10 +155,10 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumListView.BackColor = System.Drawing.SystemColors.Control;
-            this.AlbumListView.Location = new System.Drawing.Point(309, 3);
+            this.AlbumListView.Location = new System.Drawing.Point(312, 0);
             this.AlbumListView.MultiSelect = false;
             this.AlbumListView.Name = "AlbumListView";
-            this.AlbumListView.Size = new System.Drawing.Size(451, 121);
+            this.AlbumListView.Size = new System.Drawing.Size(448, 121);
             this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
             this.AlbumListView.TileSize = new System.Drawing.Size(140, 30);
@@ -166,7 +172,7 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ArtistListBox.BackColor = System.Drawing.SystemColors.Control;
             this.ArtistListBox.FormattingEnabled = true;
-            this.ArtistListBox.Location = new System.Drawing.Point(156, 3);
+            this.ArtistListBox.Location = new System.Drawing.Point(156, 0);
             this.ArtistListBox.Name = "ArtistListBox";
             this.ArtistListBox.Size = new System.Drawing.Size(150, 121);
             this.ArtistListBox.Sorted = true;
@@ -180,10 +186,10 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.BackColor = System.Drawing.SystemColors.Window;
             this.MainPanel.Controls.Add(this.SplitContainer);
-            this.MainPanel.Controls.Add(this.PlaylistListLabel);
             this.MainPanel.Controls.Add(this.AlbumListLabel);
             this.MainPanel.Controls.Add(this.ArtistListLabel);
             this.MainPanel.Controls.Add(this.GenreListLabel);
+            this.MainPanel.Controls.Add(this.PlaylistListLabel);
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(784, 351);
@@ -215,6 +221,7 @@ namespace MusicPlayer
             // 
             // PlaylistBox
             // 
+            this.PlaylistBox.BackColor = System.Drawing.SystemColors.Control;
             this.PlaylistBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlaylistBox.FormattingEnabled = true;
             this.PlaylistBox.Location = new System.Drawing.Point(0, 0);
@@ -224,20 +231,10 @@ namespace MusicPlayer
             this.PlaylistBox.Visible = false;
             this.PlaylistBox.SelectedIndexChanged += new System.EventHandler(this.PlaylistBox_SelectedIndexChanged);
             // 
-            // PlaylistListLabel
-            // 
-            this.PlaylistListLabel.AutoSize = true;
-            this.PlaylistListLabel.Location = new System.Drawing.Point(12, 8);
-            this.PlaylistListLabel.Name = "PlaylistListLabel";
-            this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
-            this.PlaylistListLabel.TabIndex = 7;
-            this.PlaylistListLabel.Text = "Playlist";
-            this.PlaylistListLabel.Visible = false;
-            // 
             // AlbumListLabel
             // 
             this.AlbumListLabel.AutoSize = true;
-            this.AlbumListLabel.Location = new System.Drawing.Point(321, 9);
+            this.AlbumListLabel.Location = new System.Drawing.Point(321, 8);
             this.AlbumListLabel.Name = "AlbumListLabel";
             this.AlbumListLabel.Size = new System.Drawing.Size(36, 13);
             this.AlbumListLabel.TabIndex = 6;
@@ -246,7 +243,7 @@ namespace MusicPlayer
             // ArtistListLabel
             // 
             this.ArtistListLabel.AutoSize = true;
-            this.ArtistListLabel.Location = new System.Drawing.Point(165, 9);
+            this.ArtistListLabel.Location = new System.Drawing.Point(165, 8);
             this.ArtistListLabel.Name = "ArtistListLabel";
             this.ArtistListLabel.Size = new System.Drawing.Size(30, 13);
             this.ArtistListLabel.TabIndex = 5;
@@ -255,11 +252,21 @@ namespace MusicPlayer
             // GenreListLabel
             // 
             this.GenreListLabel.AutoSize = true;
-            this.GenreListLabel.Location = new System.Drawing.Point(12, 9);
+            this.GenreListLabel.Location = new System.Drawing.Point(9, 8);
             this.GenreListLabel.Name = "GenreListLabel";
             this.GenreListLabel.Size = new System.Drawing.Size(36, 13);
             this.GenreListLabel.TabIndex = 4;
             this.GenreListLabel.Text = "Genre";
+            // 
+            // PlaylistListLabel
+            // 
+            this.PlaylistListLabel.AutoSize = true;
+            this.PlaylistListLabel.Location = new System.Drawing.Point(12, 9);
+            this.PlaylistListLabel.Name = "PlaylistListLabel";
+            this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
+            this.PlaylistListLabel.TabIndex = 7;
+            this.PlaylistListLabel.Text = "Playlist";
+            this.PlaylistListLabel.Visible = false;
             // 
             // MenuStrip
             // 
@@ -269,7 +276,8 @@ namespace MusicPlayer
             this.viewToolStripMenuItem,
             this.playbackToolStripMenuItem,
             this.playlistToolStripMenuItem,
-            this.searchToolStripMenuItem});
+            this.searchToolStripMenuItem,
+            this.serverToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 24);
@@ -439,6 +447,29 @@ namespace MusicPlayer
             this.ClearArtistSearchButton.Size = new System.Drawing.Size(160, 22);
             this.ClearArtistSearchButton.Text = "Clear Search";
             this.ClearArtistSearchButton.Click += new System.EventHandler(this.ClearArtistSearchButton_Click);
+            // 
+            // serverToolStripMenuItem
+            // 
+            this.serverToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SelectServerJancoButton,
+            this.SelectServerYorickButton});
+            this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.serverToolStripMenuItem.Text = "Server";
+            // 
+            // SelectServerJancoButton
+            // 
+            this.SelectServerJancoButton.Name = "SelectServerJancoButton";
+            this.SelectServerJancoButton.Size = new System.Drawing.Size(148, 22);
+            this.SelectServerJancoButton.Text = "jancokock.me";
+            this.SelectServerJancoButton.Click += new System.EventHandler(this.SelectServerJancoButton_Click);
+            // 
+            // SelectServerYorickButton
+            // 
+            this.SelectServerYorickButton.Name = "SelectServerYorickButton";
+            this.SelectServerYorickButton.Size = new System.Drawing.Size(148, 22);
+            this.SelectServerYorickButton.Text = "imegumii.nl";
+            this.SelectServerYorickButton.Click += new System.EventHandler(this.SelectServerYorickButton_Click);
             // 
             // ControlsPanel
             // 
@@ -754,6 +785,9 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPreviousButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem ViewCurrentPlaylistButton;
+        private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SelectServerJancoButton;
+        private System.Windows.Forms.ToolStripMenuItem SelectServerYorickButton;
     }
 }
 

@@ -6,12 +6,10 @@ namespace MusicPlayer
     public class Album
     {
         public string albumnaam { get; set; }
-        public Image cover;
 
-        public Album(string albumnaam, Image c)
+        public Album(string albumnaam)
         {
             this.albumnaam = albumnaam;
-            this.cover = c;
         }
     }
 }

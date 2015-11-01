@@ -19,6 +19,10 @@ namespace MusicPlayer
     public partial class MainForm : Form
     {
         bool songFinished;
+        bool draggedstarted = false;
+        bool draggedcompleted = false;
+        int startx = 0;
+        int starty = 0;
 
         public Main main
         {
@@ -85,7 +89,7 @@ namespace MusicPlayer
             else
                 PositionTrackBar.Enabled = false;
             if (!clicked)
-                PositionTrackBar.Value = main.audio.Position;
+                PositionTrackBar.Value = Math.Max(main.audio.Position, 0);
 
             //Buffer display
             BufferBar.Value = main.audio.Buffered / 10;
@@ -99,7 +103,11 @@ namespace MusicPlayer
             if (main.audio.CurrentSong == null)
                 CurrentSongLabel.Text = "Not playing any songs";
             else
+            {
+                if (main.audio.CurrentSong.Seconds < 1)
+                    PositionTrackBar.Enabled = false;
                 CurrentSongLabel.Text = "Currently playing: " + main.audio.CurrentSong.Name;
+            }
 
             //Buttons and context menu
             if (main.audio.AState == AudioHandler.AudioState.PLAYING)
@@ -117,6 +125,16 @@ namespace MusicPlayer
                 NotifyMenuStripPlayButton.Enabled = true;
                 NotifyMenuStripPlayingSongLabel.Visible = false;
             }
+
+            if (main.nw.ip == "http://jancokock.me")
+                SelectServerJancoButton.Enabled = false;
+            else
+                SelectServerJancoButton.Enabled = true;
+
+            if (main.nw.ip == "http://imegumii.nl")
+                SelectServerYorickButton.Enabled = false;
+            else
+                SelectServerYorickButton.Enabled = true;
 
             if (main.audio.AState == AudioHandler.AudioState.PAUSED)
             {
@@ -440,7 +458,69 @@ namespace MusicPlayer
         {
             main.FilterCurrentPlaying();
             int selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong);
-            SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+            if(main.currentPlayingList.Count >= 1)
+                SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+        }
+
+   
+        private void SongsTableView_MouseDown(object sender, MouseEventArgs e)
+        {
+            draggedstarted = true;
+            draggedcompleted = false;
+            startx = e.X;
+            starty = e.Y;
+        }
+
+        private void SongsTableView_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (draggedcompleted)
+            {
+                Cursor.Current = Cursors.Default;
+                Point point = PlaylistBox.PointToClient(Cursor.Position);
+                int index = PlaylistBox.IndexFromPoint(point);
+                if (index < 0) //nope, niet op een playlist gesleept
+                {
+                    draggedstarted = false;
+                    draggedcompleted = false;
+                    return;
+                }
+                Playlist currentPlaylist = main.pl.GetPlaylistByName(PlaylistBox.Items[index].ToString());
+                SongsTable s = new SongsTable();
+                if (SongsTableView.SelectedRows.Count > 0)
+                {
+                    var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+                    var row = drv.Row as DataRow;
+                    s.ImportRow(row);
+                    currentPlaylist.AddSong((s.Rows[0][5] as Song));
+                    currentPlaylist.WriteToFile();
+                }
+            }
+
+            draggedcompleted = false;
+            draggedstarted = false;
+        }
+
+        private void SongsTableView_MouseMove(object sender, MouseEventArgs e)
+        {
+            int deltax = Math.Abs(startx - e.X);
+            int deltay = Math.Abs(starty - e.Y);
+
+            if ((deltax > 5 || deltay > 5) && draggedstarted && !draggedcompleted)
+            {
+                draggedcompleted = true;
+                playlistsToolStripMenuItem_Click(this, new EventArgs());
+                Cursor.Current = Cursors.Hand;
+            }
+        }
+
+        private void SelectServerJancoButton_Click(object sender, EventArgs e)
+        {
+            main.SwitchServer("http://jancokock.me");
+        }
+
+        private void SelectServerYorickButton_Click(object sender, EventArgs e)
+        {
+            main.SwitchServer("http://imegumii.nl");
         }
     }
 }

@@ -120,7 +120,11 @@ namespace MusicPlayer
 
         private void PlaylistNewButton_Click(object sender, EventArgs e)
         {
-            pl.MakeNewPlaylistByName(PlaylistNewInputfield.Text);
+            string name = PlaylistNewInputfield.Text;
+            PlaylistNewInputfield.Text = "";
+            name = name.Replace('/', '-');
+            name = name.Replace('\\', '-');
+            pl.MakeNewPlaylistByName(name);
             Repopulate(true);
         }
 
@@ -132,6 +136,14 @@ namespace MusicPlayer
         private void FilterTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             SearchAllSongs(FilterTextBox.Text);
+        }
+
+        private void PlaylistNewInputfield_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                PlaylistNewButton_Click(sender, new EventArgs());
+            }
         }
     }
 }
