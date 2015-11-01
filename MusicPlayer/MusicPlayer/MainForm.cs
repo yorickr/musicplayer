@@ -92,7 +92,7 @@ namespace MusicPlayer
                 PositionTrackBar.Value = Math.Max(main.audio.Position, 0);
 
             //Buffer display
-            if(main.audio.Buffered / 10 > BufferBar.Minimum && main.audio.Buffered / 10 < BufferBar.Maximum)
+            if(main.audio.Buffered / 10 >= BufferBar.Minimum && main.audio.Buffered / 10 <= BufferBar.Maximum)
                 BufferBar.Value = main.audio.Buffered / 10;
 
             //Time labels
