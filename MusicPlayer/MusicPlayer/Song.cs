@@ -34,7 +34,7 @@ namespace MusicPlayer
             url = "";
         }
 
-        private string GetURL()
+        protected virtual string GetURL()
         {
             if (url == "")
             {

@@ -92,7 +92,8 @@ namespace MusicPlayer
                 PositionTrackBar.Value = Math.Max(main.audio.Position, 0);
 
             //Buffer display
-            BufferBar.Value = main.audio.Buffered / 10;
+            if(main.audio.Buffered / 10 > BufferBar.Minimum && main.audio.Buffered / 10 < BufferBar.Maximum)
+                BufferBar.Value = main.audio.Buffered / 10;
 
             //Time labels
             if (!clicked)
@@ -521,6 +522,16 @@ namespace MusicPlayer
         private void SelectServerYorickButton_Click(object sender, EventArgs e)
         {
             main.SwitchServer("http://imegumii.nl");
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("538", main.api, "http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3"));
+        }
+
+        private void qDanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("538", main.api, "            http://stream01.platform02.true.nl:8000/qdance-hard"));
         }
     }
 }
