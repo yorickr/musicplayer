@@ -167,6 +167,11 @@ namespace MusicPlayer
                 NotifyMenuStripStopButton.Enabled = true;
             }
 
+            if (RadioStationTextBox.Text.Length <= 10)
+                SetRadioStationButton.Enabled = false;
+            else
+                SetRadioStationButton.Enabled = true;
+
             if(PlayNextSongButton.Checked)
             {
                 ShuffleSongButton.Enabled = true;
@@ -203,15 +208,18 @@ namespace MusicPlayer
 
             if (songFinished)
             {
-                Thread.Sleep(20);
+                if (! (main.audio.CurrentSong is RadioStation) )
+                {
+                    Thread.Sleep(20);
 
-                if (PlayNextSongButton.Checked)
-                {
-                    NextButton_Click(this, new EventArgs());
-                }
-                else if (LoopSongButton.Checked)
-                {
-                    main.audio.Play(main.audio.CurrentSong);
+                    if (PlayNextSongButton.Checked)
+                    {
+                        NextButton_Click(this, new EventArgs());
+                    }
+                    else if (LoopSongButton.Checked)
+                    {
+                        main.audio.Play(main.audio.CurrentSong);
+                    }
                 }
 
                 songFinished = false;
@@ -531,7 +539,26 @@ namespace MusicPlayer
 
         private void qDanceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            main.audio.Play(new RadioStation("538", main.api, "            http://stream01.platform02.true.nl:8000/qdance-hard"));
+            main.audio.Play(new RadioStation("Q-Dance", main.api, "http://stream01.platform02.true.nl:8000/qdance-hard"));
         }
+
+        private void fMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("Q-Dance", main.api, "http://icecast.omroep.nl/3fm-bb-aac"));
+        }
+
+        private void SetRadioStationButton_Click(object sender, EventArgs e)
+        {
+            string input = RadioStationTextBox.Text;
+
+            if(Main.CheckURLValid(input))
+            {
+                main.audio.Play(new RadioStation(Main.GetDomain(input), main.api, input));       
+            }
+
+            RadioStationTextBox.Text = "";
+        }
+
+        
     }
 }
