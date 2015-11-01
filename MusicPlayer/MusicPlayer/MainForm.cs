@@ -19,7 +19,10 @@ namespace MusicPlayer
     public partial class MainForm : Form
     {
         bool songFinished;
-        bool draggedstarted;
+        bool draggedstarted = false;
+        bool draggedcompleted = false;
+        int startx = 0;
+        int starty = 0;
 
         public Main main
         {
@@ -441,19 +444,22 @@ namespace MusicPlayer
         {
             main.FilterCurrentPlaying();
             int selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong);
-            SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
+            if(main.currentPlayingList.Count >= 1)
+                SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
         }
 
    
         private void SongsTableView_MouseDown(object sender, MouseEventArgs e)
         {
             draggedstarted = true;
-            Cursor.Current = Cursors.Hand;
+            draggedcompleted = false;
+            startx = e.X;
+            starty = e.Y;
         }
 
         private void SongsTableView_MouseUp(object sender, MouseEventArgs e)
         {
-            if (draggedstarted)
+            if (draggedcompleted)
             {
                 Cursor.Current = Cursors.Default;
                 Point point = PlaylistBox.PointToClient(Cursor.Position);
@@ -461,6 +467,7 @@ namespace MusicPlayer
                 if (index < 0) //nope, niet op een playlist gesleept
                 {
                     draggedstarted = false;
+                    draggedcompleted = false;
                     return;
                 }
                 Playlist currentPlaylist = main.pl.GetPlaylistByName(PlaylistBox.Items[index].ToString());
@@ -474,12 +481,20 @@ namespace MusicPlayer
                     currentPlaylist.WriteToFile();
                 }
             }
+
+            draggedcompleted = false;
+            draggedstarted = false;
         }
 
         private void SongsTableView_MouseMove(object sender, MouseEventArgs e)
         {
-            if (draggedstarted)
+            int deltax = Math.Abs(startx - e.X);
+            int deltay = Math.Abs(starty - e.Y);
+
+            if ((deltax > 5 || deltay > 5) && draggedstarted)
             {
+                draggedcompleted = true;
+                playlistsToolStripMenuItem_Click(this, new EventArgs());
                 Cursor.Current = Cursors.Hand;
             }
         }

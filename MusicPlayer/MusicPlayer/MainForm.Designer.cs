@@ -31,7 +31,7 @@ namespace MusicPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
@@ -109,14 +109,14 @@ namespace MusicPlayer
             this.SongsTableView.AllowUserToResizeRows = false;
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongsTableView.Location = new System.Drawing.Point(0, 0);
@@ -139,7 +139,7 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.GenreListBox.BackColor = System.Drawing.SystemColors.Control;
             this.GenreListBox.FormattingEnabled = true;
-            this.GenreListBox.Location = new System.Drawing.Point(148, 3);
+            this.GenreListBox.Location = new System.Drawing.Point(0, 0);
             this.GenreListBox.Name = "GenreListBox";
             this.GenreListBox.Size = new System.Drawing.Size(150, 121);
             this.GenreListBox.Sorted = true;
@@ -152,10 +152,10 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.AlbumListView.BackColor = System.Drawing.SystemColors.Control;
-            this.AlbumListView.Location = new System.Drawing.Point(460, 3);
+            this.AlbumListView.Location = new System.Drawing.Point(312, 0);
             this.AlbumListView.MultiSelect = false;
             this.AlbumListView.Name = "AlbumListView";
-            this.AlbumListView.Size = new System.Drawing.Size(286, 121);
+            this.AlbumListView.Size = new System.Drawing.Size(448, 121);
             this.AlbumListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.AlbumListView.TabIndex = 2;
             this.AlbumListView.TileSize = new System.Drawing.Size(140, 30);
@@ -169,7 +169,7 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ArtistListBox.BackColor = System.Drawing.SystemColors.Control;
             this.ArtistListBox.FormattingEnabled = true;
-            this.ArtistListBox.Location = new System.Drawing.Point(304, 3);
+            this.ArtistListBox.Location = new System.Drawing.Point(156, 0);
             this.ArtistListBox.Name = "ArtistListBox";
             this.ArtistListBox.Size = new System.Drawing.Size(150, 121);
             this.ArtistListBox.Sorted = true;
@@ -183,10 +183,10 @@ namespace MusicPlayer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainPanel.BackColor = System.Drawing.SystemColors.Window;
             this.MainPanel.Controls.Add(this.SplitContainer);
-            this.MainPanel.Controls.Add(this.PlaylistListLabel);
             this.MainPanel.Controls.Add(this.AlbumListLabel);
             this.MainPanel.Controls.Add(this.ArtistListLabel);
             this.MainPanel.Controls.Add(this.GenreListLabel);
+            this.MainPanel.Controls.Add(this.PlaylistListLabel);
             this.MainPanel.Location = new System.Drawing.Point(0, 24);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(784, 351);
@@ -203,10 +203,10 @@ namespace MusicPlayer
             // 
             // SplitContainer.Panel1
             // 
-            this.SplitContainer.Panel1.Controls.Add(this.PlaylistBox);
             this.SplitContainer.Panel1.Controls.Add(this.AlbumListView);
             this.SplitContainer.Panel1.Controls.Add(this.ArtistListBox);
             this.SplitContainer.Panel1.Controls.Add(this.GenreListBox);
+            this.SplitContainer.Panel1.Controls.Add(this.PlaylistBox);
             // 
             // SplitContainer.Panel2
             // 
@@ -218,13 +218,14 @@ namespace MusicPlayer
             // 
             // PlaylistBox
             // 
-            this.PlaylistBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.PlaylistBox.BackColor = System.Drawing.SystemColors.Control;
+            this.PlaylistBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PlaylistBox.FormattingEnabled = true;
-            this.PlaylistBox.Location = new System.Drawing.Point(3, 3);
+            this.PlaylistBox.Location = new System.Drawing.Point(0, 0);
             this.PlaylistBox.Name = "PlaylistBox";
-            this.PlaylistBox.Size = new System.Drawing.Size(139, 121);
+            this.PlaylistBox.Size = new System.Drawing.Size(760, 131);
             this.PlaylistBox.TabIndex = 4;
+            this.PlaylistBox.Visible = false;
             this.PlaylistBox.SelectedIndexChanged += new System.EventHandler(this.PlaylistBox_SelectedIndexChanged);
             // 
             // PlaylistListLabel
@@ -235,11 +236,12 @@ namespace MusicPlayer
             this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
             this.PlaylistListLabel.TabIndex = 7;
             this.PlaylistListLabel.Text = "Playlist";
+            this.PlaylistListLabel.Visible = false;
             // 
             // AlbumListLabel
             // 
             this.AlbumListLabel.AutoSize = true;
-            this.AlbumListLabel.Location = new System.Drawing.Point(483, 8);
+            this.AlbumListLabel.Location = new System.Drawing.Point(321, 8);
             this.AlbumListLabel.Name = "AlbumListLabel";
             this.AlbumListLabel.Size = new System.Drawing.Size(36, 13);
             this.AlbumListLabel.TabIndex = 6;
@@ -248,7 +250,7 @@ namespace MusicPlayer
             // ArtistListLabel
             // 
             this.ArtistListLabel.AutoSize = true;
-            this.ArtistListLabel.Location = new System.Drawing.Point(327, 8);
+            this.ArtistListLabel.Location = new System.Drawing.Point(165, 8);
             this.ArtistListLabel.Name = "ArtistListLabel";
             this.ArtistListLabel.Size = new System.Drawing.Size(30, 13);
             this.ArtistListLabel.TabIndex = 5;
@@ -257,7 +259,7 @@ namespace MusicPlayer
             // GenreListLabel
             // 
             this.GenreListLabel.AutoSize = true;
-            this.GenreListLabel.Location = new System.Drawing.Point(174, 8);
+            this.GenreListLabel.Location = new System.Drawing.Point(9, 8);
             this.GenreListLabel.Name = "GenreListLabel";
             this.GenreListLabel.Size = new System.Drawing.Size(36, 13);
             this.GenreListLabel.TabIndex = 4;
