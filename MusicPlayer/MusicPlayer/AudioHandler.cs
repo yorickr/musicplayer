@@ -121,6 +121,7 @@ namespace MusicPlayer
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 AState = AudioState.STOPPED;
                 main.form.SongFinished();
                 return;
@@ -135,7 +136,10 @@ namespace MusicPlayer
                     waveOut.Init(blockAlignedStream);
                     waveOut.Play();
 
-                    Length = CurrentSong.Seconds * waveOut.OutputWaveFormat.AverageBytesPerSecond;
+                    if (CurrentSong.Seconds == 0)
+                        Length = ms.Length / waveOut.OutputWaveFormat.AverageBytesPerSecond;
+                    else
+                        Length = CurrentSong.Seconds * waveOut.OutputWaveFormat.AverageBytesPerSecond;
                     CurrentTime = (int)(ms.Position / waveOut.OutputWaveFormat.AverageBytesPerSecond);
 
                     while (waveOut.PlaybackState != PlaybackState.Stopped)
@@ -175,7 +179,7 @@ namespace MusicPlayer
 
                     }
 
-                    if(AState == AudioState.PLAYING)
+                    if(AState == AudioState.PLAYING && !firstrun)
                         main.form.SongFinished();
                     AState = AudioState.STOPPED;
                     playpos = 0;
@@ -206,6 +210,7 @@ namespace MusicPlayer
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 BState = BufferState.EMPTY;
                 AState = AudioState.STOPPED;
                 main.form.SongFinished();
