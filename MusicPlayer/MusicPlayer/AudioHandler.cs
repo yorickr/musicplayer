@@ -17,7 +17,13 @@ namespace MusicPlayer
         public AudioState AState { get; set; }
         public BufferState BState { get; set; }
 
-        public int Buffered { get { return Math.Min((int)((bufpos / (double)LengthBuffer) * 1000), 1000); } }
+        public int Buffered { get
+                {
+                    if(CurrentSong is RadioStation)
+                        return Math.Min((int)((bufpos - ms.Position) / 1000), 1000);
+                    else
+                        return Math.Min((int)((bufpos / (double)LengthBuffer) * 1000), 1000);
+                } }
         private long LengthBuffer { get; set; }
         private long bufpos = 0;
 
@@ -33,7 +39,7 @@ namespace MusicPlayer
 
         private long seek = 0;
 
-        private Stream ms;
+        private MemoryStream ms;
 
         private Thread network;
         private Thread audio;
@@ -168,10 +174,17 @@ namespace MusicPlayer
                         }
                         if (BState == BufferState.DONE && firstrun )
                         {
-                            position = mp3fr.Position;
-                            mp3fr.Close();
-                            StreamFromMP3(ms,position, false);
-                            break;
+                            if( ! (CurrentSong is RadioStation))
+                            {
+                                position = mp3fr.Position;
+                                mp3fr.Close();
+                                StreamFromMP3(ms, position, false);
+                                break;
+                            }
+                            else
+                            {
+                                AState = AudioState.STOPPED;
+                            }
                         }
 
                         playpos = blockAlignedStream.Position;
@@ -241,7 +254,6 @@ namespace MusicPlayer
                     ms.Position = ms.Length;
                     ms.Write(buffer, 0, read);
                     ms.Position = pos;
-
 
                     this.bufpos = ms.Length;
                 }
