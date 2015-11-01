@@ -103,7 +103,11 @@ namespace MusicPlayer
             if (main.audio.CurrentSong == null)
                 CurrentSongLabel.Text = "Not playing any songs";
             else
+            {
+                if (main.audio.CurrentSong.Seconds < 1)
+                    PositionTrackBar.Enabled = false;
                 CurrentSongLabel.Text = "Currently playing: " + main.audio.CurrentSong.Name;
+            }
 
             //Buttons and context menu
             if (main.audio.AState == AudioHandler.AudioState.PLAYING)
@@ -121,6 +125,16 @@ namespace MusicPlayer
                 NotifyMenuStripPlayButton.Enabled = true;
                 NotifyMenuStripPlayingSongLabel.Visible = false;
             }
+
+            if (main.nw.ip == "http://jancokock.me")
+                SelectServerJancoButton.Enabled = false;
+            else
+                SelectServerJancoButton.Enabled = true;
+
+            if (main.nw.ip == "http://imegumii.nl")
+                SelectServerYorickButton.Enabled = false;
+            else
+                SelectServerYorickButton.Enabled = true;
 
             if (main.audio.AState == AudioHandler.AudioState.PAUSED)
             {
@@ -491,12 +505,22 @@ namespace MusicPlayer
             int deltax = Math.Abs(startx - e.X);
             int deltay = Math.Abs(starty - e.Y);
 
-            if ((deltax > 5 || deltay > 5) && draggedstarted)
+            if ((deltax > 5 || deltay > 5) && draggedstarted && !draggedcompleted)
             {
                 draggedcompleted = true;
                 playlistsToolStripMenuItem_Click(this, new EventArgs());
                 Cursor.Current = Cursors.Hand;
             }
+        }
+
+        private void SelectServerJancoButton_Click(object sender, EventArgs e)
+        {
+            main.SwitchServer("http://jancokock.me");
+        }
+
+        private void SelectServerYorickButton_Click(object sender, EventArgs e)
+        {
+            main.SwitchServer("http://imegumii.nl");
         }
     }
 }

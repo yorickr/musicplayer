@@ -31,7 +31,7 @@ namespace MusicPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
@@ -40,10 +40,10 @@ namespace MusicPlayer
             this.MainPanel = new System.Windows.Forms.Panel();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.PlaylistBox = new System.Windows.Forms.ListBox();
-            this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.AlbumListLabel = new System.Windows.Forms.Label();
             this.ArtistListLabel = new System.Windows.Forms.Label();
             this.GenreListLabel = new System.Windows.Forms.Label();
+            this.PlaylistListLabel = new System.Windows.Forms.Label();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -66,6 +66,9 @@ namespace MusicPlayer
             this.SearchArtistToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchArtistsTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.ClearArtistSearchButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectServerJancoButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectServerYorickButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
@@ -109,14 +112,14 @@ namespace MusicPlayer
             this.SongsTableView.AllowUserToResizeRows = false;
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongsTableView.Location = new System.Drawing.Point(0, 0);
@@ -228,16 +231,6 @@ namespace MusicPlayer
             this.PlaylistBox.Visible = false;
             this.PlaylistBox.SelectedIndexChanged += new System.EventHandler(this.PlaylistBox_SelectedIndexChanged);
             // 
-            // PlaylistListLabel
-            // 
-            this.PlaylistListLabel.AutoSize = true;
-            this.PlaylistListLabel.Location = new System.Drawing.Point(12, 9);
-            this.PlaylistListLabel.Name = "PlaylistListLabel";
-            this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
-            this.PlaylistListLabel.TabIndex = 7;
-            this.PlaylistListLabel.Text = "Playlist";
-            this.PlaylistListLabel.Visible = false;
-            // 
             // AlbumListLabel
             // 
             this.AlbumListLabel.AutoSize = true;
@@ -265,6 +258,16 @@ namespace MusicPlayer
             this.GenreListLabel.TabIndex = 4;
             this.GenreListLabel.Text = "Genre";
             // 
+            // PlaylistListLabel
+            // 
+            this.PlaylistListLabel.AutoSize = true;
+            this.PlaylistListLabel.Location = new System.Drawing.Point(12, 9);
+            this.PlaylistListLabel.Name = "PlaylistListLabel";
+            this.PlaylistListLabel.Size = new System.Drawing.Size(39, 13);
+            this.PlaylistListLabel.TabIndex = 7;
+            this.PlaylistListLabel.Text = "Playlist";
+            this.PlaylistListLabel.Visible = false;
+            // 
             // MenuStrip
             // 
             this.MenuStrip.BackColor = System.Drawing.SystemColors.WindowFrame;
@@ -273,7 +276,8 @@ namespace MusicPlayer
             this.viewToolStripMenuItem,
             this.playbackToolStripMenuItem,
             this.playlistToolStripMenuItem,
-            this.searchToolStripMenuItem});
+            this.searchToolStripMenuItem,
+            this.serverToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
             this.MenuStrip.Size = new System.Drawing.Size(784, 24);
@@ -443,6 +447,29 @@ namespace MusicPlayer
             this.ClearArtistSearchButton.Size = new System.Drawing.Size(160, 22);
             this.ClearArtistSearchButton.Text = "Clear Search";
             this.ClearArtistSearchButton.Click += new System.EventHandler(this.ClearArtistSearchButton_Click);
+            // 
+            // serverToolStripMenuItem
+            // 
+            this.serverToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SelectServerJancoButton,
+            this.SelectServerYorickButton});
+            this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
+            this.serverToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
+            this.serverToolStripMenuItem.Text = "Server";
+            // 
+            // SelectServerJancoButton
+            // 
+            this.SelectServerJancoButton.Name = "SelectServerJancoButton";
+            this.SelectServerJancoButton.Size = new System.Drawing.Size(148, 22);
+            this.SelectServerJancoButton.Text = "jancokock.me";
+            this.SelectServerJancoButton.Click += new System.EventHandler(this.SelectServerJancoButton_Click);
+            // 
+            // SelectServerYorickButton
+            // 
+            this.SelectServerYorickButton.Name = "SelectServerYorickButton";
+            this.SelectServerYorickButton.Size = new System.Drawing.Size(148, 22);
+            this.SelectServerYorickButton.Text = "imegumii.nl";
+            this.SelectServerYorickButton.Click += new System.EventHandler(this.SelectServerYorickButton_Click);
             // 
             // ControlsPanel
             // 
@@ -758,6 +785,9 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPreviousButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem ViewCurrentPlaylistButton;
+        private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SelectServerJancoButton;
+        private System.Windows.Forms.ToolStripMenuItem SelectServerYorickButton;
     }
 }
 

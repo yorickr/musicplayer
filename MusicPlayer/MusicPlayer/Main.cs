@@ -44,6 +44,27 @@ namespace MusicPlayer
             Populate();
         }
 
+        public void SwitchServer(string server)
+        {
+            Clear();
+            nw.ip = server;
+            Populate();
+        }
+
+        private void Clear()
+        {
+            form.GenreListBox.Items.Clear();
+            form.ArtistListBox.Items.Clear();
+            form.AlbumListView.Items.Clear();
+            form.PlaylistBox.Items.Clear();
+            table.Clear();
+
+            genres = new List<string>();
+            artists = new List<string>();
+
+            currentPlayingList = new List<Song>();
+        }
+
         private void Populate()
         {
             this.api.GetAlbums().ForEach(a => { form.AlbumListView.Items.Add(a.albumnaam);});
