@@ -109,6 +109,7 @@ namespace MusicPlayer
             this.PlaylistNewInputfield.Name = "PlaylistNewInputfield";
             this.PlaylistNewInputfield.Size = new System.Drawing.Size(225, 20);
             this.PlaylistNewInputfield.TabIndex = 5;
+            this.PlaylistNewInputfield.KeyUp += new System.Windows.Forms.KeyEventHandler(this.PlaylistNewInputfield_KeyUp);
             // 
             // label1
             // 
