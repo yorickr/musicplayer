@@ -544,7 +544,7 @@ namespace MusicPlayer
 
         private void fMToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            main.audio.Play(new RadioStation("3FM", main.api, "http://icecast.omroep.nl/3fm-bb-mp3"));
+            main.audio.Play(new RadioStation("3FM", main.api, "http://icecast.omroep.nl:80/3fm-bb-mp3"));
         }
 
         private void SetRadioStationButton_Click(object sender, EventArgs e)
