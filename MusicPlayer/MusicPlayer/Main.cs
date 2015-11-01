@@ -214,6 +214,18 @@ namespace MusicPlayer
 
             return str;
         }
+
+        public static bool CheckURLValid(string source)
+        {
+            Uri uriResult;
+            return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttp;
+        }
+
+        public static string GetDomain(string url)
+        {
+            Uri uri = new Uri(url);
+            return uri.Host;
+        }
     }
 
 }
