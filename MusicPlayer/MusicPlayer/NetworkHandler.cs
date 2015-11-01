@@ -50,7 +50,7 @@ namespace MusicPlayer
         {
             try
             {
-                WebRequest req = WebRequest.Create((ip + "/music/artwork/"+album).Replace(" ", "%20"));
+                WebRequest req = WebRequest.Create((ip + "/music/.artwork/"+album).Replace(" ", "%20"));
                 WebResponse response = req.GetResponse();
                 Stream stream = response.GetResponseStream();
 
