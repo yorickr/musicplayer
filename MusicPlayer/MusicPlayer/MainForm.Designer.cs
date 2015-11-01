@@ -52,7 +52,7 @@ namespace MusicPlayer
             this.overviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.ViewCurrentPlaylistButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.ViewQueueButton = new System.Windows.Forms.ToolStripMenuItem();
             this.playbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlayNextSongButton = new System.Windows.Forms.ToolStripMenuItem();
             this.LoopSongButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -321,7 +321,7 @@ namespace MusicPlayer
             this.overviewToolStripMenuItem,
             this.playlistsToolStripMenuItem,
             this.toolStripSeparator4,
-            this.ViewCurrentPlaylistButton});
+            this.ViewQueueButton});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -329,28 +329,28 @@ namespace MusicPlayer
             // overviewToolStripMenuItem
             // 
             this.overviewToolStripMenuItem.Name = "overviewToolStripMenuItem";
-            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.overviewToolStripMenuItem.Text = "Overview";
             this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewToolStripMenuItem_Click);
             // 
             // playlistsToolStripMenuItem
             // 
             this.playlistsToolStripMenuItem.Name = "playlistsToolStripMenuItem";
-            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(151, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
-            // ViewCurrentPlaylistButton
+            // ViewQueueButton
             // 
-            this.ViewCurrentPlaylistButton.Name = "ViewCurrentPlaylistButton";
-            this.ViewCurrentPlaylistButton.Size = new System.Drawing.Size(154, 22);
-            this.ViewCurrentPlaylistButton.Text = "Current Playlist";
-            this.ViewCurrentPlaylistButton.Click += new System.EventHandler(this.ViewCurrentPlaylistButton_Click);
+            this.ViewQueueButton.Name = "ViewQueueButton";
+            this.ViewQueueButton.Size = new System.Drawing.Size(152, 22);
+            this.ViewQueueButton.Text = "Queue";
+            this.ViewQueueButton.Click += new System.EventHandler(this.ViewCurrentPlaylistButton_Click);
             // 
             // playbackToolStripMenuItem
             // 
@@ -861,7 +861,7 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripNextButton;
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuStripPreviousButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripMenuItem ViewCurrentPlaylistButton;
+        private System.Windows.Forms.ToolStripMenuItem ViewQueueButton;
         private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SelectServerJancoButton;
         private System.Windows.Forms.ToolStripMenuItem SelectServerYorickButton;
