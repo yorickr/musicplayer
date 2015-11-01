@@ -121,6 +121,11 @@ namespace MusicPlayer
             {
                 table.Add(s);
             });
+
+            form.GenreListBox.ClearSelected();
+            form.ArtistListBox.ClearSelected();
+            form.PlaylistBox.ClearSelected();
+            form.AlbumListView.SelectedIndices.Clear();
         }
 
         public void SearchArtist(string search)

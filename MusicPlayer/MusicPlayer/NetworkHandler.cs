@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web;
 using System.Net;
 using System.IO;
+using Microsoft.Security.Application;
 using Newtonsoft.Json.Linq;
 
 
@@ -22,7 +23,9 @@ namespace MusicPlayer
 
         public JObject SendString(string m)
         {
-            HttpWebRequest server =   (HttpWebRequest)WebRequest.Create(ip+":"+port+"/"+m);
+            string encodedstring = Microsoft.Security.Application.Encoder.HtmlEncode(m);
+            Console.WriteLine(encodedstring);
+            HttpWebRequest server =   (HttpWebRequest)WebRequest.Create(ip+":"+port+"/"+encodedstring);
             server.KeepAlive = false;
             HttpWebResponse respond = (HttpWebResponse)server.GetResponse();
             Stream streamResponse = respond.GetResponseStream();
