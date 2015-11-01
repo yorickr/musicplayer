@@ -77,15 +77,27 @@ namespace MusicPlayer
             {
                 BackgroundWorker b = o as BackgroundWorker;
                 ImageList imagelist = new ImageList();
-                foreach (ListViewItem item in form.AlbumListView.Items)
+                List<string> templist = new List<string>();
+                Action action = () =>
                 {
-                    imagelist.Images.Add(item.ToString(), api.getAlbumCover(item.Text));
+                    foreach (ListViewItem item in form.AlbumListView.Items)
+                    {
+                        templist.Add(item.Text);
+                        Console.WriteLine(item.Text);
+                    }
+                    };
+                form.Invoke(action);
+
+                foreach (string item in templist)
+                {
+                    imagelist.Images.Add(item, api.getAlbumCover(item));
                 }
-                Action action = () => {
+
+                action = () => {
                     form.AlbumListView.LargeImageList = imagelist;
                     foreach (ListViewItem item in form.AlbumListView.Items)
                     {
-                        item.ImageKey = item.ToString(); 
+                        item.ImageKey = item.Text; 
                     }
                 };
                 form.Invoke(action);
