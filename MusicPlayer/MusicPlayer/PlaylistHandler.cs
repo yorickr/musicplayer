@@ -20,6 +20,8 @@ namespace MusicPlayer
 
         public void Populate()
         {
+            playlists.Clear();
+
             try {
                 Directory.GetFiles(basedir).ToList().ForEach(f =>
                 {
@@ -62,6 +64,21 @@ namespace MusicPlayer
                     currentPlaylists.Add(pl);
             }
             return currentPlaylists;
+        }
+
+        internal void RemovePlaylistByName(string name)
+        {
+            Playlist toRemove = null;
+            playlists.ForEach(p =>
+            {
+                if (p.name == name) { toRemove = p; }
+            });
+
+            if(toRemove != null)
+            {
+                toRemove.Delete();
+                playlists.Remove(toRemove);
+            }
         }
     }
 }

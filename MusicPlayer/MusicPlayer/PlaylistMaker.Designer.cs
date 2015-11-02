@@ -43,6 +43,8 @@ namespace MusicPlayer
             this.label4 = new System.Windows.Forms.Label();
             this.FilterTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.DeletePlaylistButton = new System.Windows.Forms.Button();
+            this.DeleteSongsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlaylistSelectBox
@@ -87,6 +89,7 @@ namespace MusicPlayer
             this.PlaylistSongContainer.FormattingEnabled = true;
             this.PlaylistSongContainer.Location = new System.Drawing.Point(10, 319);
             this.PlaylistSongContainer.Name = "PlaylistSongContainer";
+            this.PlaylistSongContainer.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.PlaylistSongContainer.Size = new System.Drawing.Size(306, 82);
             this.PlaylistSongContainer.TabIndex = 3;
             // 
@@ -123,7 +126,7 @@ namespace MusicPlayer
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 80);
+            this.label2.Location = new System.Drawing.Point(8, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 13);
             this.label2.TabIndex = 7;
@@ -133,7 +136,7 @@ namespace MusicPlayer
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 303);
+            this.label3.Location = new System.Drawing.Point(11, 297);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 13);
             this.label3.TabIndex = 8;
@@ -165,11 +168,35 @@ namespace MusicPlayer
             this.label5.TabIndex = 11;
             this.label5.Text = "Filter";
             // 
+            // DeletePlaylistButton
+            // 
+            this.DeletePlaylistButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeletePlaylistButton.Location = new System.Drawing.Point(225, 70);
+            this.DeletePlaylistButton.Name = "DeletePlaylistButton";
+            this.DeletePlaylistButton.Size = new System.Drawing.Size(92, 23);
+            this.DeletePlaylistButton.TabIndex = 12;
+            this.DeletePlaylistButton.Text = "Delete  Playlist";
+            this.DeletePlaylistButton.UseVisualStyleBackColor = true;
+            this.DeletePlaylistButton.Click += new System.EventHandler(this.DeletePlaylistButton_Click);
+            // 
+            // DeleteSongsButton
+            // 
+            this.DeleteSongsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DeleteSongsButton.Location = new System.Drawing.Point(172, 292);
+            this.DeleteSongsButton.Name = "DeleteSongsButton";
+            this.DeleteSongsButton.Size = new System.Drawing.Size(143, 23);
+            this.DeleteSongsButton.TabIndex = 13;
+            this.DeleteSongsButton.Text = "Delete Selected Songs";
+            this.DeleteSongsButton.UseVisualStyleBackColor = true;
+            this.DeleteSongsButton.Click += new System.EventHandler(this.DeleteSongsButton_Click);
+            // 
             // PlaylistMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 411);
+            this.Controls.Add(this.DeleteSongsButton);
+            this.Controls.Add(this.DeletePlaylistButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.FilterTextBox);
             this.Controls.Add(this.label4);
@@ -206,5 +233,7 @@ namespace MusicPlayer
         private Label label4;
         private TextBox FilterTextBox;
         private Label label5;
+        private Button DeletePlaylistButton;
+        private Button DeleteSongsButton;
     }
 }
