@@ -29,6 +29,8 @@ namespace MusicPlayer
             this.api = api;
             this.form = form;
             form.main = this;
+            pl.main = this;
+            pl.Populate();
             this.pl = pl;
 
             audio = new AudioHandler(this);

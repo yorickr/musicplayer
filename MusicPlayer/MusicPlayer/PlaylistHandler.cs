@@ -8,23 +8,24 @@ namespace MusicPlayer
     public class PlaylistHandler
     {
         private List<Playlist> playlists;
-        private APIHandler api;
+        public Main main
+        {
+            get; set;
+        }
         private readonly string basedir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\.mpplaylists\\";
-        public PlaylistHandler(APIHandler api)
+        public PlaylistHandler()
         {
             this.playlists = new List<Playlist>();
-            this.api = api;
-            Populate();
         }
 
-        private void Populate()
+        public void Populate()
         {
             try {
                 Directory.GetFiles(basedir).ToList().ForEach(f =>
                 {
                     if (f.EndsWith(".txt"))
                     {
-                        playlists.Add(new Playlist(Path.GetFileName(f.Replace(".txt","")) ,basedir, api));
+                        playlists.Add(new Playlist(Path.GetFileName(f.Replace(".txt","")) ,basedir, main.nw.ip, main.api));
                     }
                 });
             }
@@ -39,7 +40,7 @@ namespace MusicPlayer
 
         public void MakeNewPlaylistByName(string name)
         {
-            playlists.Add(new Playlist(name, basedir, api));
+            playlists.Add(new Playlist(name, basedir, main.nw.ip, main.api));
         }
 
         public Playlist GetPlaylistByName(string name)
@@ -54,7 +55,13 @@ namespace MusicPlayer
 
         public List<Playlist> GetPlaylists()
         {
-            return playlists;
+            List<Playlist> currentPlaylists = new List<Playlist>();
+            foreach(Playlist pl in playlists)
+            {
+                if (pl.server == main.nw.ip)
+                    currentPlaylists.Add(pl);
+            }
+            return currentPlaylists;
         }
     }
 }

@@ -9,14 +9,16 @@ namespace MusicPlayer
         public string name { get; }
         private string basedir;
         public List<Song> songs;
+        public string server;
 
         private APIHandler api;
-        public Playlist(string name, string basedir, APIHandler api)
+        public Playlist(string name, string basedir, string server, APIHandler api)
         {
             this.songs = new List<Song>();
             this.name = name;
             this.api = api;
             this.basedir = basedir;
+            this.server = server;
             this.ReadFromFile();
         }
 
@@ -35,6 +37,8 @@ namespace MusicPlayer
             try {
                 using (StreamReader str = new StreamReader(basedir + name + ".txt"))
                 {
+                    server = str.ReadLine();
+
                     string readline;
                     while ((readline = str.ReadLine()) != null)
                     {
@@ -48,6 +52,7 @@ namespace MusicPlayer
             {
                 FileStream fs = new FileStream(basedir + name + ".txt", FileMode.CreateNew);
                 fs.Close();
+                File.WriteAllText(basedir + name + ".txt", server);
                 ReadFromFile();
             }
             
@@ -57,6 +62,8 @@ namespace MusicPlayer
         {
             using (StreamWriter stw = new StreamWriter(basedir + name + ".txt"))
             {
+                stw.WriteLine(server.ToString());
+
                 this.songs.ForEach(s =>
                 {
                     stw.WriteLine(s.ToString());
