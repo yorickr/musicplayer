@@ -128,7 +128,7 @@ namespace MusicPlayer
             catch(Exception e)
             {
                 AState = AudioState.STOPPED;
-                main.form.SongFinished();
+                //main.form.SongFinished();
                 return;
             }
             
@@ -141,7 +141,7 @@ namespace MusicPlayer
                     waveOut.Init(blockAlignedStream);
                     waveOut.Play();
 
-                    if (CurrentSong.Seconds == 0)
+                    if (CurrentSong == null || CurrentSong.Seconds == 0)
                         Length = ms.Length / waveOut.OutputWaveFormat.AverageBytesPerSecond;
                     else
                         Length = CurrentSong.Seconds * waveOut.OutputWaveFormat.AverageBytesPerSecond;

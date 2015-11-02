@@ -24,8 +24,11 @@ namespace MusicPlayer
         {
             // Q artist genre album
             JObject o = nw.SendString($"search?q={search}&album={album}&genre={genre}&artist={artist}");
-            Console.WriteLine(o.PropertyValues().ToString());
-            if (o["result"].ToString() == "OK") { return o; }
+            if (o != null)
+            {
+                Console.WriteLine(o.PropertyValues().ToString());
+                if (o["result"].ToString() == "OK") { return o; }
+            }
             return null;
 
         }
