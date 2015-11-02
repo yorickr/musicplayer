@@ -590,5 +590,10 @@ namespace MusicPlayer
             AdvancedSearch av = new AdvancedSearch(main);
             av.ShowDialog();
         }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.Repopulate();
+        }
     }
 }
