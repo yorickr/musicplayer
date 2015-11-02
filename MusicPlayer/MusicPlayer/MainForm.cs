@@ -486,7 +486,7 @@ namespace MusicPlayer
         {
             main.FilterCurrentPlaying();
             int selected = main.currentPlayingList.IndexOf(main.audio.CurrentSong);
-            if(main.currentPlayingList.Count >= 1)
+            if(main.currentPlayingList.Count >= 1 && selected >= 0)
                 SongsTableView.CurrentCell = SongsTableView.Rows[selected].Cells[0];
         }
 
@@ -505,23 +505,43 @@ namespace MusicPlayer
             {
                 Cursor.Current = Cursors.Default;
                 Point point = PlaylistBox.PointToClient(Cursor.Position);
+                Point point2 = AddToQueueLabel.PointToClient(Cursor.Position);
+                bool queue = AddToQueueLabel.ClientRectangle.Contains(point2);
                 int index = PlaylistBox.IndexFromPoint(point);
-                if (index < 0) //nope, niet op een playlist gesleept
+                if (index < 0 && !queue) //nope, niet op een playlist gesleept
                 {
                     draggedstarted = false;
                     draggedcompleted = false;
                     return;
                 }
-                Playlist currentPlaylist = main.pl.GetPlaylistByName(PlaylistBox.Items[index].ToString());
-                SongsTable s = new SongsTable();
-                if (SongsTableView.SelectedRows.Count > 0)
+
+                if (queue)
                 {
-                    var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
-                    var row = drv.Row as DataRow;
-                    s.ImportRow(row);
-                    currentPlaylist.AddSong((s.Rows[0][5] as Song));
-                    currentPlaylist.WriteToFile();
+                    SongsTable s = new SongsTable();
+                    if (SongsTableView.SelectedRows.Count > 0)
+                    {
+                        var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+                        var row = drv.Row as DataRow;
+                        s.ImportRow(row);
+                        main.currentPlayingList.Add((s.Rows[0][5] as Song));
+                        ViewCurrentPlaylistButton_Click(this, new EventArgs());
+                    }
                 }
+                else
+                {
+                    Playlist currentPlaylist = main.pl.GetPlaylistByName(PlaylistBox.Items[index].ToString());
+                    SongsTable s = new SongsTable();
+                    if (SongsTableView.SelectedRows.Count > 0)
+                    {
+                        var drv = SongsTableView.SelectedRows[0].DataBoundItem as DataRowView;
+                        var row = drv.Row as DataRow;
+                        s.ImportRow(row);
+                        currentPlaylist.AddSong((s.Rows[0][5] as Song));
+                        currentPlaylist.WriteToFile();
+                    }
+                }
+
+                AddToQueueLabel.Visible = false;
             }
 
             draggedcompleted = false;
@@ -537,6 +557,7 @@ namespace MusicPlayer
             {
                 draggedcompleted = true;
                 playlistsToolStripMenuItem_Click(this, new EventArgs());
+                AddToQueueLabel.Visible = true;
                 Cursor.Current = Cursors.Hand;
             }
         }
