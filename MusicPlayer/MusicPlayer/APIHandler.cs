@@ -114,7 +114,7 @@ namespace MusicPlayer
         {
             List<Album> albumlist = new List<Album>();
 
-            JObject o = nw.SendString("getalbums?id=hallo");
+            JObject o = nw.SendString("getalbums?");
             if (o["result"].ToString() == "OK")
             {
                 for (int i = 0; i < o["albums"].Count(); i++)
@@ -129,7 +129,7 @@ namespace MusicPlayer
         public List<Year> GetYears()
         {
             List<Year> yearlist = new List<Year> ();
-            JObject o = nw.SendString("getyears?id=hallo");
+            JObject o = nw.SendString("getyears?");
             if (o["result"].ToString() == "OK")
             {
                 for (int i = 0; i < o["years"].Count(); i++)
@@ -143,7 +143,7 @@ namespace MusicPlayer
         public List<Genre> GetGenres()
         {
             List<Genre> genreslist = new List<Genre>();
-            JObject o = nw.SendString("getgenres?id=hallo");
+            JObject o = nw.SendString("getgenres?");
             if (o["result"].ToString() == "OK")
             {
                 for (int i = 0; i < o["genres"].Count(); i++)
