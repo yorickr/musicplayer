@@ -421,8 +421,10 @@ namespace MusicPlayer
 
         private void PositionTrackBar_MouseDown(object sender, MouseEventArgs e)
         {
+            clicked = true;
             double dblValue;
-            dblValue = ((double)(e.X+PositionTrackBar.Location.X) / (double)(PositionTrackBar.Width + PositionTrackBar.Location.X)) * (PositionTrackBar.Maximum - PositionTrackBar.Minimum);
+            //dblValue = ((double)(e.X+PositionTrackBar.Location.X) / (double)(PositionTrackBar.Width + PositionTrackBar.Location.X)) * (PositionTrackBar.Maximum - PositionTrackBar.Minimum);
+            dblValue = ((double)e.X / (double)PositionTrackBar.Width) * (PositionTrackBar.Maximum - PositionTrackBar.Minimum);
             PositionTrackBar.Value = Convert.ToInt32(dblValue);
         }
 
