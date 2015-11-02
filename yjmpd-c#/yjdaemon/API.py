@@ -2,6 +2,7 @@ import json
 
 from yjdaemon.Database import Database as db
 import configparser
+import string
 """
 Add a key to the validAPIcalls dictionary, with a corresponding function
 Function should return jsonified data, so that it can then be passed on to the client.
@@ -68,45 +69,35 @@ class calls:
 
     @staticmethod
     def search(args):
-        """search?
-        q(gneeral search term)=iets&
-        artist=bleh
-        &genre=neeee"""
         data = args.split("&")
-        songnames = """
-        SELECT * FROM tracks WHERE LCASE(trackName) LIKE LCASE(\"%{}%\") GROUP BY trackName;
-        """
-        artists = """
-        SELECT artistName FROM tracks WHERE LCASE(artistName) LIKE LCASE(\"%{}%\") GROUP BY artistName;
-        """
-        genres = """
-        SELECT genre FROM tracks WHERE LCASE(genre) LIKE LCASE(\"%{}%\") GROUP BY genre;
-        """
-        albums = """
-        SELECT albumName FROM tracks WHERE LCASE(albumName) LIKE LCASE(\"%{}%\") GROUP BY albumName;
-        """
         genquery="""
-        SELECT * FROM tracks WHERE LCASE(genre) LIKE LCASE(\"%{}%\") OR LCASE(albumName) LIKE LCASE(\"%{}%\") OR LCASE(trackName) LIKE LCASE(\"%{}%\") OR LCASE(artistName) LIKE LCASE(\"%{}%\");
+        SELECT $ident FROM tracks WHERE LCASE(trackName) LIKE LCASE(\"%$trackname%\") $orgenre LCASE(genre) LIKE LCASE(\"%$genre%\") $oralbum LCASE(albumName) LIKE LCASE(\"%$album%\") $orartist LCASE(artistName) LIKE LCASE(\"%$artistname%\") $end;
         """
+        test = string.Template(genquery)
         genqueryres = ""
-        artistsres = ""
-        genresres = ""
-        songnamesres = ""
-        albumsres = ""
+        arguments = []
+        general = ""
         for entry in data:
             values = entry.split("=")
+            values[1] = values[1].replace("%20"," ")
             if values[0] == "q":
-                genqueryres = genquery.format( values[1], values[1], values[1], values[1])
-            elif values[0] == "artist":
-                artistsres = artists.format(values[1])
-            elif values[0] == "genre":
-                genresres = genres.format(values[1])
-            elif values[0] == "songname":
-                songnamesres = songnames.format(values[1])
-            elif values[0] == "album":
-                albumsres = albums.format(values[1])
-        return calls.jsonify({"result":"OK", "genres": db.executequerystatic(genresres), "songnames": db.executequerystatic(songnamesres), "artists": db.executequerystatic(artistsres), "albums": db.executequerystatic(albumsres), "query" : db.executequerystatic(genqueryres)})
-        return calls.jsonify({"result":"OK"})
+                general = values[1]
+                continue
+            if values[1]:
+                arguments.append(values)
+        print(arguments)
+        finalstring = "" + genquery
+        for arg in arguments:
+            if arg[0] == "artist":
+                finalstring = string.Template(finalstring).safe_substitute(artistname=arg[1], orartist="AND")
+            elif arg[0] == "genre":
+                finalstring = string.Template(finalstring).safe_substitute(genre=arg[1],orgenre="AND")
+            elif arg[0] == "album":
+                finalstring = string.Template(finalstring).safe_substitute(album=arg[1],oralbum="AND")
+        print(finalstring)
+        finalstring = string.Template(finalstring).safe_substitute(genre=general,artistname=general,album=general,trackname=general)
+        print(finalstring)
+        return calls.jsonify({"result":"OK", "genres": db.executequerystatic(string.Template(finalstring).safe_substitute(ident="genre", orartist="OR", orgenre="OR", oralbum="OR", end="GROUP BY genre")),"artists": db.executequerystatic(string.Template(finalstring).safe_substitute(ident="artistName", orartist="OR", orgenre="OR", oralbum="OR",end="GROUP BY artistName")), "albums": db.executequerystatic(string.Template(finalstring).safe_substitute(ident="albumName", orartist="OR", orgenre="OR", oralbum="OR",end="GROUP BY albumName")), "songs" : db.executequerystatic(string.Template(finalstring).safe_substitute(ident="*", orartist="OR", orgenre="OR", oralbum="OR",end=""))})
 
     @staticmethod
     def getsongs(args):
