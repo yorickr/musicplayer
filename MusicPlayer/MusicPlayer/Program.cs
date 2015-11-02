@@ -21,7 +21,7 @@ namespace MusicPlayer
             NetworkHandler nw = new NetworkHandler("http://imegumii.nl");
             APIHandler api = new APIHandler(nw);
             MainForm form = new MainForm();
-            PlaylistHandler pl = new PlaylistHandler(api);
+            PlaylistHandler pl = new PlaylistHandler();
             new Main(nw, api, form,pl);
 
             Application.Run(form);

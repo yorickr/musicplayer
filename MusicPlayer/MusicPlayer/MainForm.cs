@@ -92,7 +92,8 @@ namespace MusicPlayer
                 PositionTrackBar.Value = Math.Max(main.audio.Position, 0);
 
             //Buffer display
-            BufferBar.Value = main.audio.Buffered / 10;
+            if(main.audio.Buffered / 10 >= BufferBar.Minimum && main.audio.Buffered / 10 <= BufferBar.Maximum)
+                BufferBar.Value = main.audio.Buffered / 10;
 
             //Time labels
             if (!clicked)
@@ -136,6 +137,11 @@ namespace MusicPlayer
             else
                 SelectServerYorickButton.Enabled = true;
 
+            if (SearchSongsTextBox.Text.Length == 0)
+                SearchSongsButton.Enabled = false;
+            else
+                SearchSongsButton.Enabled = true;
+
             if (main.audio.AState == AudioHandler.AudioState.PAUSED)
             {
                 PauseButton.Enabled = false;
@@ -166,6 +172,11 @@ namespace MusicPlayer
                 NotifyMenuStripStopButton.Enabled = true;
             }
 
+            if (RadioStationTextBox.Text.Length <= 10)
+                SetRadioStationButton.Enabled = false;
+            else
+                SetRadioStationButton.Enabled = true;
+
             if(PlayNextSongButton.Checked)
             {
                 ShuffleSongButton.Enabled = true;
@@ -185,32 +196,42 @@ namespace MusicPlayer
             }
             else
             {
-                NextButton.Enabled = true;
-                NotifyMenuStripNextButton.Enabled = true;
-
-                if (ShuffleSongButton.Checked)
+                if (main.audio.CurrentSong is RadioStation)
                 {
-                    PreviousButton.Enabled = false;
-                    NotifyMenuStripPreviousButton.Enabled = false;
+                    main.currentPlayingList.Clear();
                 }
                 else
                 {
-                    PreviousButton.Enabled = true;
-                    NotifyMenuStripPreviousButton.Enabled = true;
+                    NextButton.Enabled = true;
+                    NotifyMenuStripNextButton.Enabled = true;
+
+                    if (ShuffleSongButton.Checked)
+                    {
+                        PreviousButton.Enabled = false;
+                        NotifyMenuStripPreviousButton.Enabled = false;
+                    }
+                    else
+                    {
+                        PreviousButton.Enabled = true;
+                        NotifyMenuStripPreviousButton.Enabled = true;
+                    }
                 }
             }
 
             if (songFinished)
             {
-                Thread.Sleep(20);
+                if (! (main.audio.CurrentSong is RadioStation) )
+                {
+                    Thread.Sleep(20);
 
-                if (PlayNextSongButton.Checked)
-                {
-                    NextButton_Click(this, new EventArgs());
-                }
-                else if (LoopSongButton.Checked)
-                {
-                    main.audio.Play(main.audio.CurrentSong);
+                    if (PlayNextSongButton.Checked)
+                    {
+                        NextButton_Click(this, new EventArgs());
+                    }
+                    else if (LoopSongButton.Checked)
+                    {
+                        main.audio.Play(main.audio.CurrentSong);
+                    }
                 }
 
                 songFinished = false;
@@ -521,6 +542,47 @@ namespace MusicPlayer
         private void SelectServerYorickButton_Click(object sender, EventArgs e)
         {
             main.SwitchServer("http://imegumii.nl");
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("538", main.api, "http://vip-icecast.538.lw.triple-it.nl:80/RADIO538_MP3"));
+        }
+
+        private void qDanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("Q-Dance", main.api, "http://stream01.platform02.true.nl:8000/qdance-hard"));
+        }
+
+        private void fMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("3FM", main.api, "http://icecast.omroep.nl:80/3fm-bb-mp3"));
+        }
+
+        private void slamFMToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            main.audio.Play(new RadioStation("Slam-FM", main.api, "http://vip-icecast.538.lw.triple-it.nl/SLAMFM_MP3"));
+        }
+
+        private void SetRadioStationButton_Click(object sender, EventArgs e)
+        {
+            string input = RadioStationTextBox.Text;
+
+            if(Main.CheckURLValid(input))
+            {
+                main.audio.Play(new RadioStation(Main.GetDomain(input), main.api, input));       
+            }
+
+            RadioStationTextBox.Text = "";
+        }
+
+        private void SearchSongsButton_Click(object sender, EventArgs e)
+        {
+            if(SearchSongsTextBox.Text.Length > 0)
+            {
+                main.SearchFilter(SearchSongsTextBox.Text);
+                SearchSongsTextBox.Text = "";
+            }
         }
     }
 }

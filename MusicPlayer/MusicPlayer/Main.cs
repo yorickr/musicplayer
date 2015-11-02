@@ -29,6 +29,8 @@ namespace MusicPlayer
             this.api = api;
             this.form = form;
             form.main = this;
+            pl.main = this;
+            pl.Populate();
             this.pl = pl;
 
             audio = new AudioHandler(this);
@@ -77,15 +79,27 @@ namespace MusicPlayer
             {
                 BackgroundWorker b = o as BackgroundWorker;
                 ImageList imagelist = new ImageList();
-                foreach (ListViewItem item in form.AlbumListView.Items)
+                List<string> templist = new List<string>();
+                Action action = () =>
                 {
-                    imagelist.Images.Add(item.ToString(), api.getAlbumCover(item.Text));
+                    foreach (ListViewItem item in form.AlbumListView.Items)
+                    {
+                        templist.Add(item.Text);
+                        Console.WriteLine(item.Text);
+                    }
+                    };
+                form.Invoke(action);
+
+                foreach (string item in templist)
+                {
+                    imagelist.Images.Add(item, api.getAlbumCover(item));
                 }
-                Action action = () => {
+
+                action = () => {
                     form.AlbumListView.LargeImageList = imagelist;
                     foreach (ListViewItem item in form.AlbumListView.Items)
                     {
-                        item.ImageKey = item.ToString(); 
+                        item.ImageKey = item.Text; 
                     }
                 };
                 form.Invoke(action);
@@ -109,6 +123,15 @@ namespace MusicPlayer
         {
             table.Clear();
             api.GetSongsByArtist(artist).ForEach(s =>
+            {
+                table.Add(s);
+            });
+        }
+
+        public void SearchFilter(string search)
+        {
+            table.Clear();
+            api.GetSongsBySearch(search).ForEach(s =>
             {
                 table.Add(s);
             });
@@ -213,6 +236,18 @@ namespace MusicPlayer
             str += seconds.ToString("D2");
 
             return str;
+        }
+
+        public static bool CheckURLValid(string source)
+        {
+            Uri uriResult;
+            return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && uriResult.Scheme == Uri.UriSchemeHttp;
+        }
+
+        public static string GetDomain(string url)
+        {
+            Uri uri = new Uri(url);
+            return uri.Host;
         }
     }
 

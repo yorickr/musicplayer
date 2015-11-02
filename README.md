@@ -1,12 +1,10 @@
 # musicplayer
 
-##Onderdelen
-- Server/Client
-- Threading/Threadpools
-- File IO
-- Socket communicatie
-- Klasse Structuur
-- Forms Applicatie
-- Specifieke C# - Delegates/Lambda...
-
-
+## todo
+- afvangen server niet online
+- server opslaan bij playlist
+- doorzoeken van alle liedjes via API
+- doorzoeken van albums
+- playlist verwijderen
+- liedjes uit playlist verwijderen
+- presentatie
