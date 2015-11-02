@@ -68,6 +68,9 @@ namespace MusicPlayer
             this.SearchArtistToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchArtistsTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.ClearArtistSearchButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.songsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchSongsTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.SearchSongsButton = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectServerJancoButton = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectServerYorickButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,9 +107,8 @@ namespace MusicPlayer
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripNextButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPreviousButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.songsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SearchSongsTextBox = new System.Windows.Forms.ToolStripTextBox();
-            this.SearchSongsButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.AdvancedSearchButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -427,7 +429,9 @@ namespace MusicPlayer
             this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SearchGenresToolStripLabel,
             this.SearchArtistToolStripLabel,
-            this.songsToolStripMenuItem});
+            this.songsToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.AdvancedSearchButton});
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
             this.searchToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.searchToolStripMenuItem.Text = "Search";
@@ -477,6 +481,28 @@ namespace MusicPlayer
             this.ClearArtistSearchButton.Size = new System.Drawing.Size(160, 22);
             this.ClearArtistSearchButton.Text = "Clear Search";
             this.ClearArtistSearchButton.Click += new System.EventHandler(this.ClearArtistSearchButton_Click);
+            // 
+            // songsToolStripMenuItem
+            // 
+            this.songsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchSongsTextBox,
+            this.SearchSongsButton});
+            this.songsToolStripMenuItem.Name = "songsToolStripMenuItem";
+            this.songsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.songsToolStripMenuItem.Text = "Songs";
+            // 
+            // SearchSongsTextBox
+            // 
+            this.SearchSongsTextBox.Name = "SearchSongsTextBox";
+            this.SearchSongsTextBox.Size = new System.Drawing.Size(100, 23);
+            // 
+            // SearchSongsButton
+            // 
+            this.SearchSongsButton.Enabled = false;
+            this.SearchSongsButton.Name = "SearchSongsButton";
+            this.SearchSongsButton.Size = new System.Drawing.Size(160, 22);
+            this.SearchSongsButton.Text = "Search";
+            this.SearchSongsButton.Click += new System.EventHandler(this.SearchSongsButton_Click);
             // 
             // serverToolStripMenuItem
             // 
@@ -790,27 +816,17 @@ namespace MusicPlayer
             this.NotifyMenuStripPreviousButton.Text = "Previous";
             this.NotifyMenuStripPreviousButton.Click += new System.EventHandler(this.NotifyMenuStripPreviousButton_Click);
             // 
-            // songsToolStripMenuItem
+            // AdvancedSearchButton
             // 
-            this.songsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SearchSongsTextBox,
-            this.SearchSongsButton});
-            this.songsToolStripMenuItem.Name = "songsToolStripMenuItem";
-            this.songsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.songsToolStripMenuItem.Text = "Songs";
+            this.AdvancedSearchButton.Name = "AdvancedSearchButton";
+            this.AdvancedSearchButton.Size = new System.Drawing.Size(152, 22);
+            this.AdvancedSearchButton.Text = "Advanced";
+            this.AdvancedSearchButton.Click += new System.EventHandler(this.AdvancedSearchButton_Click);
             // 
-            // SearchSongsTextBox
+            // toolStripSeparator7
             // 
-            this.SearchSongsTextBox.Name = "SearchSongsTextBox";
-            this.SearchSongsTextBox.Size = new System.Drawing.Size(100, 23);
-            // 
-            // SearchSongsButton
-            // 
-            this.SearchSongsButton.Enabled = false;
-            this.SearchSongsButton.Name = "SearchSongsButton";
-            this.SearchSongsButton.Size = new System.Drawing.Size(160, 22);
-            this.SearchSongsButton.Text = "Search";
-            this.SearchSongsButton.Click += new System.EventHandler(this.SearchSongsButton_Click);
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
@@ -921,6 +937,8 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem songsToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox SearchSongsTextBox;
         private System.Windows.Forms.ToolStripMenuItem SearchSongsButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem AdvancedSearchButton;
     }
 }
 

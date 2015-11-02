@@ -584,5 +584,11 @@ namespace MusicPlayer
                 SearchSongsTextBox.Text = "";
             }
         }
+
+        private void AdvancedSearchButton_Click(object sender, EventArgs e)
+        {
+            AdvancedSearch av = new AdvancedSearch(main);
+            av.ShowDialog();
+        }
     }
 }

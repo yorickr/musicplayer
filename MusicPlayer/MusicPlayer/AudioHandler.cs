@@ -61,7 +61,7 @@ namespace MusicPlayer
 
             CurrentSong = null;
 
-            Thread.Sleep(11);
+            Thread.Sleep(10);
 
             ms = new MemoryStream();
 
@@ -127,7 +127,6 @@ namespace MusicPlayer
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.StackTrace);
                 AState = AudioState.STOPPED;
                 main.form.SongFinished();
                 return;
@@ -230,7 +229,6 @@ namespace MusicPlayer
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.StackTrace);
                 BState = BufferState.EMPTY;
                 AState = AudioState.STOPPED;
                 main.form.SongFinished();
@@ -242,7 +240,7 @@ namespace MusicPlayer
             LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
-                byte[] buffer = new byte[65536]; // 32KB chunks
+                byte[] buffer = new byte[65536]; // 64KB chunks
 
                 int read;
                 BState = BufferState.BUFFERING;
