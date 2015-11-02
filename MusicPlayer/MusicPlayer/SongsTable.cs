@@ -12,9 +12,9 @@ namespace MusicPlayer
         public SongsTable() : base()
         {
             this.Columns.Clear();
-            this.Columns.Add("Naam", typeof(string));
+            this.Columns.Add("Name", typeof(string));
             this.Columns.Add("Album", typeof(string));
-            this.Columns.Add("Artiest", typeof(string));
+            this.Columns.Add("Artist", typeof(string));
             this.Columns.Add("Genre", typeof(string));
             this.Columns.Add("Duration", typeof(string));
             this.Columns.Add("song", typeof(Song));
