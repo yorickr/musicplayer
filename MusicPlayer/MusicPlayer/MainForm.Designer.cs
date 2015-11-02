@@ -31,13 +31,14 @@ namespace MusicPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
             this.AlbumListView = new System.Windows.Forms.ListView();
             this.ArtistListBox = new System.Windows.Forms.ListBox();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.AddToQueueLabel = new System.Windows.Forms.Label();
             this.SplitContainer = new System.Windows.Forms.SplitContainer();
             this.PlaylistBox = new System.Windows.Forms.ListBox();
             this.AlbumListLabel = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@ namespace MusicPlayer
             this.SearchSongsButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.AdvancedSearchButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectServerJancoButton = new System.Windows.Forms.ToolStripMenuItem();
             this.SelectServerYorickButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,8 +112,6 @@ namespace MusicPlayer
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripNextButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPreviousButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AddToQueueLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -132,14 +132,14 @@ namespace MusicPlayer
             this.SongsTableView.AllowUserToResizeRows = false;
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongsTableView.Location = new System.Drawing.Point(0, 0);
@@ -215,6 +215,20 @@ namespace MusicPlayer
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(784, 351);
             this.MainPanel.TabIndex = 5;
+            // 
+            // AddToQueueLabel
+            // 
+            this.AddToQueueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddToQueueLabel.AutoSize = true;
+            this.AddToQueueLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.AddToQueueLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AddToQueueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddToQueueLabel.Location = new System.Drawing.Point(668, 4);
+            this.AddToQueueLabel.Name = "AddToQueueLabel";
+            this.AddToQueueLabel.Size = new System.Drawing.Size(104, 18);
+            this.AddToQueueLabel.TabIndex = 10;
+            this.AddToQueueLabel.Text = "Add to Queue";
+            this.AddToQueueLabel.Visible = false;
             // 
             // SplitContainer
             // 
@@ -521,6 +535,13 @@ namespace MusicPlayer
             this.AdvancedSearchButton.Size = new System.Drawing.Size(127, 22);
             this.AdvancedSearchButton.Text = "Advanced";
             this.AdvancedSearchButton.Click += new System.EventHandler(this.AdvancedSearchButton_Click);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
             // 
             // serverToolStripMenuItem
             // 
@@ -844,25 +865,6 @@ namespace MusicPlayer
             this.NotifyMenuStripPreviousButton.Size = new System.Drawing.Size(119, 22);
             this.NotifyMenuStripPreviousButton.Text = "Previous";
             this.NotifyMenuStripPreviousButton.Click += new System.EventHandler(this.NotifyMenuStripPreviousButton_Click);
-            //
-            // resetToolStripMenuItem
-            //
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
-            // AddToQueueLabel
-            // 
-            this.AddToQueueLabel.AutoSize = true;
-            this.AddToQueueLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.AddToQueueLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AddToQueueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddToQueueLabel.Location = new System.Drawing.Point(668, 4);
-            this.AddToQueueLabel.Name = "AddToQueueLabel";
-            this.AddToQueueLabel.Size = new System.Drawing.Size(104, 18);
-            this.AddToQueueLabel.TabIndex = 10;
-            this.AddToQueueLabel.Text = "Add to Queue";
-            this.AddToQueueLabel.Visible = false;
             // 
             // MainForm
             // 
