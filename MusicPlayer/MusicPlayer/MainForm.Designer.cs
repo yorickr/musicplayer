@@ -31,7 +31,7 @@ namespace MusicPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
@@ -86,6 +86,7 @@ namespace MusicPlayer
             this.RadioStationTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.SetRadioStationButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ControlsPanel = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
             this.CurrentSongLabel = new System.Windows.Forms.Label();
@@ -118,6 +119,7 @@ namespace MusicPlayer
             this.SplitContainer.SuspendLayout();
             this.MenuStrip.SuspendLayout();
             this.ControlsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).BeginInit();
             this.NotifyMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -129,14 +131,14 @@ namespace MusicPlayer
             this.SongsTableView.AllowUserToResizeRows = false;
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongsTableView.Location = new System.Drawing.Point(0, 0);
@@ -444,7 +446,7 @@ namespace MusicPlayer
             this.SearchGenresTextBox,
             this.ClearGenreSearchButton});
             this.SearchGenresToolStripLabel.Name = "SearchGenresToolStripLabel";
-            this.SearchGenresToolStripLabel.Size = new System.Drawing.Size(152, 22);
+            this.SearchGenresToolStripLabel.Size = new System.Drawing.Size(127, 22);
             this.SearchGenresToolStripLabel.Text = "Genres";
             // 
             // SearchGenresTextBox
@@ -467,7 +469,7 @@ namespace MusicPlayer
             this.SearchArtistsTextBox,
             this.ClearArtistSearchButton});
             this.SearchArtistToolStripLabel.Name = "SearchArtistToolStripLabel";
-            this.SearchArtistToolStripLabel.Size = new System.Drawing.Size(152, 22);
+            this.SearchArtistToolStripLabel.Size = new System.Drawing.Size(127, 22);
             this.SearchArtistToolStripLabel.Text = "Artists";
             // 
             // SearchArtistsTextBox
@@ -490,7 +492,7 @@ namespace MusicPlayer
             this.SearchSongsTextBox,
             this.SearchSongsButton});
             this.songsToolStripMenuItem.Name = "songsToolStripMenuItem";
-            this.songsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.songsToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.songsToolStripMenuItem.Text = "Songs";
             // 
             // SearchSongsTextBox
@@ -509,12 +511,12 @@ namespace MusicPlayer
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(124, 6);
             // 
             // AdvancedSearchButton
             // 
             this.AdvancedSearchButton.Name = "AdvancedSearchButton";
-            this.AdvancedSearchButton.Size = new System.Drawing.Size(152, 22);
+            this.AdvancedSearchButton.Size = new System.Drawing.Size(127, 22);
             this.AdvancedSearchButton.Text = "Advanced";
             this.AdvancedSearchButton.Click += new System.EventHandler(this.AdvancedSearchButton_Click);
             // 
@@ -611,6 +613,7 @@ namespace MusicPlayer
             // ControlsPanel
             // 
             this.ControlsPanel.BackColor = System.Drawing.SystemColors.GrayText;
+            this.ControlsPanel.Controls.Add(this.pictureBox1);
             this.ControlsPanel.Controls.Add(this.NextButton);
             this.ControlsPanel.Controls.Add(this.PreviousButton);
             this.ControlsPanel.Controls.Add(this.CurrentSongLabel);
@@ -628,9 +631,19 @@ namespace MusicPlayer
             this.ControlsPanel.Size = new System.Drawing.Size(784, 83);
             this.ControlsPanel.TabIndex = 4;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox1.Location = new System.Drawing.Point(5, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(72, 72);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(214, 51);
+            this.NextButton.Location = new System.Drawing.Point(295, 54);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(31, 23);
             this.NextButton.TabIndex = 13;
@@ -640,7 +653,7 @@ namespace MusicPlayer
             // 
             // PreviousButton
             // 
-            this.PreviousButton.Location = new System.Drawing.Point(177, 51);
+            this.PreviousButton.Location = new System.Drawing.Point(258, 54);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(31, 23);
             this.PreviousButton.TabIndex = 12;
@@ -651,7 +664,7 @@ namespace MusicPlayer
             // CurrentSongLabel
             // 
             this.CurrentSongLabel.AutoSize = true;
-            this.CurrentSongLabel.Location = new System.Drawing.Point(256, 56);
+            this.CurrentSongLabel.Location = new System.Drawing.Point(338, 59);
             this.CurrentSongLabel.Name = "CurrentSongLabel";
             this.CurrentSongLabel.Size = new System.Drawing.Size(111, 13);
             this.CurrentSongLabel.TabIndex = 11;
@@ -670,7 +683,7 @@ namespace MusicPlayer
             // LabelCurrentTime
             // 
             this.LabelCurrentTime.AutoSize = true;
-            this.LabelCurrentTime.Location = new System.Drawing.Point(12, 26);
+            this.LabelCurrentTime.Location = new System.Drawing.Point(93, 29);
             this.LabelCurrentTime.Name = "LabelCurrentTime";
             this.LabelCurrentTime.Size = new System.Drawing.Size(49, 13);
             this.LabelCurrentTime.TabIndex = 8;
@@ -681,10 +694,10 @@ namespace MusicPlayer
             this.PositionTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PositionTrackBar.Enabled = false;
-            this.PositionTrackBar.Location = new System.Drawing.Point(3, 3);
+            this.PositionTrackBar.Location = new System.Drawing.Point(83, 3);
             this.PositionTrackBar.Maximum = 1000;
             this.PositionTrackBar.Name = "PositionTrackBar";
-            this.PositionTrackBar.Size = new System.Drawing.Size(778, 45);
+            this.PositionTrackBar.Size = new System.Drawing.Size(698, 45);
             this.PositionTrackBar.TabIndex = 7;
             this.PositionTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.PositionTrackBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PositionTrackBar_MouseDown);
@@ -710,7 +723,7 @@ namespace MusicPlayer
             // StopButton
             // 
             this.StopButton.Enabled = false;
-            this.StopButton.Location = new System.Drawing.Point(122, 51);
+            this.StopButton.Location = new System.Drawing.Point(203, 54);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(49, 23);
             this.StopButton.TabIndex = 2;
@@ -721,7 +734,7 @@ namespace MusicPlayer
             // PauseButton
             // 
             this.PauseButton.Enabled = false;
-            this.PauseButton.Location = new System.Drawing.Point(67, 51);
+            this.PauseButton.Location = new System.Drawing.Point(148, 54);
             this.PauseButton.Name = "PauseButton";
             this.PauseButton.Size = new System.Drawing.Size(49, 23);
             this.PauseButton.TabIndex = 1;
@@ -731,7 +744,7 @@ namespace MusicPlayer
             // 
             // PlayButton
             // 
-            this.PlayButton.Location = new System.Drawing.Point(12, 51);
+            this.PlayButton.Location = new System.Drawing.Point(93, 54);
             this.PlayButton.Name = "PlayButton";
             this.PlayButton.Size = new System.Drawing.Size(49, 23);
             this.PlayButton.TabIndex = 0;
@@ -863,6 +876,7 @@ namespace MusicPlayer
             this.MenuStrip.PerformLayout();
             this.ControlsPanel.ResumeLayout(false);
             this.ControlsPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).EndInit();
             this.NotifyMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -949,6 +963,7 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripMenuItem AdvancedSearchButton;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

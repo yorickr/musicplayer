@@ -96,6 +96,9 @@ namespace MusicPlayer
                 }
 
                 action = () => {
+                    imagelist.ImageSize = new System.Drawing.Size(64,64);
+                    imagelist.ColorDepth = ColorDepth.Depth32Bit;
+                    form.AlbumListView.View = View.LargeIcon;
                     form.AlbumListView.LargeImageList = imagelist;
                     foreach (ListViewItem item in form.AlbumListView.Items)
                     {

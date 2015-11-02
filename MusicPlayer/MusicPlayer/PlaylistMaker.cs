@@ -47,11 +47,16 @@ namespace MusicPlayer
                 PlaylistSelectBox.SelectedIndex = PlaylistSelectBox.Items.Count - 1;
             else
                 PlaylistSelectBox.SelectedIndex = selection;
+            PlaylistSongContainer.Items.Clear();
             if (PlaylistSelectBox.SelectedItem != null)
             {
-                PlaylistSongContainer.Items.Clear();
                 allPlaylistSongs = pl.GetPlaylistByName(PlaylistSelectBox.SelectedItem.ToString()).GetSongs();
                 allPlaylistSongs.ForEach(s => PlaylistSongContainer.Items.Add(s.Name));
+            }
+            else
+            {
+                PlaylistSelectBox.SelectedIndex = -1;
+                PlaylistSelectBox.Text = "";
             }
         }
 
@@ -144,6 +149,39 @@ namespace MusicPlayer
             {
                 PlaylistNewButton_Click(sender, new EventArgs());
             }
+        }
+
+        private void DeletePlaylistButton_Click(object sender, EventArgs e)
+        {
+            if (PlaylistSelectBox.SelectedItem != null)
+                if (MessageBox.Show("Are you sure to delete " + PlaylistSelectBox.SelectedItem.ToString() + "?", "Confirm Delete!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    pl.RemovePlaylistByName(PlaylistSelectBox.SelectedItem.ToString());
+                    Repopulate(true);
+                }
+        }
+
+        private void DeleteSongsButton_Click(object sender, EventArgs e)
+        {
+            if (PlaylistSelectBox.SelectedItem != null)
+            {
+                Playlist currentPlaylist = pl.GetPlaylistByName(PlaylistSelectBox.SelectedItem.ToString());
+                foreach (string song in PlaylistSongSelector.SelectedItems)
+                {
+                    for (int i = currentPlaylist.GetSongs().Count - 1; i > 0; i--)
+                    {
+                        Song s = currentPlaylist.GetSongs()[i];
+                        if (s.Name == song)
+                        {
+                            currentPlaylist.RemoveSong(s);
+                            break;
+                        }
+                    }
+                }
+                currentPlaylist.WriteToFile();
+            }
+            Thread.Sleep(10);
+            Repopulate();
         }
     }
 }

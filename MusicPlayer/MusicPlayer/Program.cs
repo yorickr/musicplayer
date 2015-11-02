@@ -17,7 +17,6 @@ namespace MusicPlayer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-//            NetworkHandler nw = new NetworkHandler("http://jancokock.me");
             NetworkHandler nw = new NetworkHandler("http://imegumii.nl");
             APIHandler api = new APIHandler(nw);
             MainForm form = new MainForm();

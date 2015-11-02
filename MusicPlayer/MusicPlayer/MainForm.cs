@@ -110,8 +110,15 @@ namespace MusicPlayer
                 CurrentSongLabel.Text = "Currently playing: " + main.audio.CurrentSong.Name;
             }
 
-            //Buttons and context menu
-            if (main.audio.AState == AudioHandler.AudioState.PLAYING)
+            //image box
+            if (AlbumListView.LargeImageList != null && main.audio.CurrentSong != null)
+            {
+                //Console.WriteLine(AlbumListView.LargeImageList.Images["Get Wet"]);
+                pictureBox1.Image = AlbumListView.LargeImageList.Images[main.audio.CurrentSong.Album];
+            }
+
+                //Buttons and context menu
+                if (main.audio.AState == AudioHandler.AudioState.PLAYING)
             {
                 PlayButton.Enabled = false;
                 NotifyMenuStripPlayButton.Enabled = false;

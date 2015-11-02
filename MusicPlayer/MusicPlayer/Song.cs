@@ -53,5 +53,29 @@ namespace MusicPlayer
         {
             return $"{this.SongID}|{this.Name}|{this.Album}|{this.Artist}|{this.Genre}|{this.Seconds}";
         }
+
+        public override bool Equals(System.Object obj)
+        {
+            // If parameter is null return false.
+            if (obj == null)
+            {
+                return false;
+            }
+
+            // If parameter cannot be cast to Point return false.
+            Song s = obj as Song;
+            if ((System.Object)s == null)
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return (s.Name == Name) && (s.SongID == SongID);
+        }
+
+        public override int GetHashCode()
+        {
+            return int.Parse(this.SongID);
+        }
     }
 }

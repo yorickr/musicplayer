@@ -71,5 +71,21 @@ namespace MusicPlayer
                 stw.Flush();
             }
         }
+
+        public void Delete()
+        {
+            try {
+                System.IO.File.Move(basedir + name + ".txt", basedir + name + ".txt.old");
+            }
+            catch(Exception)
+            {
+                //Already removed.
+            }
+        }
+
+        internal void RemoveSong(Song s)
+        {
+            this.songs.Remove(s);
+        }
     }
 }
