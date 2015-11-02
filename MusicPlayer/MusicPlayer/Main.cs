@@ -85,7 +85,6 @@ namespace MusicPlayer
                     foreach (ListViewItem item in form.AlbumListView.Items)
                     {
                         templist.Add(item.Text);
-                        Console.WriteLine(item.Text);
                     }
                     };
                 form.Invoke(action);
@@ -135,6 +134,11 @@ namespace MusicPlayer
             {
                 table.Add(s);
             });
+        }
+
+        public void AdvancedSearchFilter(string search, string album, string artist, string genre)
+        {
+            throw new NotImplementedException();
         }
 
         public void FilterCurrentPlaying()

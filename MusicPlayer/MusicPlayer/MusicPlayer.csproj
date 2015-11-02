@@ -77,6 +77,12 @@
     <Compile Include="NetworkHandler.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="PlaylistHandler.cs" />
+    <Compile Include="AdvancedSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedSearch.Designer.cs">
+      <DependentUpon>AdvancedSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlaylistMaker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     <Compile Include="Year.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdvancedSearch.resx">
+      <DependentUpon>AdvancedSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlaylistMaker.resx">
       <DependentUpon>PlaylistMaker.cs</DependentUpon>

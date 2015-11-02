@@ -24,7 +24,6 @@ namespace MusicPlayer
         public JObject SendString(string m)
         {
             string encodedstring = Microsoft.Security.Application.Encoder.HtmlEncode(m);
-            Console.WriteLine(encodedstring);
             HttpWebRequest server =   (HttpWebRequest)WebRequest.Create(ip+":"+port+"/"+encodedstring);
             server.KeepAlive = false;
             try {
@@ -63,7 +62,9 @@ namespace MusicPlayer
         {
             try
             {
-                WebRequest req = WebRequest.Create((ip + "/music/.artwork/"+album).Replace(" ", "%20"));
+                string encodedstring = Microsoft.Security.Application.Encoder.HtmlEncode(ip + "/music/.artwork/" + album);
+                WebRequest req = WebRequest.Create(encodedstring);
+                //WebRequest req = WebRequest.Create((ip + "/music/.artwork/" + album).Replace(" ","%20"));
                 WebResponse response = req.GetResponse();
                 Stream stream = response.GetResponseStream();
 
