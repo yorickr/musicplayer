@@ -27,30 +27,43 @@ namespace MusicPlayer
             Console.WriteLine(encodedstring);
             HttpWebRequest server =   (HttpWebRequest)WebRequest.Create(ip+":"+port+"/"+encodedstring);
             server.KeepAlive = false;
-            HttpWebResponse respond = (HttpWebResponse)server.GetResponse();
-            Stream streamResponse = respond.GetResponseStream();
-            StreamReader streamRead = new StreamReader(streamResponse);
-            Char[] readBuff = new Char[256];
-            int count = streamRead.Read(readBuff, 0, 256);
-            string data = "";
-            while (count > 0)
-            {
-                String outputData = new String(readBuff, 0, count);
-                data +=outputData;
-                count = streamRead.Read(readBuff, 0, 256);
+            try {
+                HttpWebResponse respond = (HttpWebResponse)server.GetResponse();
+                Stream streamResponse = respond.GetResponseStream();
+                StreamReader streamRead = new StreamReader(streamResponse);
+                Char[] readBuff = new Char[256];
+                int count = streamRead.Read(readBuff, 0, 256);
+                string data = "";
+                while (count > 0)
+                {
+                    String outputData = new String(readBuff, 0, count);
+                    data += outputData;
+                    count = streamRead.Read(readBuff, 0, 256);
+                }
+                JObject o = JObject.Parse(data);
+                respond.Close();
+                streamResponse.Close();
+                streamRead.Close();
+                return o;
             }
-            JObject o = JObject.Parse(data);
-            respond.Close();
-            streamResponse.Close();
-            streamRead.Close();
-            return o;
+            catch(WebException e)
+            {
+                Console.WriteLine("Server is offline");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Er is iets fout gegaan bij het communiceren met de server.");
+            }
+
+            return null;
+            
         }
 
         public MemoryStream downloadArtwork(string album)
         {
             try
             {
-                WebRequest req = WebRequest.Create((ip + "/music/artwork/"+album).Replace(" ", "%20"));
+                WebRequest req = WebRequest.Create((ip + "/music/.artwork/"+album).Replace(" ", "%20"));
                 WebResponse response = req.GetResponse();
                 Stream stream = response.GetResponseStream();
 

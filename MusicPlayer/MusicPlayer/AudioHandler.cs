@@ -17,7 +17,13 @@ namespace MusicPlayer
         public AudioState AState { get; set; }
         public BufferState BState { get; set; }
 
-        public int Buffered { get { return Math.Min((int)((bufpos / (double)LengthBuffer) * 1000), 1000); } }
+        public int Buffered { get
+                {
+                    if(CurrentSong is RadioStation)
+                        return Math.Min((int)((bufpos - ms.Position) / 1000), 1000);
+                    else
+                        return Math.Min((int)((bufpos / (double)LengthBuffer) * 1000), 1000);
+                } }
         private long LengthBuffer { get; set; }
         private long bufpos = 0;
 
@@ -33,7 +39,7 @@ namespace MusicPlayer
 
         private long seek = 0;
 
-        private Stream ms;
+        private MemoryStream ms;
 
         private Thread network;
         private Thread audio;
@@ -121,6 +127,7 @@ namespace MusicPlayer
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 AState = AudioState.STOPPED;
                 main.form.SongFinished();
                 return;
@@ -135,7 +142,10 @@ namespace MusicPlayer
                     waveOut.Init(blockAlignedStream);
                     waveOut.Play();
 
-                    Length = CurrentSong.Seconds * waveOut.OutputWaveFormat.AverageBytesPerSecond;
+                    if (CurrentSong.Seconds == 0)
+                        Length = ms.Length / waveOut.OutputWaveFormat.AverageBytesPerSecond;
+                    else
+                        Length = CurrentSong.Seconds * waveOut.OutputWaveFormat.AverageBytesPerSecond;
                     CurrentTime = (int)(ms.Position / waveOut.OutputWaveFormat.AverageBytesPerSecond);
 
                     while (waveOut.PlaybackState != PlaybackState.Stopped)
@@ -164,10 +174,17 @@ namespace MusicPlayer
                         }
                         if (BState == BufferState.DONE && firstrun )
                         {
-                            position = mp3fr.Position;
-                            mp3fr.Close();
-                            StreamFromMP3(ms,position, false);
-                            break;
+                            if( ! (CurrentSong is RadioStation))
+                            {
+                                position = mp3fr.Position;
+                                mp3fr.Close();
+                                StreamFromMP3(ms, position, false);
+                                break;
+                            }
+                            else
+                            {
+                                AState = AudioState.STOPPED;
+                            }
                         }
 
                         playpos = blockAlignedStream.Position;
@@ -175,7 +192,7 @@ namespace MusicPlayer
 
                     }
 
-                    if(AState == AudioState.PLAYING)
+                    if(AState == AudioState.PLAYING && !firstrun)
                         main.form.SongFinished();
                     AState = AudioState.STOPPED;
                     playpos = 0;
@@ -187,7 +204,14 @@ namespace MusicPlayer
         private void PlayAudio()
         {
             AState = AudioState.WAITING;
-            while (ms.Length < 65536 * 10 && BState != BufferState.DONE)
+
+            int buffertime = 0;
+            if (CurrentSong is RadioStation)
+                buffertime = 32768 * 10;
+            else
+                buffertime = 65536 * 10;
+
+            while (ms.Length < buffertime && BState != BufferState.DONE)
                 Thread.Sleep(1000);
             AState = AudioState.PLAYING;
 
@@ -206,6 +230,7 @@ namespace MusicPlayer
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 BState = BufferState.EMPTY;
                 AState = AudioState.STOPPED;
                 main.form.SongFinished();
@@ -217,8 +242,8 @@ namespace MusicPlayer
             LengthBuffer = response.ContentLength;
             using (var stream = response.GetResponseStream())
             {
-                byte[] buffer = new byte[65536]; // 64KB chunks
-                //byte[] buffer = new byte[65536*4]; // 256KB chunks
+                byte[] buffer = new byte[65536]; // 32KB chunks
+
                 int read;
                 BState = BufferState.BUFFERING;
                 AState = AudioState.WAITING;
@@ -229,7 +254,6 @@ namespace MusicPlayer
                     ms.Position = ms.Length;
                     ms.Write(buffer, 0, read);
                     ms.Position = pos;
-
 
                     this.bufpos = ms.Length;
                 }
