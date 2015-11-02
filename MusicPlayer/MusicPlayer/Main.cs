@@ -16,7 +16,6 @@ namespace MusicPlayer
         public NetworkHandler nw;
         public PlaylistHandler pl;
         public AudioHandler audio;
-
         public SongsTable table;
        
         private List<string> genres;
@@ -116,6 +115,7 @@ namespace MusicPlayer
             form.ArtistListBox.Items.Clear();
             form.GenreListBox.Items.Clear();
             form.PlaylistBox.Items.Clear();
+
             this.api.GetAlbums().ForEach(a => form.AlbumListView.Items.Add(a.albumnaam,a.albumnaam));
             this.api.GetArtists().ForEach(a => form.ArtistListBox.Items.Add(a.naam));
             this.api.GetGenres().ForEach(g => form.GenreListBox.Items.Add(g.name));
@@ -154,44 +154,13 @@ namespace MusicPlayer
                 api.Songify(o).ForEach(s => table.Add(s));
 
                 //albums
-                api.Albumify(o).ForEach(a => form.AlbumListView.Items.Add(a.albumnaam));
+                api.Albumify(o).ForEach(a => form.AlbumListView.Items.Add(a.albumnaam, a.albumnaam));
 
                 //artists
                 api.Artistify(o).ForEach(a => form.ArtistListBox.Items.Add(a.naam));
 
                 //genres
                 api.Genrify(o).ForEach(g => form.GenreListBox.Items.Add(g.name));
-                BackgroundWorker bw = new BackgroundWorker();
-                bw.DoWork += new DoWorkEventHandler(
-                delegate (object x, DoWorkEventArgs args)
-                {
-                    BackgroundWorker b = x as BackgroundWorker;
-                    ImageList imagelist = new ImageList();
-                    List<string> templist = new List<string>();
-                    Action action = () =>
-                    {
-                        foreach (ListViewItem item in form.AlbumListView.Items)
-                        {
-                            templist.Add(item.Text);
-                        }
-                    };
-                    form.Invoke(action);
-
-                    foreach (string item in templist)
-                    {
-                        imagelist.Images.Add(item, api.getAlbumCover(item));
-                    }
-
-                    action = () => {
-                        form.AlbumListView.LargeImageList = imagelist;
-                        foreach (ListViewItem item in form.AlbumListView.Items)
-                        {
-                            item.ImageKey = item.Text;
-                        }
-                    };
-                    form.Invoke(action);
-                });
-                bw.RunWorkerAsync();
             }
 
         }
