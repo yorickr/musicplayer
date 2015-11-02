@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 
 namespace MusicPlayer
 {
@@ -138,7 +139,58 @@ namespace MusicPlayer
 
         public void AdvancedSearchFilter(string search, string album, string artist, string genre)
         {
-            throw new NotImplementedException();
+            JObject o = api.GetAllBySearch(search, album, artist, genre);
+            if (o != null)
+            {
+                //q
+                form.AlbumListView.Items.Clear();
+                form.ArtistListBox.Items.Clear();
+                form.GenreListBox.Items.Clear();
+                form.PlaylistBox.Items.Clear();
+                table.Clear();
+                api.Songify(o).ForEach(s => table.Add(s));
+
+                //albums
+                api.Albumify(o).ForEach(a => form.AlbumListView.Items.Add(a.albumnaam));
+
+                //artists
+                api.Artistify(o).ForEach(a => form.ArtistListBox.Items.Add(a.naam));
+
+                //genres
+                api.Genrify(o).ForEach(g => form.GenreListBox.Items.Add(g.name));
+                BackgroundWorker bw = new BackgroundWorker();
+                bw.DoWork += new DoWorkEventHandler(
+                delegate (object x, DoWorkEventArgs args)
+                {
+                    BackgroundWorker b = x as BackgroundWorker;
+                    ImageList imagelist = new ImageList();
+                    List<string> templist = new List<string>();
+                    Action action = () =>
+                    {
+                        foreach (ListViewItem item in form.AlbumListView.Items)
+                        {
+                            templist.Add(item.Text);
+                        }
+                    };
+                    form.Invoke(action);
+
+                    foreach (string item in templist)
+                    {
+                        imagelist.Images.Add(item, api.getAlbumCover(item));
+                    }
+
+                    action = () => {
+                        form.AlbumListView.LargeImageList = imagelist;
+                        foreach (ListViewItem item in form.AlbumListView.Items)
+                        {
+                            item.ImageKey = item.Text;
+                        }
+                    };
+                    form.Invoke(action);
+                });
+                bw.RunWorkerAsync();
+            }
+
         }
 
         public void FilterCurrentPlaying()

@@ -23,7 +23,7 @@ namespace MusicPlayer
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            if(SearchTermTextBox.Text.Length > 3)
+            if(SearchTermTextBox.Text.Length > 1)
             {
                 SearchTermTextBox.ForeColor = Color.Black;
                 main.AdvancedSearchFilter(SearchTermTextBox.Text, AlbumTextBox.Text, ArtistTextBox.Text, GenreTextBox.Text);

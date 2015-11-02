@@ -20,6 +20,16 @@ namespace MusicPlayer
             defaultCover = Image.FromStream(nw.downloadArtwork("default-cover.png"));
         }
 
+        public JObject GetAllBySearch(string search, string album, string artist, string genre)
+        {
+            // Q artist genre album
+            JObject o = nw.SendString($"search?q={search}&album={album}&genre={genre}&artist={artist}");
+            Console.WriteLine(o.PropertyValues().ToString());
+            if (o["result"].ToString() == "OK") { return o; }
+            return null;
+
+        }
+
         public string GetSongURLByID(string id)
         {
             JObject o = nw.SendString("getsongbyid?id=" + id);
@@ -53,6 +63,61 @@ namespace MusicPlayer
         {
             return GetSongsByArgs("search=" + search);
         }
+
+        public List<Genre> Genrify(JObject o)
+        {
+            List<Genre> genreslist = new List<Genre>();
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["genres"].Count(); i++)
+                {
+                    genreslist.Add(new Genre(o["genres"][i][0].ToString()));
+                }
+            }
+            return genreslist;
+        } 
+
+        public List<Artist> Artistify(JObject o)
+        {
+            List<Artist> artistlist = new List<Artist>();
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["artists"].Count(); i++)
+                {
+                    artistlist.Add(new Artist(o["artists"][i][0].ToString()));
+                }
+            }
+            return artistlist;
+        } 
+
+        public List<Song> Songify(JObject o)
+        {
+            List<Song> allsongslist = new List<Song>();
+            if (o["result"].ToString() == "OK")
+            {
+                dynamic songs = o["songs"];
+                for (int i = 0; i < songs.Count; i++)
+                {
+                    allsongslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                }
+            }
+            return allsongslist;
+        }
+
+        public List<Album> Albumify(JObject o)
+        {
+            List<Album> albumlist = new List<Album>();
+
+            if (o["result"].ToString() == "OK")
+            {
+                for (int i = 0; i < o["albums"].Count(); i++)
+                {
+                    albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                }
+            }
+
+            return albumlist;
+        } 
 
         public List<Song> GetAllSongs()
         {
@@ -90,7 +155,7 @@ namespace MusicPlayer
         {
             List<Artist> artistlist = new List<Artist>();
 
-            JObject o = nw.SendString("getartists?id=hallo");
+            JObject o = nw.SendString("getartists?");
             if (o["result"].ToString() == "OK")
             {
                 for (int i = 0; i < o["artists"].Count(); i++) {
