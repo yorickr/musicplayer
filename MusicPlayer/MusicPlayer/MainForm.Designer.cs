@@ -31,7 +31,7 @@ namespace MusicPlayer
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SongsTableView = new System.Windows.Forms.DataGridView();
             this.GenreListBox = new System.Windows.Forms.ListBox();
@@ -59,6 +59,8 @@ namespace MusicPlayer
             this.ShuffleSongButton = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewPlaylistToolstripMenuButton = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchGenresToolStripLabel = new System.Windows.Forms.ToolStripMenuItem();
             this.SearchGenresTextBox = new System.Windows.Forms.ToolStripTextBox();
@@ -102,8 +104,9 @@ namespace MusicPlayer
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripNextButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPreviousButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewPlaylistToolstripMenuButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.songsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SearchSongsTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.SearchSongsButton = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -123,14 +126,14 @@ namespace MusicPlayer
             this.SongsTableView.AllowUserToResizeRows = false;
             this.SongsTableView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SongsTableView.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlLight;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.SongsTableView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.SongsTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SongsTableView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SongsTableView.Location = new System.Drawing.Point(0, 0);
@@ -403,15 +406,28 @@ namespace MusicPlayer
             // makeToolStripMenuItem
             // 
             this.makeToolStripMenuItem.Name = "makeToolStripMenuItem";
-            this.makeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.makeToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.makeToolStripMenuItem.Text = "Create / Edit";
             this.makeToolStripMenuItem.Click += new System.EventHandler(this.makeToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(136, 6);
+            // 
+            // viewPlaylistToolstripMenuButton
+            // 
+            this.viewPlaylistToolstripMenuButton.Name = "viewPlaylistToolstripMenuButton";
+            this.viewPlaylistToolstripMenuButton.Size = new System.Drawing.Size(139, 22);
+            this.viewPlaylistToolstripMenuButton.Text = "View";
+            this.viewPlaylistToolstripMenuButton.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SearchGenresToolStripLabel,
-            this.SearchArtistToolStripLabel});
+            this.SearchArtistToolStripLabel,
+            this.songsToolStripMenuItem});
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
             this.searchToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.searchToolStripMenuItem.Text = "Search";
@@ -422,7 +438,7 @@ namespace MusicPlayer
             this.SearchGenresTextBox,
             this.ClearGenreSearchButton});
             this.SearchGenresToolStripLabel.Name = "SearchGenresToolStripLabel";
-            this.SearchGenresToolStripLabel.Size = new System.Drawing.Size(110, 22);
+            this.SearchGenresToolStripLabel.Size = new System.Drawing.Size(152, 22);
             this.SearchGenresToolStripLabel.Text = "Genres";
             // 
             // SearchGenresTextBox
@@ -445,7 +461,7 @@ namespace MusicPlayer
             this.SearchArtistsTextBox,
             this.ClearArtistSearchButton});
             this.SearchArtistToolStripLabel.Name = "SearchArtistToolStripLabel";
-            this.SearchArtistToolStripLabel.Size = new System.Drawing.Size(110, 22);
+            this.SearchArtistToolStripLabel.Size = new System.Drawing.Size(152, 22);
             this.SearchArtistToolStripLabel.Text = "Artists";
             // 
             // SearchArtistsTextBox
@@ -774,17 +790,27 @@ namespace MusicPlayer
             this.NotifyMenuStripPreviousButton.Text = "Previous";
             this.NotifyMenuStripPreviousButton.Click += new System.EventHandler(this.NotifyMenuStripPreviousButton_Click);
             // 
-            // viewPlaylistToolstripMenuButton
+            // songsToolStripMenuItem
             // 
-            this.viewPlaylistToolstripMenuButton.Name = "viewPlaylistToolstripMenuButton";
-            this.viewPlaylistToolstripMenuButton.Size = new System.Drawing.Size(152, 22);
-            this.viewPlaylistToolstripMenuButton.Text = "View";
-            this.viewPlaylistToolstripMenuButton.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
+            this.songsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SearchSongsTextBox,
+            this.SearchSongsButton});
+            this.songsToolStripMenuItem.Name = "songsToolStripMenuItem";
+            this.songsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.songsToolStripMenuItem.Text = "Songs";
             // 
-            // toolStripSeparator6
+            // SearchSongsTextBox
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(149, 6);
+            this.SearchSongsTextBox.Name = "SearchSongsTextBox";
+            this.SearchSongsTextBox.Size = new System.Drawing.Size(100, 23);
+            // 
+            // SearchSongsButton
+            // 
+            this.SearchSongsButton.Enabled = false;
+            this.SearchSongsButton.Name = "SearchSongsButton";
+            this.SearchSongsButton.Size = new System.Drawing.Size(160, 22);
+            this.SearchSongsButton.Text = "Search";
+            this.SearchSongsButton.Click += new System.EventHandler(this.SearchSongsButton_Click);
             // 
             // MainForm
             // 
@@ -892,6 +918,9 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem slamFMToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem viewPlaylistToolstripMenuButton;
+        private System.Windows.Forms.ToolStripMenuItem songsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox SearchSongsTextBox;
+        private System.Windows.Forms.ToolStripMenuItem SearchSongsButton;
     }
 }
 

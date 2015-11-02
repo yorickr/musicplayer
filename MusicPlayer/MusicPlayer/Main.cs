@@ -126,6 +126,15 @@ namespace MusicPlayer
             });
         }
 
+        public void SearchFilter(string search)
+        {
+            table.Clear();
+            api.GetSongsBySearch(search).ForEach(s =>
+            {
+                table.Add(s);
+            });
+        }
+
         public void FilterCurrentPlaying()
         {
             table.Clear();

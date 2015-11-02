@@ -137,6 +137,11 @@ namespace MusicPlayer
             else
                 SelectServerYorickButton.Enabled = true;
 
+            if (SearchSongsTextBox.Text.Length == 0)
+                SearchSongsButton.Enabled = false;
+            else
+                SearchSongsButton.Enabled = true;
+
             if (main.audio.AState == AudioHandler.AudioState.PAUSED)
             {
                 PauseButton.Enabled = false;
@@ -569,6 +574,15 @@ namespace MusicPlayer
             }
 
             RadioStationTextBox.Text = "";
+        }
+
+        private void SearchSongsButton_Click(object sender, EventArgs e)
+        {
+            if(SearchSongsTextBox.Text.Length > 0)
+            {
+                main.SearchFilter(SearchSongsTextBox.Text);
+                SearchSongsTextBox.Text = "";
+            }
         }
     }
 }

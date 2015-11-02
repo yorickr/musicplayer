@@ -49,6 +49,11 @@ namespace MusicPlayer
             return GetSongsByArgs("album=" + year);
         }
 
+        public List<Song> GetSongsBySearch(string search)
+        {
+            return GetSongsByArgs("search=" + search);
+        }
+
         public List<Song> GetAllSongs()
         {
             List<Song> allsongslist = new List<Song>();
