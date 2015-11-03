@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MusicPlayer.AdvancedSearch" Collapsed="true">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAACAACAABBAAAQCAAAACIAAQAAAAAIAAAAAAAAQ=</HashCode>
+      <FileName>AdvancedSearch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.Album" Collapsed="true">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Album.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.APIHandler" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACoAAAEAAAAAAwAAEIAQAYAAAAiAQAAAAIEAAAAgII=</HashCode>
+      <FileName>APIHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.Artist" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Artist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.AudioHandler" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgBQAIAAAwCAAAAADBAAAAAAEApAYIgAQECAY=</HashCode>
+      <FileName>AudioHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.Genre" Collapsed="true">
+    <Position X="2.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Genre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.Main" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQQAgAQAQQAQAABEAAAAIIMDAAAgAAAAACAFQABAAAg=</HashCode>
+      <FileName>Main.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.MainForm" Collapsed="true">
+    <Position X="2.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>lBiEqv2DtukQMwGvAROAcednBwz2giwRpBQj4IrABKU=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.NetworkHandler" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAgAAAIgAAAAAAA=</HashCode>
+      <FileName>NetworkHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.Playlist" Collapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAQQAAAAAAAAEAEEEAAAEACAAAAAAgAI=</HashCode>
+      <FileName>Playlist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.PlaylistHandler" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABABAAAAAAAAAIAAAAAAAAAACAAAAAAAAAIAAAEAQ=</HashCode>
+      <FileName>PlaylistHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.PlaylistMaker" Collapsed="true">
+    <Position X="4" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iiCCAAAAAKAAABAWQBiAQAACCQAAACAAACAIQAEICAA=</HashCode>
+      <FileName>PlaylistMaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.RadioStation" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>RadioStation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.Song" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAEgAIAIAQAAIAIAIAACCABCAAAAAA=</HashCode>
+      <FileName>Song.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MusicPlayer.SongsTable" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SongsTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
