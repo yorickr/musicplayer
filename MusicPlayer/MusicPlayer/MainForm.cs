@@ -310,8 +310,8 @@ namespace MusicPlayer
         {
             if (!clicked)
                 main.audio.Seek(PositionTrackBar.Value);
-
-            LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value / 1000) * main.audio.CurrentSong.Seconds));
+            if(main.audio.CurrentSong != null)
+                LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value / 1000) * main.audio.CurrentSong.Seconds));
         }
 
         private void NotifyIcon_Click(object sender, MouseEventArgs e)
