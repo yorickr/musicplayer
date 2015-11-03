@@ -36,8 +36,12 @@ namespace MusicPlayer
         public string GetSongURLByID(string id)
         {
             JObject o = nw.SendString("getsongbyid?id=" + id);
-            if (o["result"].ToString() == "OK") {
-                return o["songurl"].ToString();
+            if (o != null)
+            {
+                if (o["result"].ToString() == "OK")
+                {
+                    return o["songurl"].ToString();
+                }
             }
             return o["errormsg"].ToString();
         }
@@ -70,11 +74,14 @@ namespace MusicPlayer
         public List<Genre> Genrify(JObject o)
         {
             List<Genre> genreslist = new List<Genre>();
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["genres"].Count(); i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    genreslist.Add(new Genre(o["genres"][i][0].ToString()));
+                    for (int i = 0; i < o["genres"].Count(); i++)
+                    {
+                        genreslist.Add(new Genre(o["genres"][i][0].ToString()));
+                    }
                 }
             }
             return genreslist;
@@ -83,11 +90,14 @@ namespace MusicPlayer
         public List<Artist> Artistify(JObject o)
         {
             List<Artist> artistlist = new List<Artist>();
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["artists"].Count(); i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    artistlist.Add(new Artist(o["artists"][i][0].ToString()));
+                    for (int i = 0; i < o["artists"].Count(); i++)
+                    {
+                        artistlist.Add(new Artist(o["artists"][i][0].ToString()));
+                    }
                 }
             }
             return artistlist;
@@ -96,12 +106,15 @@ namespace MusicPlayer
         public List<Song> Songify(JObject o)
         {
             List<Song> allsongslist = new List<Song>();
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                dynamic songs = o["songs"];
-                for (int i = 0; i < songs.Count; i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    allsongslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                    dynamic songs = o["songs"];
+                    for (int i = 0; i < songs.Count; i++)
+                    {
+                        allsongslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                    }
                 }
             }
             return allsongslist;
@@ -110,12 +123,14 @@ namespace MusicPlayer
         public List<Album> Albumify(JObject o)
         {
             List<Album> albumlist = new List<Album>();
-
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["albums"].Count(); i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                    for (int i = 0; i < o["albums"].Count(); i++)
+                    {
+                        albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                    }
                 }
             }
 
@@ -126,12 +141,15 @@ namespace MusicPlayer
         {
             List<Song> allsongslist = new List<Song>();
             JObject o = nw.SendString("getallsongs?");
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                dynamic songs = o["songs"];
-                for (int i = 0; i < songs.Count; i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    allsongslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                    dynamic songs = o["songs"];
+                    for (int i = 0; i < songs.Count; i++)
+                    {
+                        allsongslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                    }
                 }
             }
             return allsongslist;
@@ -142,13 +160,16 @@ namespace MusicPlayer
         {
             List<Song> songslist = new List<Song>();
             JObject o = nw.SendString("getsongs?"+args);
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                dynamic songs = o["songs"];
-                for (int i = 0; i < songs.Count; i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    if(songs[i][2].ToString().EndsWith(".mp3"))
-                        songslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                    dynamic songs = o["songs"];
+                    for (int i = 0; i < songs.Count; i++)
+                    {
+                        if (songs[i][2].ToString().EndsWith(".mp3"))
+                            songslist.Add(new Song(songs[i][0].ToString(), songs[i][3].ToString(), songs[i][5].ToString(), songs[i][4].ToString(), songs[i][1].ToString(), (int)songs[i][9], this));
+                    }
                 }
             }
             return songslist;
@@ -159,10 +180,14 @@ namespace MusicPlayer
             List<Artist> artistlist = new List<Artist>();
 
             JObject o = nw.SendString("getartists?");
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["artists"].Count(); i++) {
-                    artistlist.Add(new Artist(o["artists"][i][0].ToString()));
+                if (o["result"].ToString() == "OK")
+                {
+                    for (int i = 0; i < o["artists"].Count(); i++)
+                    {
+                        artistlist.Add(new Artist(o["artists"][i][0].ToString()));
+                    }
                 }
             }
             return artistlist;
@@ -183,11 +208,14 @@ namespace MusicPlayer
             List<Album> albumlist = new List<Album>();
 
             JObject o = nw.SendString("getalbums?");
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["albums"].Count(); i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                    for (int i = 0; i < o["albums"].Count(); i++)
+                    {
+                        albumlist.Add(new Album(o["albums"][i][0].ToString()));
+                    }
                 }
             }
 
@@ -198,11 +226,14 @@ namespace MusicPlayer
         {
             List<Year> yearlist = new List<Year> ();
             JObject o = nw.SendString("getyears?");
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["years"].Count(); i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    yearlist.Add(new Year(o["years"][i][0].ToString()));
+                    for (int i = 0; i < o["years"].Count(); i++)
+                    {
+                        yearlist.Add(new Year(o["years"][i][0].ToString()));
+                    }
                 }
             }
             return yearlist;
@@ -212,11 +243,14 @@ namespace MusicPlayer
         {
             List<Genre> genreslist = new List<Genre>();
             JObject o = nw.SendString("getgenres?");
-            if (o["result"].ToString() == "OK")
+            if (o != null)
             {
-                for (int i = 0; i < o["genres"].Count(); i++)
+                if (o["result"].ToString() == "OK")
                 {
-                    genreslist.Add(new Genre(o["genres"][i][0].ToString()));
+                    for (int i = 0; i < o["genres"].Count(); i++)
+                    {
+                        genreslist.Add(new Genre(o["genres"][i][0].ToString()));
+                    }
                 }
             }
             return genreslist;

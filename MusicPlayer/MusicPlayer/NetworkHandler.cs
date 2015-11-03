@@ -25,10 +25,12 @@ namespace MusicPlayer
         {
             string encodedstring = Microsoft.Security.Application.Encoder.HtmlEncode(m);
             HttpWebRequest server =   (HttpWebRequest)WebRequest.Create(ip+":"+port+"/"+encodedstring);
+            server.ReadWriteTimeout = 500;
             server.KeepAlive = false;
             try {
                 HttpWebResponse respond = (HttpWebResponse)server.GetResponse();
                 Stream streamResponse = respond.GetResponseStream();
+                streamResponse.ReadTimeout = 500;
                 StreamReader streamRead = new StreamReader(streamResponse);
                 Char[] readBuff = new Char[256];
                 int count = streamRead.Read(readBuff, 0, 256);
@@ -64,9 +66,11 @@ namespace MusicPlayer
             {
                 string encodedstring = Microsoft.Security.Application.Encoder.HtmlEncode(ip + "/music/.artwork/" + album);
                 WebRequest req = WebRequest.Create(encodedstring);
+                req.Timeout = 500;
                 //WebRequest req = WebRequest.Create((ip + "/music/.artwork/" + album).Replace(" ","%20"));
                 WebResponse response = req.GetResponse();
                 Stream stream = response.GetResponseStream();
+                stream.ReadTimeout = 500;
 
                 //Download in chuncks
                 byte[] buffer = new byte[1024];

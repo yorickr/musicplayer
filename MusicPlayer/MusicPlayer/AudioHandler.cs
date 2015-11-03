@@ -182,6 +182,7 @@ namespace MusicPlayer
                             }
                             else
                             {
+                                BState = BufferState.EMPTY;
                                 AState = AudioState.STOPPED;
                             }
                         }
