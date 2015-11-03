@@ -73,7 +73,10 @@ class calls:
         genquery="""
         SELECT $ident FROM tracks WHERE LCASE(trackName) LIKE LCASE(\"%$trackname%\") $orgenre LCASE(genre) LIKE LCASE(\"%$genre%\") $oralbum LCASE(albumName) LIKE LCASE(\"%$album%\") $orartist LCASE(artistName) LIKE LCASE(\"%$artistname%\") $end;
         """
-        test = string.Template(genquery)
+        query="""
+        SELECT $ident FROM tracks WHERE ($or1 OR $or2 OR  $or3 ) $and1 $and2 $and3 $end;
+        """
+        test = string.Template(query)
         genqueryres = ""
         arguments = []
         general = ""
@@ -90,14 +93,20 @@ class calls:
         for arg in arguments:
             if arg[0] == "artist":
                 finalstring = string.Template(finalstring).safe_substitute(artistname=arg[1], orartist="AND")
+                test = string.Template(test.safe_substitute(and1="AND LCASE(artistName) LIKE LCASE(\"%"+ arg[1] +"%\")"))
             elif arg[0] == "genre":
                 finalstring = string.Template(finalstring).safe_substitute(genre=arg[1],orgenre="AND")
+                test = string.Template(test.safe_substitute(and2="AND LCASE(genre) LIKE LCASE(\"%"+ arg[1] +"%\")"))
             elif arg[0] == "album":
                 finalstring = string.Template(finalstring).safe_substitute(album=arg[1],oralbum="AND")
+                test = string.Template(test.safe_substitute(and3="AND LCASE(albumName) LIKE LCASE(\"%"+ arg[1] +"%\")"))
         print(finalstring)
         finalstring = string.Template(finalstring).safe_substitute(genre=general,artistname=general,album=general,trackname=general)
         print(finalstring)
-        return calls.jsonify({"result":"OK", "genres": db.executequerystatic(string.Template(finalstring).safe_substitute(ident="genre", orartist="OR", orgenre="OR", oralbum="OR", end="GROUP BY genre")),"artists": db.executequerystatic(string.Template(finalstring).safe_substitute(ident="artistName", orartist="OR", orgenre="OR", oralbum="OR",end="GROUP BY artistName")), "albums": db.executequerystatic(string.Template(finalstring).safe_substitute(ident="albumName", orartist="OR", orgenre="OR", oralbum="OR",end="GROUP BY albumName")), "songs" : db.executequerystatic(string.Template(finalstring).safe_substitute(ident="*", orartist="OR", orgenre="OR", oralbum="OR",end=""))})
+        test = test.safe_substitute( and1="", and2="",and3="",or1="LCASE(artistName) LIKE LCASE(\"%"+general+"%\")",or2="LCASE(genre) LIKE LCASE(\"%"+general+"%\")",or3="LCASE(albumName) LIKE LCASE(\"%"+general+"%\")")
+        print(test)
+        print(string.Template(test).safe_substitute(ident="*",end=""))
+        return calls.jsonify({"result":"OK", "genres": db.executequerystatic(string.Template(test).safe_substitute(ident="genre",end="GROUP BY genre")),"artists": db.executequerystatic(string.Template(test).safe_substitute(ident="artistName",end="GROUP BY artistName")), "albums": db.executequerystatic(string.Template(test).safe_substitute(ident="albumName",end="GROUP BY albumName")), "songs" : db.executequerystatic(string.Template(test).safe_substitute(ident="*",end=""))})
 
     @staticmethod
     def getsongs(args):
