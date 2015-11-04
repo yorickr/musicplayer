@@ -179,6 +179,11 @@ namespace MusicPlayer
                 NotifyMenuStripStopButton.Enabled = true;
             }
 
+            if (VolumeCustomTextBox.Text == "")
+                VolumeCustomSetButton.Enabled = false;
+            else
+                VolumeCustomSetButton.Enabled = true;
+
             if (RadioStationTextBox.Text.Length <= 10)
                 SetRadioStationButton.Enabled = false;
             else
@@ -624,6 +629,47 @@ namespace MusicPlayer
         private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
             main.Repopulate();
+        }
+
+        private void VolumeControl_ValueChanged(object sender, EventArgs e)
+        {
+            main.audio.Volume = (float)(VolumeControl.Value/100);
+            VolumeCurrentLabel.Text = "Currently " + VolumeControl.Value + "%";
+        }
+
+        private void Volume100Button_Click(object sender, EventArgs e)
+        {
+            VolumeControl.Value = 100;
+        }
+
+        private void Volume75Button_Click(object sender, EventArgs e)
+        {
+            VolumeControl.Value = 75;
+        }
+
+        private void Volume50Button_Click(object sender, EventArgs e)
+        {
+            VolumeControl.Value = 50;
+        }
+
+        private void Volume25Button_Click(object sender, EventArgs e)
+        {
+            VolumeControl.Value = 25;
+        }
+
+        private void Volume0Button_Click(object sender, EventArgs e)
+        {
+            VolumeControl.Value = 0;
+        }
+
+        private void VolumeCustomSetButton_Click(object sender, EventArgs e)
+        {
+            int volume;
+            bool volumeOK = int.TryParse(VolumeCustomTextBox.Text, out volume);
+
+            if(volumeOK)
+                VolumeControl.Value = Math.Max(Math.Min(volume, 100), 0);
+            VolumeCustomTextBox.Text = "";
         }
     }
 }

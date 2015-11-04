@@ -112,6 +112,21 @@ namespace MusicPlayer
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.NotifyMenuStripNextButton = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyMenuStripPreviousButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.VolumeControl = new System.Windows.Forms.NumericUpDown();
+            this.VolumeLabel = new System.Windows.Forms.Label();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.VolumeMenuStripButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.Volume100Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.Volume75Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.Volume50Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.Volume25Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.Volume0Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.VolumeCustomButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.VolumeCustomTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.VolumeCustomSetButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.VolumeCurrentLabel = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.SongsTableView)).BeginInit();
             this.MainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitContainer)).BeginInit();
@@ -123,6 +138,7 @@ namespace MusicPlayer
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).BeginInit();
             this.NotifyMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VolumeControl)).BeginInit();
             this.SuspendLayout();
             // 
             // SongsTableView
@@ -325,6 +341,7 @@ namespace MusicPlayer
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -332,12 +349,12 @@ namespace MusicPlayer
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(89, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -355,26 +372,26 @@ namespace MusicPlayer
             // overviewToolStripMenuItem
             // 
             this.overviewToolStripMenuItem.Name = "overviewToolStripMenuItem";
-            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.overviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.overviewToolStripMenuItem.Text = "Overview";
             this.overviewToolStripMenuItem.Click += new System.EventHandler(this.overviewToolStripMenuItem_Click);
             // 
             // playlistsToolStripMenuItem
             // 
             this.playlistsToolStripMenuItem.Name = "playlistsToolStripMenuItem";
-            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.playlistsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.playlistsToolStripMenuItem.Text = "Playlists";
             this.playlistsToolStripMenuItem.Click += new System.EventHandler(this.playlistsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(120, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // ViewQueueButton
             // 
             this.ViewQueueButton.Name = "ViewQueueButton";
-            this.ViewQueueButton.Size = new System.Drawing.Size(123, 22);
+            this.ViewQueueButton.Size = new System.Drawing.Size(152, 22);
             this.ViewQueueButton.Text = "Queue";
             this.ViewQueueButton.Click += new System.EventHandler(this.ViewCurrentPlaylistButton_Click);
             // 
@@ -687,7 +704,7 @@ namespace MusicPlayer
             // CurrentSongLabel
             // 
             this.CurrentSongLabel.AutoSize = true;
-            this.CurrentSongLabel.Location = new System.Drawing.Point(338, 59);
+            this.CurrentSongLabel.Location = new System.Drawing.Point(332, 59);
             this.CurrentSongLabel.Name = "CurrentSongLabel";
             this.CurrentSongLabel.Size = new System.Drawing.Size(111, 13);
             this.CurrentSongLabel.TabIndex = 11;
@@ -796,11 +813,13 @@ namespace MusicPlayer
             this.NotifyMenuStripPlayButton,
             this.NotifyMenuStripPauseButton,
             this.NotifyMenuStripStopButton,
+            this.toolStripSeparator8,
+            this.VolumeMenuStripButton,
             this.toolStripSeparator3,
             this.NotifyMenuStripNextButton,
             this.NotifyMenuStripPreviousButton});
             this.NotifyMenuStrip.Name = "NotifyMenuStrip";
-            this.NotifyMenuStrip.Size = new System.Drawing.Size(120, 148);
+            this.NotifyMenuStrip.Size = new System.Drawing.Size(153, 198);
             // 
             // NotifyMenuStripPlayingLabel
             // 
@@ -808,7 +827,7 @@ namespace MusicPlayer
             this.NotifyMenuStripPlayingSongLabel});
             this.NotifyMenuStripPlayingLabel.Enabled = false;
             this.NotifyMenuStripPlayingLabel.Name = "NotifyMenuStripPlayingLabel";
-            this.NotifyMenuStripPlayingLabel.Size = new System.Drawing.Size(119, 22);
+            this.NotifyMenuStripPlayingLabel.Size = new System.Drawing.Size(152, 22);
             this.NotifyMenuStripPlayingLabel.Text = "Stopped";
             // 
             // NotifyMenuStripPlayingSongLabel
@@ -822,12 +841,12 @@ namespace MusicPlayer
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(116, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // NotifyMenuStripPlayButton
             // 
             this.NotifyMenuStripPlayButton.Name = "NotifyMenuStripPlayButton";
-            this.NotifyMenuStripPlayButton.Size = new System.Drawing.Size(119, 22);
+            this.NotifyMenuStripPlayButton.Size = new System.Drawing.Size(152, 22);
             this.NotifyMenuStripPlayButton.Text = "Play";
             this.NotifyMenuStripPlayButton.Click += new System.EventHandler(this.NotifyMenuStripPlayButton_Click);
             // 
@@ -835,7 +854,7 @@ namespace MusicPlayer
             // 
             this.NotifyMenuStripPauseButton.Enabled = false;
             this.NotifyMenuStripPauseButton.Name = "NotifyMenuStripPauseButton";
-            this.NotifyMenuStripPauseButton.Size = new System.Drawing.Size(119, 22);
+            this.NotifyMenuStripPauseButton.Size = new System.Drawing.Size(152, 22);
             this.NotifyMenuStripPauseButton.Text = "Pause";
             this.NotifyMenuStripPauseButton.Click += new System.EventHandler(this.NotifyMenuStripPauseButton_Click);
             // 
@@ -843,34 +862,161 @@ namespace MusicPlayer
             // 
             this.NotifyMenuStripStopButton.Enabled = false;
             this.NotifyMenuStripStopButton.Name = "NotifyMenuStripStopButton";
-            this.NotifyMenuStripStopButton.Size = new System.Drawing.Size(119, 22);
+            this.NotifyMenuStripStopButton.Size = new System.Drawing.Size(152, 22);
             this.NotifyMenuStripStopButton.Text = "Stop";
             this.NotifyMenuStripStopButton.Click += new System.EventHandler(this.NotifyMenuStripStopButton_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(116, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // NotifyMenuStripNextButton
             // 
             this.NotifyMenuStripNextButton.Name = "NotifyMenuStripNextButton";
-            this.NotifyMenuStripNextButton.Size = new System.Drawing.Size(119, 22);
+            this.NotifyMenuStripNextButton.Size = new System.Drawing.Size(152, 22);
             this.NotifyMenuStripNextButton.Text = "Next";
             this.NotifyMenuStripNextButton.Click += new System.EventHandler(this.NotifyMenuStripNextButton_Click);
             // 
             // NotifyMenuStripPreviousButton
             // 
             this.NotifyMenuStripPreviousButton.Name = "NotifyMenuStripPreviousButton";
-            this.NotifyMenuStripPreviousButton.Size = new System.Drawing.Size(119, 22);
+            this.NotifyMenuStripPreviousButton.Size = new System.Drawing.Size(152, 22);
             this.NotifyMenuStripPreviousButton.Text = "Previous";
             this.NotifyMenuStripPreviousButton.Click += new System.EventHandler(this.NotifyMenuStripPreviousButton_Click);
+            // 
+            // VolumeControl
+            // 
+            this.VolumeControl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.VolumeControl.BackColor = System.Drawing.SystemColors.GrayText;
+            this.VolumeControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.VolumeControl.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.VolumeControl.Location = new System.Drawing.Point(736, 4);
+            this.VolumeControl.Name = "VolumeControl";
+            this.VolumeControl.Size = new System.Drawing.Size(36, 16);
+            this.VolumeControl.TabIndex = 7;
+            this.VolumeControl.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.VolumeControl.ValueChanged += new System.EventHandler(this.VolumeControl_ValueChanged);
+            // 
+            // VolumeLabel
+            // 
+            this.VolumeLabel.AutoSize = true;
+            this.VolumeLabel.BackColor = System.Drawing.SystemColors.GrayText;
+            this.VolumeLabel.Location = new System.Drawing.Point(682, 4);
+            this.VolumeLabel.Name = "VolumeLabel";
+            this.VolumeLabel.Size = new System.Drawing.Size(48, 13);
+            this.VolumeLabel.TabIndex = 8;
+            this.VolumeLabel.Text = "Volume: ";
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
+            // 
+            // VolumeMenuStripButton
+            // 
+            this.VolumeMenuStripButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.VolumeCurrentLabel,
+            this.toolStripSeparator10,
+            this.Volume100Button,
+            this.Volume75Button,
+            this.Volume50Button,
+            this.Volume25Button,
+            this.Volume0Button,
+            this.toolStripSeparator9,
+            this.VolumeCustomButton});
+            this.VolumeMenuStripButton.Name = "VolumeMenuStripButton";
+            this.VolumeMenuStripButton.Size = new System.Drawing.Size(152, 22);
+            this.VolumeMenuStripButton.Text = "Volume";
+            // 
+            // Volume100Button
+            // 
+            this.Volume100Button.Name = "Volume100Button";
+            this.Volume100Button.Size = new System.Drawing.Size(154, 22);
+            this.Volume100Button.Text = "100%";
+            this.Volume100Button.Click += new System.EventHandler(this.Volume100Button_Click);
+            // 
+            // Volume75Button
+            // 
+            this.Volume75Button.Name = "Volume75Button";
+            this.Volume75Button.Size = new System.Drawing.Size(154, 22);
+            this.Volume75Button.Text = "75%";
+            this.Volume75Button.Click += new System.EventHandler(this.Volume75Button_Click);
+            // 
+            // Volume50Button
+            // 
+            this.Volume50Button.Name = "Volume50Button";
+            this.Volume50Button.Size = new System.Drawing.Size(154, 22);
+            this.Volume50Button.Text = "50%";
+            this.Volume50Button.Click += new System.EventHandler(this.Volume50Button_Click);
+            // 
+            // Volume25Button
+            // 
+            this.Volume25Button.Name = "Volume25Button";
+            this.Volume25Button.Size = new System.Drawing.Size(154, 22);
+            this.Volume25Button.Text = "25%";
+            this.Volume25Button.Click += new System.EventHandler(this.Volume25Button_Click);
+            // 
+            // Volume0Button
+            // 
+            this.Volume0Button.Name = "Volume0Button";
+            this.Volume0Button.Size = new System.Drawing.Size(154, 22);
+            this.Volume0Button.Text = "Mute";
+            this.Volume0Button.Click += new System.EventHandler(this.Volume0Button_Click);
+            // 
+            // VolumeCustomButton
+            // 
+            this.VolumeCustomButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.VolumeCustomTextBox,
+            this.VolumeCustomSetButton});
+            this.VolumeCustomButton.Name = "VolumeCustomButton";
+            this.VolumeCustomButton.Size = new System.Drawing.Size(154, 22);
+            this.VolumeCustomButton.Text = "Custom";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(151, 6);
+            // 
+            // VolumeCustomTextBox
+            // 
+            this.VolumeCustomTextBox.Name = "VolumeCustomTextBox";
+            this.VolumeCustomTextBox.Size = new System.Drawing.Size(100, 23);
+            // 
+            // VolumeCustomSetButton
+            // 
+            this.VolumeCustomSetButton.Name = "VolumeCustomSetButton";
+            this.VolumeCustomSetButton.Size = new System.Drawing.Size(160, 22);
+            this.VolumeCustomSetButton.Text = "Set";
+            this.VolumeCustomSetButton.Click += new System.EventHandler(this.VolumeCustomSetButton_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(151, 6);
+            // 
+            // VolumeCurrentLabel
+            // 
+            this.VolumeCurrentLabel.Enabled = false;
+            this.VolumeCurrentLabel.Name = "VolumeCurrentLabel";
+            this.VolumeCurrentLabel.Size = new System.Drawing.Size(154, 22);
+            this.VolumeCurrentLabel.Text = "Currently 100%";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.VolumeLabel);
+            this.Controls.Add(this.VolumeControl);
             this.Controls.Add(this.ControlsPanel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MenuStrip);
@@ -895,6 +1041,7 @@ namespace MusicPlayer
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PositionTrackBar)).EndInit();
             this.NotifyMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.VolumeControl)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -981,6 +1128,21 @@ namespace MusicPlayer
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label AddToQueueLabel;
+        private System.Windows.Forms.NumericUpDown VolumeControl;
+        private System.Windows.Forms.Label VolumeLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem VolumeMenuStripButton;
+        private System.Windows.Forms.ToolStripMenuItem Volume100Button;
+        private System.Windows.Forms.ToolStripMenuItem Volume75Button;
+        private System.Windows.Forms.ToolStripMenuItem Volume50Button;
+        private System.Windows.Forms.ToolStripMenuItem Volume25Button;
+        private System.Windows.Forms.ToolStripMenuItem Volume0Button;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem VolumeCustomButton;
+        private System.Windows.Forms.ToolStripTextBox VolumeCustomTextBox;
+        private System.Windows.Forms.ToolStripMenuItem VolumeCustomSetButton;
+        private System.Windows.Forms.ToolStripMenuItem VolumeCurrentLabel;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     }
 }
 

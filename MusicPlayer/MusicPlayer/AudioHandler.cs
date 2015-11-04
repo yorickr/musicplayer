@@ -31,6 +31,7 @@ namespace MusicPlayer
         public int Position { get { return Math.Min((int)((playpos / (double)Length) * 1000), 1000); } }
         private long Length { get; set; }
         private long playpos = 0;
+        public float Volume { get; set; }
 
 
         public int CurrentTime { get; set; }
@@ -51,6 +52,7 @@ namespace MusicPlayer
         public AudioHandler(Main main)
         {
             this.main = main;
+            Volume = 1.0f;
             CreateThreads(); 
         }
 
@@ -139,6 +141,7 @@ namespace MusicPlayer
                 using (WaveOut waveOut = new WaveOut(WaveCallbackInfo.FunctionCallback()))
                 {
                     waveOut.Init(blockAlignedStream);
+                    waveOut.Volume = Volume;
                     waveOut.Play();
 
                     if (CurrentSong == null || CurrentSong.Seconds == 0)
@@ -150,6 +153,8 @@ namespace MusicPlayer
                     while (waveOut.PlaybackState != PlaybackState.Stopped)
                     {
                         System.Threading.Thread.Sleep(10);
+
+                        waveOut.Volume = Volume;
 
                         if (AState == AudioState.PLAYING && waveOut.PlaybackState == PlaybackState.Paused)
                         {
@@ -187,6 +192,7 @@ namespace MusicPlayer
                             }
                         }
 
+                        
                         playpos = blockAlignedStream.Position;
                         CurrentTime = (int)(playpos / waveOut.OutputWaveFormat.AverageBytesPerSecond);
 
