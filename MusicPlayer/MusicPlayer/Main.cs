@@ -42,7 +42,10 @@ namespace MusicPlayer
             artists = new List<string>();
 
             currentPlayingList = new List<Song>();
+        }
 
+        public void Init()
+        {
             Populate();
         }
 

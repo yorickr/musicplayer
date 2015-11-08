@@ -60,6 +60,7 @@ namespace MusicPlayer
         private void MainForm_Load(object sender, EventArgs e)
         {
             UpdateTimer.Start();
+            main.Init();
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
@@ -679,7 +680,7 @@ namespace MusicPlayer
                 this.ShowInTaskbar = false;
                 if (!showed)
                 {
-                    this.NotifyIcon.ShowBalloonTip(2000);
+                    this.NotifyIcon.ShowBalloonTip(0);
                     showed = true;
                 }
             }
@@ -725,6 +726,11 @@ namespace MusicPlayer
                 else
                     MessageBox.Show("Error while saving file");
             }
+        }
+
+        private void ExitNotifyIconMenuStrip_Click(object sender, EventArgs e)
+        {
+            ExitProgram();
         }
     }
 }
