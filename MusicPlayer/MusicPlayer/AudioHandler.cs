@@ -104,6 +104,20 @@ namespace MusicPlayer
             
         }
 
+        public bool SaveBufferToFile(string savelocation)
+        {
+            if(ms != null && BState == BufferState.DONE)
+            {
+                using (FileStream fs = new FileStream(savelocation, FileMode.OpenOrCreate))
+                {
+                    ms.WriteTo(fs);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void Stop()
         {
             CreateThreads();
