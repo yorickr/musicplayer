@@ -13,11 +13,11 @@ namespace MusicPlayer
     public class APIHandler
     {
         private NetworkHandler nw;
-        private Image defaultCover;
+        public Image defaultCover;
         public APIHandler(NetworkHandler nw)
         {
             this.nw = nw;
-            defaultCover = Image.FromStream(nw.downloadArtwork("default-cover.png"));
+            defaultCover = MusicPlayer.Resource.default_cover;
         }
 
         public JObject GetAllBySearch(string search, string album, string artist, string genre)
