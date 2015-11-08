@@ -159,9 +159,10 @@ namespace MusicPlayer
                     waveOut.Play();
 
                     if (CurrentSong == null || CurrentSong.Seconds == 0)
-                        Length = ms.Length / waveOut.OutputWaveFormat.AverageBytesPerSecond;
+                        Length = ms.Length;
                     else
                         Length = CurrentSong.Seconds * waveOut.OutputWaveFormat.AverageBytesPerSecond;
+
                     CurrentTime = (int)(ms.Position / waveOut.OutputWaveFormat.AverageBytesPerSecond);
 
                     while (waveOut.PlaybackState != PlaybackState.Stopped)
