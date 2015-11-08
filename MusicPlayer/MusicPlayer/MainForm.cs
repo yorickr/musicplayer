@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace MusicPlayer
         bool draggedcompleted = false;
         int startx = 0;
         int starty = 0;
+
+        bool showed;
 
         public Main main
         {
@@ -51,6 +54,7 @@ namespace MusicPlayer
             };
 
             songFinished = false;
+            showed = false;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -178,6 +182,11 @@ namespace MusicPlayer
                 StopButton.Enabled = true;
                 NotifyMenuStripStopButton.Enabled = true;
             }
+
+            if (main.audio.BState == AudioHandler.BufferState.DONE)
+                SaveBufferButton.Enabled = true;
+            else
+                SaveBufferButton.Enabled = false;
 
             if (VolumeCustomTextBox.Text == "")
                 VolumeCustomSetButton.Enabled = false;
@@ -317,15 +326,6 @@ namespace MusicPlayer
                 main.audio.Seek(PositionTrackBar.Value);
             if(main.audio.CurrentSong != null)
                 LabelCurrentTime.Text = Main.SecondsToTimestamp((int)(((double)PositionTrackBar.Value / 1000) * main.audio.CurrentSong.Seconds));
-        }
-
-        private void NotifyIcon_Click(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                MethodInfo mi = typeof(NotifyIcon).GetMethod("ShowContextMenu", BindingFlags.Instance | BindingFlags.NonPublic);
-                mi.Invoke(NotifyIcon, null);
-            }
         }
 
         private void overviewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -670,6 +670,58 @@ namespace MusicPlayer
             if(volumeOK)
                 VolumeControl.Value = Math.Max(Math.Min(volume, 100), 0);
             VolumeCustomTextBox.Text = "";
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            if(this.WindowState == FormWindowState.Minimized)
+            {
+                this.ShowInTaskbar = false;
+                if (!showed)
+                {
+                    this.NotifyIcon.ShowBalloonTip(2000);
+                    showed = true;
+                }
+            }
+        }
+
+        private void NotifyIcon_Click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.ShowInTaskbar = true;
+            }
+        }
+
+        private void NotifyIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            NotifyIcon_Click(sender, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
+        }
+
+        private void SaveBufferButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog SaveMP3FromBuffer = new SaveFileDialog();
+            SaveMP3FromBuffer.Filter = "MP3 File|*.mp3";
+            SaveMP3FromBuffer.Title = "Save current song to mp3 file";
+            SaveMP3FromBuffer.ShowDialog();
+
+            // If the file name is not an empty string open it for saving.
+            if (SaveMP3FromBuffer.FileName != "")
+            {
+                if (main.audio.SaveBufferToFile(SaveMP3FromBuffer.FileName))
+                {
+                    try {
+                        Process.Start("explorer.exe", @"/select, " + SaveMP3FromBuffer.FileName);
+                    }
+                    catch(Exception)
+                    {
+                        MessageBox.Show("Error while saving file");
+                    }
+                }
+                else
+                    MessageBox.Show("Error while saving file");
+            }
         }
     }
 }
