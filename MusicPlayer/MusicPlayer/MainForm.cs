@@ -704,7 +704,10 @@ namespace MusicPlayer
             SaveFileDialog SaveMP3FromBuffer = new SaveFileDialog();
             SaveMP3FromBuffer.Filter = "MP3 File|*.mp3";
             SaveMP3FromBuffer.Title = "Save current song to mp3 file";
-            SaveMP3FromBuffer.ShowDialog();
+            SaveMP3FromBuffer.FileName = main.audio.CurrentSong.Name + ".mp3";
+
+            if(SaveMP3FromBuffer.ShowDialog() != DialogResult.OK)
+                return;
 
             // If the file name is not an empty string open it for saving.
             if (SaveMP3FromBuffer.FileName != "")
@@ -716,7 +719,7 @@ namespace MusicPlayer
                     }
                     catch(Exception)
                     {
-                        MessageBox.Show("Error while saving file");
+                        MessageBox.Show("File saved.");
                     }
                 }
                 else
